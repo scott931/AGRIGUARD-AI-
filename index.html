@@ -47,6 +47,59 @@
                 opacity: 0;
             }
         }
+
+        /* Services grid layout */
+        .services-collection-list {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 991px) {
+            .services-collection-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .services-collection-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Service card styling with theme color */
+        .services-collection-item {
+            background-color: #035925;
+            border-radius: 10px;
+            padding: 2rem;
+            color: white;
+            background-image: none !important;
+        }
+
+        .services-collection-item .card-link-text {
+            color: white;
+        }
+
+        .services-collection-item .solution-card-paragraph {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .bg-rectangle {
+            background-image: none !important;
+        }
+
+        /* Technology section 3-column grid responsive */
+        @media (max-width: 991px) {
+            .technology-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .technology-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
@@ -91,22 +144,16 @@
                             class="close-menu-button w-nav-button"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee63cb3895632eb840cc1c_close-btn.svg" loading="lazy" alt="icon" class="nav-close-icon" /></div>
             </div>
             <div class="menu-wrap">
-                <div data-hover="true" data-delay="0" data-w-id="ba67b287-f196-4627-29a8-f080f7e8b145" class="nav-dropdown w-dropdown">
-                    <div data-w-id="ba67b287-f196-4627-29a8-f080f7e8b146" class="nav-dropdown-toggle w-dropdown-toggle">
-                        <div class="clip nav">
-                            <div class="button-text-wrap nav">
-                                <p class="nav-item-title">Demos</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" class="nav-arrow" /></div>
-                            <div class="button-text-wrap bottom-wrap">
-                                <p class="nav-item-title">Demos</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" /></div>
+                <a data-w-id="ba67b287-f196-4627-29a8-f080f7e8b145" href="index.html" class="nav-link w-inline-block">
+                    <div class="clip">
+                        <div class="button-text-wrap">
+                            <p class="nav-item-title">Home</p>
+                        </div>
+                        <div class="button-text-wrap bottom-wrap">
+                            <p class="nav-item-title line">Home</p>
                         </div>
                     </div>
-                    <nav class="nav-dropdown-list w-dropdown-list">
-                        <div class="nav-dropdown-link-wrapper"><a href="/home" aria-current="page" class="nav-dropdown-link w-dropdown-link w--current"><span class="nav-dropdown-link-line"> </span>Home 1</a><a href="/home-2" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Home 2</a>
-                            <a
-                                href="/home-3" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Home 3</a>
-                        </div>
-                    </nav>
-                </div>
+                </a>
                 <a data-w-id="a8cb650f-e8fd-ea12-ff85-ae122dc2f9b8" href="/about-us" class="nav-link w-inline-block">
                     <div class="clip">
                         <div class="button-text-wrap">
@@ -138,14 +185,14 @@
                     </div>
                 </a>
                 <div data-hover="true" data-delay="0" data-w-id="759a51eb-eddc-7cf1-e791-b0db9ba66b7d" class="nav-dropdown w-dropdown">
-                    <div data-w-id="759a51eb-eddc-7cf1-e791-b0db9ba66b7e" class="nav-dropdown-toggle w-dropdown-toggle">
+                    <!-- <div data-w-id="759a51eb-eddc-7cf1-e791-b0db9ba66b7e" class="nav-dropdown-toggle w-dropdown-toggle">
                         <div class="clip nav">
                             <div class="button-text-wrap nav">
                                 <p class="nav-item-title">All Pages</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" class="nav-arrow" /></div>
                             <div class="button-text-wrap bottom-wrap">
                                 <p class="nav-item-title">All Pages</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" /></div>
                         </div>
-                    </div>
+                    </div> -->
                     <nav class="nav-dropdown-list megamenu w-dropdown-list">
                         <div class="nav-dropdown-column">
                             <div class="nav-dropdown-link-wrapper"><a href="/home" aria-current="page" class="nav-dropdown-link w-dropdown-link w--current"><span class="nav-dropdown-link-line"> </span>Home 1</a><a href="/home-2" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Home 2</a>
@@ -226,32 +273,48 @@
                     <div class="home-1-banner-top-wrapper mobile">
                         <div class="home-1-banner-left-wrapper mobile">
                             <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f20f9" style="opacity:0" class="home-1-banner-labels-wrap">
-                                <div class="label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
+                                <!-- <div class="label"> 
                                     <h6 class="text-white">Driven</h6>
-                                </div>
-                                <div class="label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
+                                </div> -->
+                                <!-- <div class="label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
                                     <h6 class="text-white">Rooted</h6>
                                 </div>
                                 <div class="label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
                                     <h6 class="text-white">Impactful</h6>
-                                </div>
+                                </div> -->
                             </div>
-                            <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2106" style="opacity:0" class="home-1-banner-text">Through sustainable farming and smart collaboration, we grow more than crops — we grow impact.</div>
+                            <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2106" style="opacity:0" class="home-1-banner-text">If tractors and motorbikes can be financed through monitoring, farmers should be too.
+                                AgriGuard AI uses real-time farm data to protect harvests and unlock fair financing for smallholder farmers.
+                                </div>
+                                <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2106" style="opacity:0;font-size: 18px;" class="home-1-banner-text">Built for farmers, cooperatives, financiers, insurers, and development partners.
+                                </div>
+                                
                             <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2108" style="opacity:0">
                                 <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="/contact-us" class="underlined-link w-inline-block">
                                     <div class="underlined-link-text-wrap">
-                                        <div>Start growing with us</div><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee96d781f57edc797a59ed_Frame%20(46).svg" loading="lazy" alt="icon" class="arrow-burron-icon" /></div>
+                                        <div>Get a Demo</div>
+                                        <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee96d781f57edc797a59ed_Frame%20(46).svg" loading="lazy" alt="icon" class="arrow-burron-icon" /></div>
                                     <div class="link-line"></div>
                                 </a>
                             </div>
+                            <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2108" style="opacity:0;margin-top: 30px;" >
+                                <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="/contact-us" class="underlined-link w-inline-block">
+                                    <div class="underlined-link-text-wrap">
+                                        <div>See How It Works</div>
+                                        <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee96d781f57edc797a59ed_Frame%20(46).svg" loading="lazy" alt="icon" class="arrow-burron-icon" /></div>
+                                    <div class="link-line"></div>
+                                </a>
+                            </div>
+                      
                         </div>
                         <div id="w-node-eb4cd57a-4a15-4380-cd2d-81105d6f210f-b840c97c" class="home-1-h1-wrapper mobile">
-                            <h1 data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2110" style="opacity:0" class="text-white">Redefining agriculture at a global scale</h1>
+                            <h1 data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2110" style="opacity:0" class="text-white">Low-cost, solar-powered AI for crop monitoring and farmer financing</h1>
                         </div>
+                        
                     </div>
-                    <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2112" style="opacity:0" class="home-1-banner-bottom-wrapper">
-                        <h6 class="text-white without-space">35.6895° N, 139.6917° E</h6>
-                        <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2115" href="#About-Section" class="scroll-link-block w-inline-block">
+                    <!-- <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2112" style="opacity:0" class="home-1-banner-bottom-wrapper"> -->
+                        <!-- <h6 class="text-white without-space">35.6895° N, 139.6917° E</h6> -->
+                        <!-- <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2115" href="#About-Section" class="scroll-link-block w-inline-block">
                             <div class="clip">
                                 <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
                                     class="button-text-wrap">
@@ -260,7 +323,7 @@
                                     <div>Start growing with us</div><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee96d781f57edc797a59ed_Frame%20(46).svg" loading="lazy" alt="icon" class="image-2" /></div>
                             </div>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
     </section>
@@ -268,11 +331,12 @@
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="home-1-about">
                 <div class="title-wrapper">
-                    <div data-w-id="7da9b323-29b7-9d66-4f7e-dd7b248e26d8" style="opacity:0" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                    <div data-w-id="7da9b323-29b7-9d66-4f7e-dd7b248e26d8" style="opacity:0" class="section-label">
+                        <!-- <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" /> -->
                         <div>About us</div>
                     </div>
                     <div data-w-id="fd60e872-2737-4e2c-dd65-64b0551666fa" style="opacity:0" class="heading-wrap">
-                        <h2>We are committed to advancing agriculture. </h2>
+                        <h2>AgriGuard AI is building a future where real farm data becomes the foundation of crop protection, fair financing, and climate-resilient agriculture. </h2>
                     </div>
                     <div data-w-id="41c010cc-3e5e-74c2-b44d-5786c3d1bc95" style="opacity:0" class="labels-wrapper">
                         <div class="about-label">
@@ -305,17 +369,21 @@
                     </div>
                 </div>
                 <div class="paragraph-wrapper">
-                    <p data-w-id="7abb38ce-9671-f7ac-32fb-d2317f1649c8" style="opacity:0">Our mission is to redefine what’s possible in modern farming — creating lasting value for communities, ecosystems, and future generations. Rooted in tradition, driven by innovation — we grow more than crops, we grow impact.</p>
+                    <p data-w-id="7abb38ce-9671-f7ac-32fb-d2317f1649c8" style="opacity:0; font-size: 20px;font-weight: 600;">Our mission:</p>
+                    <p data-w-id="7abb38ce-9671-f7ac-32fb-d2317f1649c8" style="opacity:0; font-size: 20px;">Help farmers secure their harvests and unlock capital — without requiring traditional collateral.</p>
+
                     <div
                         data-w-id="f60d6b5d-c8b9-ccd0-fcef-60e0dcef8924" style="opacity:0">
                         <a data-w-id="20c04489-b589-79f2-fb08-3ca99145ef6f" href="/about-us" class="primary-button w-inline-block">
                             <div class="clip">
-                                <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
-                                    class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
-                                    <div>About the company</div>
+                                <div style=""
+                                    class="button-text-wrap">
+                                    <!-- <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" /> -->
+                                    <div>Our Founder</div>
                                 </div>
-                                <div class="button-text-wrap bottom-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
-                                    <div>About the company</div>
+                                <div class="button-text-wrap bottom-wrap">
+                                    <!-- <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" /> -->
+                                    <div>Our Founder</div>
                                 </div>
                             </div>
                         </a>
@@ -326,30 +394,64 @@
     </section>
     <section class="section">
         <div class="w-layout-blockcontainer base-container w-container">
+            
+                        <div class="title-wrapper testimonials-home-1">
+                            <div data-w-id="cd1639ad-0b29-38de-7a81-4609676a64a4" style="opacity:0" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                                <div>Impact</div>
+                            </div>
+                            <div class="heading-wrap">
+                                <h2 data-w-id="cd1639ad-0b29-38de-7a81-4609676a64a9" style="opacity:0">Impact in the field.</h2>
+                            </div>
+                        </div>
+
+
+                        
             <div class="home-1-numbers-wrapper">
-                <div class="number-cell"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67eea468f77f829117f6dbb5_Group%202%20(4).svg" loading="lazy" style="opacity:0" data-w-id="284df7da-3a19-35e8-5716-eb6c615ab9ce" alt="" />
+                <div class="number-cell">
                     <div data-w-id="77da3d0b-1384-25f3-86d6-1509e6244358"
-                        style="opacity:0" class="large-text numbers">98%</div>
-                    <h5 data-w-id="6fab0258-45ce-578e-ec61-3215873c6135" style="opacity:0">On-time delivery rate</h5>
+                        style="opacity:0" class="large-text numbers">30,000</div>
+                    <h5 data-w-id="6fab0258-45ce-578e-ec61-3215873c6135" style="opacity:0">Farmers supported</h5>
                     <div class="number-text-wrapper">
-                        <p data-w-id="49d73645-4f69-e135-6900-50d40c2f1a6e" style="opacity:0">Efficient distribution across regions, supporting supply chains with reliability and precision.</p>
+                        <!-- <p data-w-id="49d73645-4f69-e135-6900-50d40c2f1a6e" style="opacity:0">Efficient distribution across regions, supporting supply chains with reliability and precision.</p> -->
                     </div>
                 </div>
-                <div class="number-cell"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67eea468f77f829117f6dbb5_Group%202%20(4).svg" loading="lazy" style="opacity:0" data-w-id="36bda2f3-48da-952e-e775-d20e0de8fbcb" alt="" />
+                <div class="number-cell">
                     <div data-w-id="36bda2f3-48da-952e-e775-d20e0de8fbcc"
-                        style="opacity:0" class="large-text numbers">15</div>
-                    <h5 data-w-id="36bda2f3-48da-952e-e775-d20e0de8fbce" style="opacity:0">Countries reached</h5>
+                        style="opacity:0" class="large-text numbers">90%</div>
+                    <h5 data-w-id="36bda2f3-48da-952e-e775-d20e0de8fbce" style="opacity:0">Reduction in crop losses</h5>
                     <div class="number-text-wrapper">
-                        <p data-w-id="36bda2f3-48da-952e-e775-d20e0de8fbd1" style="opacity:0">Our agricultural solutions are trusted by partners and farmers in more than 15 countries worldwide.</p>
+                        <!-- <p data-w-id="36bda2f3-48da-952e-e775-d20e0de8fbd1" style="opacity:0">Our agricultural solutions are trusted by partners and farmers in more than 15 countries worldwide.</p> -->
                     </div>
                 </div>
-                <div class="number-cell"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67eea468f77f829117f6dbb5_Group%202%20(4).svg" loading="lazy" style="opacity:0" data-w-id="34adb66e-2ba8-f8a1-23c3-dfa35cf0b31d" alt="" />
+                <div class="number-cell">
                     <div data-w-id="34adb66e-2ba8-f8a1-23c3-dfa35cf0b31e"
-                        style="opacity:0" class="large-text numbers">500k+</div>
-                    <h5 data-w-id="34adb66e-2ba8-f8a1-23c3-dfa35cf0b320" style="opacity:0">Acres cultivated sustainably</h5>
+                        style="opacity:0" class="large-text numbers">150%</div>
+                    <h5 data-w-id="34adb66e-2ba8-f8a1-23c3-dfa35cf0b320" style="opacity:0">Increase in access to finance</h5>
                     <div class="number-text-wrapper">
-                        <p data-w-id="34adb66e-2ba8-f8a1-23c3-dfa35cf0b323" style="opacity:0">We promote responsible land use with eco-friendly practices across half a million acres of farmland.</p>
+                        <!-- <p data-w-id="34adb66e-2ba8-f8a1-23c3-dfa35cf0b323" style="opacity:0">We promote responsible land use with eco-friendly practices across half a million acres of farmland.</p> -->
                     </div>
+                </div>
+            </div>
+                <div class="paragraph-wrapper">
+                    <p data-w-id="7abb38ce-9671-f7ac-32fb-d2317f1649c8" style="opacity:0; font-size: 20px;font-weight: 600;">Case highlight:</p>
+                    <p data-w-id="7abb38ce-9671-f7ac-32fb-d2317f1649c8" style="opacity:0; font-size: 20px;">
+                        “From unbanked to financed — AgriGuard enabled smallholder farmers to secure inputs and reduce losses through verified data.”                    </p>
+
+                    <div
+                        data-w-id="f60d6b5d-c8b9-ccd0-fcef-60e0dcef8924" style="opacity:0">
+                        <a data-w-id="20c04489-b589-79f2-fb08-3ca99145ef6f" href="/about-us" class="primary-button w-inline-block">
+                            <div class="clip">
+                                <div style=""
+                                    class="button-text-wrap">
+                                    <!-- <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" /> -->
+                                    <div>Read More Stories</div>
+                                </div>
+                                <div class="button-text-wrap bottom-wrap">
+                                    <!-- <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" /> -->
+                                    <div>Read More Stories</div>
+                                </div>
+                            </div>
+                        </a>
                 </div>
             </div>
         </div>
@@ -358,88 +460,244 @@
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="home-1-services">
                 <div class="home-1-service-section-title-wrapper">
-                    <div data-w-id="f6d11b66-08ee-ac8c-a0b9-b2182a63eec7" style="opacity:0" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
-                        <div>Our solutions</div>
+                    <div data-w-id="f6d11b66-08ee-ac8c-a0b9-b2182a63eec7" style="opacity:0" class="section-label">
+                        <div>OUR INNOVATION</div>
                     </div>
                     <div class="home-1-services-text-wrapper">
-                        <h2 data-w-id="f6d11b66-08ee-ac8c-a0b9-b2182a63eecc" style="opacity:0">Innovating the way you grow.</h2>
-                        <p data-w-id="4c385e27-6144-ba31-a098-f2e9ca5aea32" style="opacity:0">We deliver end-to-end agricultural solutions that combine traditional farming wisdom with modern innovation.</p>
+                        <h2 data-w-id="f6d11b66-08ee-ac8c-a0b9-b2182a63eecc" style="opacity:0">A new way to finance farmers — powered by real-time monitoring.</h2>
+                        <p data-w-id="4c385e27-6144-ba31-a098-f2e9ca5aea32" style="opacity:0">AgriGuard AI deploys low-cost, 3D-printed, plug-and-play sensors across farms and combines them with GIS data to monitor fields continuously.
+                            We capture insights such as:
+                            </p>
+                            <p data-w-id="4c385e27-6144-ba31-a098-f2e9ca5aea32" style="opacity:0;font-weight: 900;">
+                                We capture insights such as:
+                                </p>
                     </div>
-                    <div data-w-id="aec2ba5a-8868-2b38-95c5-be59f2770def" style="opacity:0" class="tm40-button-wrapper">
+                    <!-- <div data-w-id="aec2ba5a-8868-2b38-95c5-be59f2770def" style="opacity:0" class="tm40-button-wrapper">
                         <a data-w-id="db98c867-8e26-f6b0-e2fc-f31611dd2742" href="/services-1" class="primary-button w-inline-block">
                             <div class="clip">
                                 <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
-                                    class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
+                                    class="button-text-wrap">
                                     <div>Discover our solutions</div>
                                 </div>
-                                <div class="button-text-wrap bottom-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                                <div class="button-text-wrap bottom-wrap">
                                     <div>Discover our solutions</div>
                                 </div>
                             </div>
                         </a>
+                    </div> -->
+                    <div class="home-1-services-text-wrapper">
+                        <!-- <h2 data-w-id="f6d11b66-08ee-ac8c-a0b9-b2182a63eecc" style="opacity:0">A new way to finance farmers — powered by real-time monitoring.</h2> -->
+                        <p data-w-id="4c385e27-6144-ba31-a098-f2e9ca5aea32" style="opacity:0">
+                            This builds a living digital profile of each farmer and farm — proving reliability, productivity, and risk in real time.
+                            </p>
+                            <p data-w-id="4c385e27-6144-ba31-a098-f2e9ca5aea32" style="opacity:0">
+                                Just like GPS devices derisk asset financing, AgriGuard uses data to derisk financing for farmers themselves, especially those who are unbanked.
+                                </p>
                     </div>
                 </div>
                 <div class="bg-rectangle">
                     <div class="services-collection-list-wrapper w-dyn-list">
                         <div data-w-id="2922bb3c-d1e0-c5f8-e388-187d831d7de6" style="opacity:0" role="list" class="services-collection-list w-dyn-items">
-                            <div style="background-image:url(&quot;https://cdn.prod.website-files.com/67ee63cb3895632eb840c987/67eea98d4ed2d66727aa91de_69d10ec013b362f97a4f33a54ddf4d9d%20(1).png&quot;)" role="listitem" class="services-collection-item w-dyn-item">
-                                <div class="plus-button-wrapper"><a data-w-id="91e5f2e3-60c2-f24c-eb11-a20d02687ce7" href="/solutions/precision-farming" class="plus-button w-inline-block"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67eeb06619a02117609585db_Frame%20(48).svg" loading="lazy" alt="icon" class="plus-icon"/></a></div>
-                                <div
-                                    class="services-card"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67eeaf2869e4b86a1daec33d_Ellipse%201.svg" loading="lazy" alt="" class="blur-image" /></div>
-                            <div class="service-card-text-wrap"><a href="/solutions/precision-farming" class="card-link-text">Precision farming</a>
-                                <p class="solution-card-paragraph">We use data-driven insights and smart technology to help farmers monitor soil health.</p>
+                            <div role="listitem" class="services-collection-item w-dyn-item">
+                                <div class="service-card-text-wrap"><a href="/solutions/precision-farming" class="card-link-text">Irrigation timing</a>
+                                    <!-- <p class="solution-card-paragraph">We use data-driven insights and smart technology to help farmers monitor soil health.</p> -->
+                                </div>
                             </div>
+                            <div role="listitem" class="services-collection-item w-dyn-item">
+                                <div class="service-card-text-wrap"><a href="/solutions/sustainable-irrigation" class="card-link-text">Weed levels and farm condition</a>
+                                    <!-- <p class="solution-card-paragraph">Our advanced irrigation systems reduce water waste and support efficient crop hydration.</p> -->
+                                </div>
+                            </div>
+                            <div role="listitem" class="services-collection-item w-dyn-item">
+                                <div class="service-card-text-wrap"><a href="/solutions/supply-chain-support" class="card-link-text">Crop health and early disease signals</a>
+                                    <!-- <p class="solution-card-paragraph">We provide tools and expertise to streamline post-harvest logistics, ensuring fresh, high-quality products.</p> -->
+                                </div>
+                            </div>
+                            <div role="listitem" class="services-collection-item w-dyn-item">
+                                <div class="service-card-text-wrap"><a href="/solutions/crop-monitoring" class="card-link-text">How frequently the fields are worked</a>
+                                    <!-- <p class="solution-card-paragraph">Real-time monitoring solutions to track crop growth, health, and yield potential throughout the season.</p> -->
+                                </div>
+                            </div>
+                            <div role="listitem" class="services-collection-item w-dyn-item">
+                                <div class="service-card-text-wrap"><a href="/solutions/farmer-financing" class="card-link-text">Diligence and consistency</a>
+                                    <!-- <p class="solution-card-paragraph">Unlock fair financing opportunities for farmers using real-time farm data and digital profiles.</p> -->
+                                </div>
+                            </div>
+                            <div role="listitem" class="services-collection-item w-dyn-item">
+                                <div class="service-card-text-wrap"><a href="/solutions/climate-resilience" class="card-link-text">Consent-based mobile-money repayment history</a>
+                                    <!-- <p class="solution-card-paragraph">Build climate-resilient farming practices with data-driven insights and adaptive strategies.</p> -->
+                                </div>
+                            </div>
+                            <!-- <div role="listitem" class="services-collection-item w-dyn-item">
+                                <div class="service-card-text-wrap"><a href="/solutions/data-analytics" class="card-link-text">Data analytics</a>
+                                    <p class="solution-card-paragraph">Transform farm data into actionable insights for better decision-making and improved outcomes.</p>
+                                </div>
+                            </div> -->
                         </div>
-                        <div style="background-image:url(&quot;https://cdn.prod.website-files.com/67ee63cb3895632eb840c987/67eea9fe158e0ec493d22f1c_61207690c3987ee4821a7cec1009b088%20(1).png&quot;)" role="listitem" class="services-collection-item w-dyn-item">
-                            <div class="plus-button-wrapper"><a data-w-id="91e5f2e3-60c2-f24c-eb11-a20d02687ce7" href="/solutions/sustainable-irrigation" class="plus-button w-inline-block"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67eeb06619a02117609585db_Frame%20(48).svg" loading="lazy" alt="icon" class="plus-icon"/></a></div>
-                            <div
-                                class="services-card"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67eeaf2869e4b86a1daec33d_Ellipse%201.svg" loading="lazy" alt="" class="blur-image" /></div>
-                        <div class="service-card-text-wrap"><a href="/solutions/sustainable-irrigation" class="card-link-text">Sustainable irrigation</a>
-                            <p class="solution-card-paragraph">Our advanced irrigation systems reduce water waste and support efficient crop hydration.</p>
-                        </div>
-                    </div>
-                    <div style="background-image:url(&quot;https://cdn.prod.website-files.com/67ee63cb3895632eb840c987/67eeaa39355d36e01eee6222_f8a34b254f7276851137fe28d833a3f4%20(1).png&quot;)" role="listitem" class="services-collection-item w-dyn-item">
-                        <div class="plus-button-wrapper"><a data-w-id="91e5f2e3-60c2-f24c-eb11-a20d02687ce7" href="/solutions/supply-chain-support" class="plus-button w-inline-block"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67eeb06619a02117609585db_Frame%20(48).svg" loading="lazy" alt="icon" class="plus-icon"/></a></div>
-                        <div
-                            class="services-card"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67eeaf2869e4b86a1daec33d_Ellipse%201.svg" loading="lazy" alt="" class="blur-image" /></div>
-                    <div class="service-card-text-wrap"><a href="/solutions/supply-chain-support" class="card-link-text">Supply chain support</a>
-                        <p class="solution-card-paragraph">We provide tools and expertise to streamline post-harvest logistics, ensuring fresh, high-quality products.</p>
                     </div>
                 </div>
-            </div>
-        </div>
+                
+        
+
+        
         </div>
         </div>
         </div>
     </section>
+    <section class="section without-top-spacing">
+        <div class="w-layout-blockcontainer base-container w-container">
+           
+            <div class="title-wrapper testimonials-home-1">
+                <div data-w-id="cd1639ad-0b29-38de-7a81-4609676a64a4" style="opacity:0" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                    <div>THE PROBLEM</div>
+                </div>
+                <div class="heading-wrap">
+                    <h2 data-w-id="cd1639ad-0b29-38de-7a81-4609676a64a9" style="opacity:0">Problem  in the field.</h2>
+                </div>
+            </div>
+            <div class="home-1-services-text-wrapper">
+                <!-- <h2 data-w-id="f6d11b66-08ee-ac8c-a0b9-b2182a63eecc" style="opacity:0">A new way to finance farmers — powered by real-time monitoring.</h2> -->
+                <p data-w-id="4c385e27-6144-ba31-a098-f2e9ca5aea32" style="opacity:0;font-weight: 900;">
+                    Yet every farm already generates valuable information — soil readings, crop images, GPS data, and payment trails — but it remains unused.
+                    </p>
+                    <p data-w-id="4c385e27-6144-ba31-a098-f2e9ca5aea32" style="opacity:0; font-weight: 900;">
+                        Transition:
+AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, input access, and market opportunities.
+
+                        </p>
+            </div>
+
+            <div data-delay="2000" data-animation="slide" class="home-1-testimonials-slider w-slider" data-autoplay="true" data-easing="ease" style="opacity:0" data-hide-arrows="false" data-disable-swipe="false" data-w-id="b77a5c0a-3f14-02cc-242e-9d4ba3af7f9f"
+                data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
+                <div class="home-1-testimonials-mask w-slider-mask">
+                    <!-- <div class="big-testimonial-slide w-slide">
+                        <div class="testimonial-card">
+                            <div id="w-node-_9448fc4f-081e-37df-00b4-9d3377c0c144-b840c97c" class="client-name-wrap">
+                                <div class="client-photo-wrap">
+                                    <div class="testimonial-quote"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f39a81b06253590b44df88_%E2%80%9C%20(5).svg" loading="lazy" alt="icon" /></div><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f39ac5f2b4535ec1562575_0107498c7d71858feb093541b0969658.webp"
+                                        loading="lazy" alt="photo" class="client-photo" /></div>
+                                <p class="medium-weight-paragraph"><span class="black-text-span">Mark Linberg,</span> CEO of Artana</p>
+                            </div>
+                            <div class="testimonial-card-text">“Working with James has transformed the way we operate. Their sustainable approach and reliable delivery have made them an essential part of our supply chain.”</div>
+                        </div>
+                    </div> -->
+                    <div class="testimonial-slide black-bg w-slide">
+                        <div class="testimonial-small-card">
+                            <div class="testimonial-card-text text-white">Farming is risky — and farmers carry the burden</div>
+                            <!-- <div class="client-name-wrap">
+                                <div class="client-photo-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f39cd36730fabba9a70cc5_cc6be39e83c230aba39ce05e6dc5ab4b.webp" loading="lazy" alt="photo" class="testimonials-client-photo" /></div>
+                                <p class="medium-weight-paragraph text-white">Lisa Rhouther</p>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="testimonial-slide w-slide">
+                        <div class="testimonial-small-card">
+                            <div class="testimonial-card-text">Pests and diseases destroy harvests</div>
+                            <!-- <div class="client-name-wrap">
+                                <div class="client-photo-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f39e2973e065aaeb6829f5_8351356b6266e418d38c01078bbc5cf1.webp" loading="lazy" alt="photo" class="testimonials-client-photo" /></div>
+                                <p class="medium-weight-paragraph"><span class="black-text-span">Rebecca Truj</span></p>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="testimonial-slide primary-bg w-slide">
+                        <div class="testimonial-small-card">
+                            <div class="testimonial-card-text text-white">Climate shocks hit crops without warning</div>
+                            <!-- <div class="client-name-wrap">
+                                <div class="client-photo-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f39e9dbfe7a69e9497e0a7_ffaab380274c77955b489b4a99200855.webp" loading="lazy" alt="photo" class="testimonials-client-photo" /></div>
+                                <p class="medium-weight-paragraph text-white">Fred Anderson</p>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="testimonial-slide w-slide">
+                        <div class="testimonial-small-card">
+                            <div class="testimonial-card-text">Farmers sell at poor prices due to weak market information</div>
+                            <!-- <div class="client-name-wrap">
+                                <div class="client-photo-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3a34fbcec1d9d4b8d3142_luca-nicoletti-EqLXRA41jrA-unsplash.webp" loading="lazy" sizes="(max-width: 640px) 100vw, 640px" srcset="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3a34fbcec1d9d4b8d3142_luca-nicoletti-EqLXRA41jrA-unsplash-p-500.webp 500w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3a34fbcec1d9d4b8d3142_luca-nicoletti-EqLXRA41jrA-unsplash.webp 640w"
+                                        alt="photo" class="testimonials-client-photo" /></div>
+                                <p class="medium-weight-paragraph"><span class="black-text-span">Jaycee Wilkins</span></p>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="testimonial-slide w-slide">
+                        <div class="testimonial-small-card">
+                            <div class="testimonial-card-text">Banks refuse loans and insurance due to lack of verified data</div>
+                            <!-- <div class="client-name-wrap">
+                                <div class="client-photo-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3a3f1e99c6f06b03656c5_jahanzeb-ahsan-YXZMEgBNjCA-unsplash.webp" loading="lazy" sizes="100vw" srcset="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3a3f1e99c6f06b03656c5_jahanzeb-ahsan-YXZMEgBNjCA-unsplash-p-500.webp 500w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3a3f1e99c6f06b03656c5_jahanzeb-ahsan-YXZMEgBNjCA-unsplash.webp 640w"
+                                        alt="photo" class="testimonials-client-photo" /></div>
+                                <p class="medium-weight-paragraph"><span class="black-text-span">Roman Sumner</span></p>
+                            </div> -->
+                        </div>
+                    </div>
+                   
+                </div>
+                
+                <div data-w-id="b77a5c0a-3f14-02cc-242e-9d4ba3af7fa3" style="opacity:0" class="home-1-testimonials-left-arrow w-slider-arrow-left"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f39d01dee1875eea58b4ab_Frame%20(49).svg" loading="lazy" alt="icon" class="left-testimonials-arrow-icon" /></div>
+                <div data-w-id="b77a5c0a-3f14-02cc-242e-9d4ba3af7fa5"
+                    style="opacity:0" class="home-2-testimonials-right-arrow w-slider-arrow-right"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f39d019b7701c27d1b1375_Frame%20(50).svg" loading="lazy" alt="icon" class="right-testimonials-arrow-icon" /></div>
+                <div class="hidden-nav w-slider-nav w-round w-num"></div>
+            </div>
+
+           
+        </div>
+    </section>
+    
     <section class="section">
         <div class="w-layout-blockcontainer base-container w-container">
             <div data-w-id="1a45aec6-27b0-0c1d-a3e0-3437c249064d" style="opacity:0" class="gray-card">
                 <div class="gray-card-text-wrapper">
-                    <div data-w-id="8e78b66e-bed4-87f9-c390-a9cc9a4bd5da" style="opacity:0" class="large-text">Sustainability at our core.</div>
-                    <p data-w-id="ce1f796e-bdd7-92e1-539b-ce3770105170" style="opacity:0">We’re committed to farming that respects the land, preserves resources, and supports future generations.</p>
+                    <div data-w-id="8e78b66e-bed4-87f9-c390-a9cc9a4bd5da" style="opacity:0" class="large-text">The Solution</div>
+                    <p data-w-id="ce1f796e-bdd7-92e1-539b-ce3770105170" style="opacity:0">
+                        One platform for monitoring, decision-making, and financing
+                        </p>
                     <div class="solutions-list">
                         <div data-w-id="9fb1b5cd-24d4-c538-e769-02cc350f041b" style="opacity:0" class="solution-list-item">
-                            <h5 class="without-space">Composting</h5>
-                            <p class="small-paragraph">Reducing waste and returning nutrients to the soil</p>
+                            <h5 class="without-space"> Three core pillars.</h5>
+                        </div>
+                        <div data-w-id="9fb1b5cd-24d4-c538-e769-02cc350f041b" style="opacity:0" class="solution-list-item">
+                            <h5 class="without-space">Monitor</h5>
+                            <p class="small-paragraph">
+                                Solar-powered AI sensors + GIS track farm activity, crop health, and environmental conditions..</p>
                         </div>
                         <div data-w-id="ba6dc0c5-caab-0db9-ffc5-3f2a7f42a203" style="opacity:0" class="solution-list-item">
-                            <h5 class="without-space">Water-saving systems</h5>
-                            <p class="small-paragraph">Smart irrigation that conserves every drop</p>
+                            <h5 class="without-space">Advise</h5>
+                            <p class="small-paragraph">Farmers receive early alerts and tailored recommendations via mobile app, SMS, or USSD.</p>
+                        </div>
+                        <!-- <div data-w-id="ba6dc0c5-caab-0db9-ffc5-3f2a7f42a203" style="opacity:0" class="solution-list-item">
+                            <h5 class="without-space">Advise</h5>
+                            <p class="small-paragraph">Farmers receive early alerts and tailored recommendations via mobile app, SMS, or USSD.</p>
+                        </div> -->
+                        <div data-w-id="ba6dc0c5-caab-0db9-ffc5-3f2a7f42a203" style="opacity:0" class="solution-list-item">
+                            <h5 class="without-space">Finance</h5>
+                            <p class="small-paragraph">Verified data derisks loans, insurance, crowdfunding, and input credit.</p>
                         </div>
                     </div>
-                    <div data-w-id="1981c144-7e46-d3e9-925b-9457dfc7e0f8" style="opacity:0" class="solution-button-wrapper">
-                        <a data-w-id="85459d89-4893-e035-a900-ee8e75b11c5a" href="/contact-us" class="primary-button w-inline-block">
-                            <div class="clip">
-                                <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
-                                    class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
-                                    <div>Let’s work together</div>
+                    <div style="display: flex; gap: 20px; margin-top: 42px;">
+                        <div data-w-id="1981c144-7e46-d3e9-925b-9457dfc7e0f8" style="opacity:0" class="solution-button-wrapper">
+                            <a data-w-id="85459d89-4893-e035-a900-ee8e75b11c5a" href="/contact-us" class="primary-button w-inline-block">
+                                <div class="clip">
+                                    <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
+                                        class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
+                                        <div>How it works</div>
+                                    </div>
+                                    <div class="button-text-wrap bottom-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                                        <div>How it works</div>
+                                    </div>
                                 </div>
-                                <div class="button-text-wrap bottom-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
-                                    <div>Let’s work together</div>
+                            </a>
+                        </div>
+                        <!-- <div data-w-id="1981c144-7e46-d3e9-925b-9457dfc7e0f8" style="opacity:0" class="solution-button-wrapper">
+                            <a data-w-id="85459d89-4893-e035-a900-ee8e75b11c5a" href="/contact-us" class="primary-button w-inline-block">
+                                <div class="clip">
+                                    <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
+                                        class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
+                                        <div>Get a Demo</div>
+                                    </div>
+                                    <div class="button-text-wrap bottom-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                                        <div>Get a Demo</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div> -->
                     </div>
                 </div><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ef8a6ad768e862b11d6277_7fc3e3d572c79cacb9efa8682315fe0d_056fbf144eaeb7621934335973edd45d.webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
                     srcset="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ef8a6ad768e862b11d6277_7fc3e3d572c79cacb9efa8682315fe0d_056fbf144eaeb7621934335973edd45d-p-500.webp 500w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ef8a6ad768e862b11d6277_7fc3e3d572c79cacb9efa8682315fe0d_056fbf144eaeb7621934335973edd45d-p-800.webp 800w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ef8a6ad768e862b11d6277_7fc3e3d572c79cacb9efa8682315fe0d_056fbf144eaeb7621934335973edd45d.webp 1200w"
@@ -450,44 +708,44 @@
     <section class="section">
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="title-wrapper">
-                <div data-w-id="how-it-works-label" style="opacity:0" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                <div data-w-id="how-it-works-label" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
                     <div>HOW IT WORKS</div>
                 </div>
                 <div class="heading-wrap">
-                    <h2 data-w-id="how-it-works-title" style="opacity:0">From farm data to fair financing</h2>
+                    <h2 data-w-id="how-it-works-title">From farm data to fair financing</h2>
                 </div>
             </div>
             <div class="home-1-numbers-wrapper" style="margin-top: 50px;">
                 <div class="number-cell">
-                    <div data-w-id="step-1-number" style="opacity:0" class="large-text numbers">01</div>
-                    <h5 data-w-id="step-1-title" style="opacity:0">Deploy</h5>
+                    <div data-w-id="step-1-number" class="large-text numbers">01</div>
+                    <h5 data-w-id="step-1-title">Deploy</h5>
                     <div class="number-text-wrapper">
-                        <p data-w-id="step-1-text" style="opacity:0">Plug-and-play 3D-printed sensors are installed on farms.</p>
+                        <p data-w-id="step-1-text">Plug-and-play 3D-printed sensors are installed on farms.</p>
                     </div>
                 </div>
                 <div class="number-cell">
-                    <div data-w-id="step-2-number" style="opacity:0" class="large-text numbers">02</div>
-                    <h5 data-w-id="step-2-title" style="opacity:0">Monitor</h5>
+                    <div data-w-id="step-2-number" class="large-text numbers">02</div>
+                    <h5 data-w-id="step-2-title">Monitor</h5>
                     <div class="number-text-wrapper">
-                        <p data-w-id="step-2-text" style="opacity:0">AI analyzes crop, soil, and environmental signals.</p>
+                        <p data-w-id="step-2-text">AI analyzes crop, soil, and environmental signals.</p>
                     </div>
                 </div>
                 <div class="number-cell">
-                    <div data-w-id="step-3-number" style="opacity:0" class="large-text numbers">03</div>
-                    <h5 data-w-id="step-3-title" style="opacity:0">Alert</h5>
+                    <div data-w-id="step-3-number" class="large-text numbers">03</div>
+                    <h5 data-w-id="step-3-title">Alert</h5>
                     <div class="number-text-wrapper">
-                        <p data-w-id="step-3-text" style="opacity:0">Farmers receive early warnings and practical guidance.</p>
+                        <p data-w-id="step-3-text">Farmers receive early warnings and practical guidance.</p>
                     </div>
                 </div>
                 <div class="number-cell">
-                    <div data-w-id="step-4-number" style="opacity:0" class="large-text numbers">04</div>
-                    <h5 data-w-id="step-4-title" style="opacity:0">Finance</h5>
+                    <div data-w-id="step-4-number" class="large-text numbers">04</div>
+                    <h5 data-w-id="step-4-title">Finance</h5>
                     <div class="number-text-wrapper">
-                        <p data-w-id="step-4-text" style="opacity:0">The same data becomes trusted evidence for lenders, insurers, and input suppliers.</p>
+                        <p data-w-id="step-4-text">The same data becomes trusted evidence for lenders, insurers, and input suppliers.</p>
                     </div>
                 </div>
             </div>
-            <div data-w-id="how-it-works-button" style="opacity:0; margin-top: 50px; justify-content: center;" class="tm40-button-wrapper">
+            <div data-w-id="how-it-works-button" style="margin-top: 50px; justify-content: center;" class="tm40-button-wrapper">
                 <a data-w-id="how-it-works-button-link" href="/contact-us" class="primary-button w-inline-block">
                     <div class="clip">
                         <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
@@ -506,62 +764,67 @@
     <section class="section gray-bg">
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="title-wrapper">
-                <div data-w-id="product-suite-label" style="opacity:0" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                <div data-w-id="product-suite-label" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
                     <div>PRODUCT SUITE</div>
                 </div>
                 <div class="heading-wrap">
-                    <h2 data-w-id="product-suite-title" style="opacity:0">The AgriGuard Smart Farm Suite</h2>
+                    <h2 data-w-id="product-suite-title">The AgriGuard Smart Farm Suite</h2>
                 </div>
             </div>
-            <div class="bg-rectangle" style="margin-top: 50px;">
-                <div class="services-collection-list-wrapper w-dyn-list">
-                    <div data-w-id="product-suite-list" style="opacity:0" role="list" class="services-collection-list w-dyn-items">
-                        <div role="listitem" class="services-collection-item w-dyn-item">
-                            <div class="service-card-text-wrap">
-                                <a href="#" class="card-link-text">Smart Farm Manager</a>
-                                <p class="solution-card-paragraph">Digital farm diary and records</p>
-                            </div>
+            <div style="margin-top: 60px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                    <div class="light-gray-card" style="height: auto; min-height: 200px;">
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 16px; text-align: center;">📊</div>
+                            <h5 style="margin-bottom: 12px; text-align: center;">Smart Farm Manager</h5>
+                            <p class="small-paragraph">Digital farm diary and records</p>
                         </div>
-                        <div role="listitem" class="services-collection-item w-dyn-item">
-                            <div class="service-card-text-wrap">
-                                <a href="#" class="card-link-text">Smart Farm Prices</a>
-                                <p class="solution-card-paragraph">Real-time produce price insights</p>
-                            </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 200px;">
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 16px; text-align: center;">💰</div>
+                            <h5 style="margin-bottom: 12px; text-align: center;">Smart Farm Prices</h5>
+                            <p class="small-paragraph">Real-time produce price insights</p>
                         </div>
-                        <div role="listitem" class="services-collection-item w-dyn-item">
-                            <div class="service-card-text-wrap">
-                                <a href="#" class="card-link-text">Smart Farm Capital</a>
-                                <p class="solution-card-paragraph">Loans based on verified farm data</p>
-                            </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 200px;">
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 16px; text-align: center;">💳</div>
+                            <h5 style="margin-bottom: 12px; text-align: center;">Smart Farm Capital</h5>
+                            <p class="small-paragraph">Loans based on verified farm data</p>
                         </div>
-                        <div role="listitem" class="services-collection-item w-dyn-item">
-                            <div class="service-card-text-wrap">
-                                <a href="#" class="card-link-text">Smart Farm Crowdfund</a>
-                                <p class="solution-card-paragraph">Raise funds from communities</p>
-                            </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 200px;">
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 16px; text-align: center;">🤝</div>
+                            <h5 style="margin-bottom: 12px; text-align: center;">Smart Farm Crowdfund</h5>
+                            <p class="small-paragraph">Raise funds from communities</p>
                         </div>
-                        <div role="listitem" class="services-collection-item w-dyn-item">
-                            <div class="service-card-text-wrap">
-                                <a href="#" class="card-link-text">Smart Farm Micro-Insure</a>
-                                <p class="solution-card-paragraph">Data-driven crop insurance</p>
-                            </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 200px;">
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 16px; text-align: center;">🛡️</div>
+                            <h5 style="margin-bottom: 12px; text-align: center;">Smart Farm Micro-Insure</h5>
+                            <p class="small-paragraph">Data-driven crop insurance</p>
                         </div>
-                        <div role="listitem" class="services-collection-item w-dyn-item">
-                            <div class="service-card-text-wrap">
-                                <a href="#" class="card-link-text">Smart Farm Input Credit</a>
-                                <p class="solution-card-paragraph">Buy inputs now, pay after harvest</p>
-                            </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 200px;">
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 16px; text-align: center;">🌾</div>
+                            <h5 style="margin-bottom: 12px; text-align: center;">Smart Farm Input Credit</h5>
+                            <p class="small-paragraph">Buy inputs now, pay after harvest</p>
                         </div>
-                        <div role="listitem" class="services-collection-item w-dyn-item">
-                            <div class="service-card-text-wrap">
-                                <a href="#" class="card-link-text">Pest & Disease Detection Devices</a>
-                                <p class="solution-card-paragraph">Field AI monitors crop health</p>
-                            </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 200px;">
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 16px; text-align: center;">🔍</div>
+                            <h5 style="margin-bottom: 12px; text-align: center;">Pest & Disease Detection Devices</h5>
+                            <p class="small-paragraph">Field AI monitors crop health</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div data-w-id="product-suite-button" style="opacity:0; margin-top: 50px; justify-content: center;" class="tm40-button-wrapper">
+            <div data-w-id="product-suite-button" style="margin-top: 50px; justify-content: center; display: flex;" class="tm40-button-wrapper">
                 <a data-w-id="product-suite-button-link" href="/services-1" class="primary-button w-inline-block">
                     <div class="clip">
                         <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
@@ -577,34 +840,86 @@
         </div>
     </section>
     <!-- TECHNOLOGY Section -->
-    <section class="section">
+    <section class="section gray-bg">
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="title-wrapper">
-                <div data-w-id="technology-label" style="opacity:0" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                <div data-w-id="technology-label" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
                     <div>TECHNOLOGY</div>
                 </div>
                 <div class="heading-wrap">
-                    <h2 data-w-id="technology-title" style="opacity:0">Solar-powered. Offline-ready. Built for rural realities.</h2>
+                    <h2 data-w-id="technology-title">Solar-powered. Offline-ready. Built for rural realities.</h2>
                 </div>
             </div>
-            <div class="solutions-list" style="margin-top: 50px;">
-                <div data-w-id="tech-feature-1" style="opacity:0" class="solution-list-item">
-                    <h5 class="without-space">3D-printed devices to reduce costs</h5>
-                </div>
-                <div data-w-id="tech-feature-2" style="opacity:0" class="solution-list-item">
-                    <h5 class="without-space">Solar powered — no grid needed</h5>
-                </div>
-                <div data-w-id="tech-feature-3" style="opacity:0" class="solution-list-item">
-                    <h5 class="without-space">Works even in weak-network areas</h5>
-                </div>
-                <div data-w-id="tech-feature-4" style="opacity:0" class="solution-list-item">
-                    <h5 class="without-space">Supports SMS and USSD</h5>
-                </div>
-                <div data-w-id="tech-feature-5" style="opacity:0" class="solution-list-item">
-                    <h5 class="without-space">GIS + AI for hyperlocal decision support</h5>
+            <div style="margin-top: 60px;">
+                <div class="technology-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                    <div class="light-gray-card" style="height: auto; min-height: 400px; position: relative; overflow: hidden; border: 1px solid rgba(3, 89, 37, 0.1); background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 10px 30px rgba(3, 89, 37, 0.1); transition: transform 0.3s ease;">
+                        <div style="position: relative; height: 220px; background: linear-gradient(135deg, #035925 0%, #048a3f 100%); overflow: hidden;">
+                            <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f0002b34e90111e6f9684d_Frame%2027.webp" alt="3D Printing Technology" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3; mix-blend-mode: overlay;" />
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255, 255, 255, 0.3);">
+                                <div style="font-size: 50px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">🖨️</div>
+                            </div>
+                            <div style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: #f8f9fa; border-radius: 50%; border: 3px solid #035925;"></div>
+                        </div>
+                        <div style="padding: 40px 20px 25px;">
+                            <h5 style="margin-bottom: 12px; text-align: center; color: #035925; font-weight: 600;">3D-printed devices</h5>
+                            <p class="small-paragraph" style="text-align: center; color: #666; line-height: 1.6;">Reduce costs with innovative manufacturing</p>
+                        </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 400px; position: relative; overflow: hidden; border: 1px solid rgba(3, 89, 37, 0.1); background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 10px 30px rgba(3, 89, 37, 0.1); transition: transform 0.3s ease;">
+                        <div style="position: relative; height: 220px; background: linear-gradient(135deg, #035925 0%, #048a3f 100%); overflow: hidden;">
+                            <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ef8a6ad768e862b11d6277_7fc3e3d572c79cacb9efa8682315fe0d_056fbf144eaeb7621934335973edd45d.webp" alt="Solar Power" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3; mix-blend-mode: overlay;" />
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255, 255, 255, 0.3);">
+                                <div style="font-size: 50px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">☀️</div>
+                            </div>
+                            <div style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: #f8f9fa; border-radius: 50%; border: 3px solid #035925;"></div>
+                        </div>
+                        <div style="padding: 40px 20px 25px;">
+                            <h5 style="margin-bottom: 12px; text-align: center; color: #035925; font-weight: 600;">Solar powered</h5>
+                            <p class="small-paragraph" style="text-align: center; color: #666; line-height: 1.6;">No grid needed — works anywhere</p>
+                        </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 400px; position: relative; overflow: hidden; border: 1px solid rgba(3, 89, 37, 0.1); background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 10px 30px rgba(3, 89, 37, 0.1); transition: transform 0.3s ease;">
+                        <div style="position: relative; height: 220px; background: linear-gradient(135deg, #035925 0%, #048a3f 100%); overflow: hidden;">
+                            <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effad5607ea45d6bca9af5_c5485d29d92ea73c41f3488150d3c68f%20(2).webp" alt="Network Technology" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3; mix-blend-mode: overlay;" />
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255, 255, 255, 0.3);">
+                                <div style="font-size: 50px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">📡</div>
+                            </div>
+                            <div style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: #f8f9fa; border-radius: 50%; border: 3px solid #035925;"></div>
+                        </div>
+                        <div style="padding: 40px 20px 25px;">
+                            <h5 style="margin-bottom: 12px; text-align: center; color: #035925; font-weight: 600;">Weak-network ready</h5>
+                            <p class="small-paragraph" style="text-align: center; color: #666; line-height: 1.6;">Works even in low connectivity areas</p>
+                        </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 400px; position: relative; overflow: hidden; border: 1px solid rgba(3, 89, 37, 0.1); background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 10px 30px rgba(3, 89, 37, 0.1); transition: transform 0.3s ease;">
+                        <div style="position: relative; height: 220px; background: linear-gradient(135deg, #035925 0%, #048a3f 100%); overflow: hidden;">
+                            <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effbaa5e7a9aa900e45a9c_98954c4cebcd99cf4f6500e647e36d76%20(1).webp" alt="Mobile Technology" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3; mix-blend-mode: overlay;" />
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255, 255, 255, 0.3);">
+                                <div style="font-size: 50px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">📱</div>
+                            </div>
+                            <div style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: #f8f9fa; border-radius: 50%; border: 3px solid #035925;"></div>
+                        </div>
+                        <div style="padding: 40px 20px 25px;">
+                            <h5 style="margin-bottom: 12px; text-align: center; color: #035925; font-weight: 600;">SMS & USSD support</h5>
+                            <p class="small-paragraph" style="text-align: center; color: #666; line-height: 1.6;">Accessible on any mobile device</p>
+                        </div>
+                    </div>
+                    <div class="light-gray-card" style="height: auto; min-height: 400px; position: relative; overflow: hidden; border: 1px solid rgba(3, 89, 37, 0.1); background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 10px 30px rgba(3, 89, 37, 0.1); transition: transform 0.3s ease;">
+                        <div style="position: relative; height: 220px; background: linear-gradient(135deg, #035925 0%, #048a3f 100%); overflow: hidden;">
+                            <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67efed6b64d16af50386666f_3d75c307f6233299255463120d7c5ff6%20(1).webp" alt="AI Technology" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3; mix-blend-mode: overlay;" />
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255, 255, 255, 0.3);">
+                                <div style="font-size: 50px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">🤖</div>
+                            </div>
+                            <div style="position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: #f8f9fa; border-radius: 50%; border: 3px solid #035925;"></div>
+                        </div>
+                        <div style="padding: 40px 20px 25px; text-align: center;">
+                            <h5 style="margin-bottom: 12px; color: #035925; font-weight: 600;">GIS + AI Intelligence</h5>
+                            <p class="small-paragraph" style="color: #666; line-height: 1.6;">Hyperlocal decision support powered by advanced geospatial intelligence and machine learning</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div data-w-id="technology-button" style="opacity:0; margin-top: 42px;" class="solution-button-wrapper">
+            <div data-w-id="technology-button" style="margin-top: 60px; display: flex; justify-content: center;" class="solution-button-wrapper">
                 <a data-w-id="technology-button-link" href="/contact-us" class="primary-button w-inline-block">
                     <div class="clip">
                         <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
@@ -623,15 +938,15 @@
     <section class="section gray-bg">
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="title-wrapper">
-                <div data-w-id="financing-label" style="opacity:0" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
+                <div data-w-id="financing-label" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
                     <div>FINANCING ECOSYSTEM</div>
                 </div>
                 <div class="heading-wrap">
-                    <h2 data-w-id="financing-title" style="opacity:0">Data replaces collateral — and opens opportunity</h2>
+                    <h2 data-w-id="financing-title">Data replaces collateral — and opens opportunity</h2>
                 </div>
             </div>
             <div class="paragraph-wrapper" style="margin-top: 30px;">
-                <p data-w-id="financing-intro" style="opacity:0">Traditional loans exclude farmers. AgriGuard changes that by turning verified farm data into trusted risk insights.</p>
+                <p data-w-id="financing-intro">Traditional loans exclude farmers. AgriGuard changes that by turning verified farm data into trusted risk insights.</p>
             </div>
             <div class="home-1-cards-wrapper" style="margin-top: 50px;">
                 <div data-w-id="financing-card-1" class="light-gray-card">
@@ -659,7 +974,7 @@
                     </div>
                 </div>
             </div>
-            <div data-w-id="financing-button" style="opacity:0; margin-top: 50px; justify-content: center;" class="tm40-button-wrapper">
+            <div data-w-id="financing-button" style="margin-top: 50px; justify-content: center;" class="tm40-button-wrapper">
                 <a data-w-id="financing-button-link" href="/contact-us" class="primary-button w-inline-block">
                     <div class="clip">
                         <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
@@ -680,31 +995,37 @@
     <section class="section without-top-spacing">
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="center-title-wrapper">
-                <div data-w-id="143f5b43-2dfe-3120-ae3f-4a2a74579973" style="opacity:0" class="section-label"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee9dc219ea961bc2b63556_Rectangle%202.svg" loading="lazy" alt="" />
-                    <div>Why choose us</div>
+                <div data-w-id="143f5b43-2dfe-3120-ae3f-4a2a74579973" style="opacity:0" class="section-label">
+                    <div>Who we Serve</div>
                 </div>
-                <h2 data-w-id="0254c467-84c5-211b-d57e-314055d35b69" style="opacity:0">We’re more than just a farm — we’re your trusted partner in sustainable agriculture.</h2>
+                <h2 data-w-id="0254c467-84c5-211b-d57e-314055d35b69" style="opacity:0">
+                    WHO WE SERVE                </h2>
             </div>
             <div data-w-id="0f6c1119-093a-298c-7df2-d0e505a436b2" class="home-1-cards-wrapper">
                 <div data-w-id="21373589-0659-c099-813a-d9f336f6dbe2" class="black-card"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effbaa5e7a9aa900e45a9c_98954c4cebcd99cf4f6500e647e36d76%20(1).webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effbaa5e7a9aa900e45a9c_98954c4cebcd99cf4f6500e647e36d76%20(1)-p-500.webp 500w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effbaa5e7a9aa900e45a9c_98954c4cebcd99cf4f6500e647e36d76%20(1)-p-800.webp 800w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effbaa5e7a9aa900e45a9c_98954c4cebcd99cf4f6500e647e36d76%20(1).webp 1000w"
                         alt="photo" class="card-image" />
                     <div>
-                        <h5 class="text-white">Sustainable Practices</h5>
-                        <p class="text-white">From pesticide-free farming to smart water use, we’re committed to methods that respect the planet and future generations.</p>
+                        <h5 class="text-white">Built for everyone in the farming ecosystem</h5>
+                        <p class="text-white">
+                            🌱 Smallholder Farmers
+                            </p>
                     </div>
                 </div>
                 <div data-w-id="105b2039-60d0-3233-be75-1e70a19dc18d" class="light-gray-card"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67efed6b64d16af50386666f_3d75c307f6233299255463120d7c5ff6%20(1).webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67efed6b64d16af50386666f_3d75c307f6233299255463120d7c5ff6%20(1)-p-500.webp 500w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67efed6b64d16af50386666f_3d75c307f6233299255463120d7c5ff6%20(1)-p-800.webp 800w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67efed6b64d16af50386666f_3d75c307f6233299255463120d7c5ff6%20(1).webp 992w"
                         alt="photo" class="card-image" />
                     <div>
-                        <h5>Global Expertise</h5>
-                        <p>Years of international experience delivering scalable agricultural solutions across diverse climates and regions.</p>
+                        <h5>🤝 Cooperatives & NGOs</h5>
+                        <p>
+                            Deploy at scale and measure impact.
+                            </p>
                     </div>
                 </div>
                 <div data-w-id="70e27d44-97e5-e41c-9cf7-3477c62b532a" class="primary-card"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effad5607ea45d6bca9af5_c5485d29d92ea73c41f3488150d3c68f%20(2).webp" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effad5607ea45d6bca9af5_c5485d29d92ea73c41f3488150d3c68f%20(2)-p-500.webp 500w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effad5607ea45d6bca9af5_c5485d29d92ea73c41f3488150d3c68f%20(2)-p-800.webp 800w, https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67effad5607ea45d6bca9af5_c5485d29d92ea73c41f3488150d3c68f%20(2).webp 1000w"
                         alt="photo" class="card-image" />
                     <div>
-                        <h5 class="text-white">Trusted by Thousands</h5>
-                        <p class="text-white">Farmers, distributors, and partners worldwide rely on us for quality, reliability, and long-term success.</p>
+                        <h5 class="text-white">🏦 Banks, MFIs & Insurers</h5>
+                        <p class="text-white">
+                            Derisk lending and expand portfolios responsibly.                        </p>
                     </div>
                 </div>
             </div>
@@ -718,12 +1039,15 @@
                     <div class="founder-text">Founder &amp; CEO</div>
                 </div>
                 <div id="w-node-a678455a-b827-91b9-3fbd-1fb71a365909-b840c97c" class="quote-wrap">
-                    <div class="founder-quote"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3949efb78ba9b7c1da84e_%E2%80%9C%20(4).svg" loading="lazy" alt="icon" class="quotes-icon" />
-                        <div class="founder-quote-text">“We started this journey with a simple belief — that farming can feed the world without harming it. Every seed we plant, every partnership we build, reflects our commitment to sustainability, innovation, and people.”</div>
+                    <div class="founder-quote">
+                        <div class="founder-quote-text" style="font-size: 20px;">
+                            Gloria Mbatha is a Strathmore University graduate with over six years of experience working directly with smallholder farmers across Africa. She saw the injustice of productive farmers being denied credit simply because they lacked records. Inspired by how vehicles and tractors are financed through monitoring tools, she asked: “Why can’t farms be financed using their own data?” Gloria founded AgriGuard AI to make that possible — combining low-cost farm sensors, GIS intelligence, and farmer-approved mobile-money insights to create trustworthy digital profiles that financiers can rely on.
+                            
+                            </div>
                     </div>
                     <div class="founder-name-wrap">
-                        <div class="large-text text-white">James<br/>Der Linden</div>
-                        <div class="team-button-wrap">
+                        <div class="large-text text-white" style="margin-top: -30px;">Gloria Mbatha<br/></div>
+                        <!-- <div class="team-button-wrap">
                             <a data-w-id="57b04eec-4176-b72b-9e7e-32da4ac7ee24" href="/our-team" class="secondary-button w-inline-block">
                                 <div class="clip">
                                     <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
@@ -735,7 +1059,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -881,7 +1205,7 @@
                 <div class="footer-brand-wrapper">
                     <div class="footer-logo-wrapper"><a href="/home" aria-current="page" class="footer-brand w-nav-brand w--current"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3a7eeec27e86f08823bf4_0ea11bb1e0bb93359555ba23023d935d_Group%201%20%281%29.svg" loading="lazy" alt="Logo" height="30" class="footer-logo"/></a>
                         <div
-                            class="footer-text">Redefining agriculture at a global scale.</div>
+                            class="footer-text">Low-cost, solar-powered AI for crop monitoring and farmer financing.</div>
                 </div>
                 <div class="social-wrapper"><a href="https://www.instagram.com/" target="_blank" class="social-link-block w-inline-block"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3ab344ecca7dc1cd63a7f_Frame%20(51).svg" loading="lazy" alt="icon" class="footer-social-image"/><div>Instagram</div></a>
                     <a
@@ -919,7 +1243,7 @@
         </div>
     </div>
     </div>
-    <div class="promotion-labels-wrapper-to-remove">
+    <!-- <div class="promotion-labels-wrapper-to-remove">
         <div class="promotion-label-left">
             <div class="promotion-label-holder">
                 <div class="promotion-label-paragraph">Boost Your Webflow with Pro Apps! Get 20% Off with Code <span class="promotion-coupon">WEBFLOW20</span> </div>
@@ -935,7 +1259,7 @@
                 <div>Buy this Template</div>
                 </a>
         </div>
-    </div>
+    </div> -->
     </div>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67ee63cb3895632eb840c962" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript"></script>
@@ -945,4 +1269,5 @@
     <script src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/js/webflow.7093eada.ea782a54e635492e.js" type="text/javascript"></script>
 </body>
 
+</html>
 </html>
