@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFarm AI - Analytics Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <style>
+        :root {
+            --primary: #27AE60;
+            --primary-light: #E9F7EF;
+            --primary-dark: #219653;
+            --secondary: #2D9CDB;
+            --secondary-light: #E3F2FD;
+            --danger: #EB5757;
+            --warning: #F2C94C;
+            --success: #6FCF97;
+            --purple: #9B51E0;
+            --orange: #F2994A;
+            --bg-light: #F8F9FA;
+            --white: #FFFFFF;
+            --text-main: #1D1F27;
+            --text-secondary: #4F4F4F;
+            --text-grey: #828282;
+            --border: #E0E0E0;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --sidebar-width: 260px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            overflow: hidden;
+            font-family: 'Poppins', 'Roboto', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .app-container {
+            display: flex;
+            height: 100vh;
+            font-family: 'Poppins', 'Roboto', sans-serif;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, #1D1F27 0%, #2D3436 100%);
+            color: white;
+            padding: 25px 0;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            padding: 0 25px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo i {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .menu-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #95A5A6;
+            margin: 25px 0 15px;
+            letter-spacing: 1px;
+            font-weight: 500;
+            padding: 0 25px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .sidebar li {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #BDC3C7;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            margin: 0 10px 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar li.active {
+            background: linear-gradient(90deg, rgba(39, 174, 96, 0.2) 0%, rgba(39, 174, 96, 0.1) 100%);
+            color: white;
+            font-weight: 500;
+            border-left: 3px solid var(--primary);
+        }
+
+        .sidebar li:hover:not(.active) {
+            background: rgba(255,255,255,0.05);
+            transform: translateX(2px);
+            color: white;
+        }
+
+        .sidebar li.settings-item {
+            margin-top: 30px;
+            background: rgba(155, 81, 224, 0.1);
+            border-left: 3px solid var(--purple);
+        }
+
+        .sidebar li.settings-item:hover {
+            background: rgba(155, 81, 224, 0.2);
+        }
+
+        .sidebar li i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 25px 30px;
+            overflow-y: auto;
+            font-family: 'Poppins', 'Roboto', sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .farm-info h1 {
+            font-size: 26px;
+            color: var(--text-main);
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .farm-meta {
+            font-size: 14px;
+            color: var(--text-grey);
+            margin-top: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Stats Row */
+        .top-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-card h4 {
+            font-size: 12px;
+            color: var(--text-grey);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .trend {
+            font-size: 13px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .up { color: var(--primary); }
+        .down { color: var(--danger); }
+
+        /* Main Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* INFOGRAHIC MAP STYLES */
+        .map-view {
+            height: 280px;
+            background: #F0F7F4;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #E0E4E8;
+        }
+
+        /* Farm Zones */
+        .farm-zone {
+            position: absolute;
+            border: 2px solid;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+            color: #333;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+            overflow: hidden;
+        }
+
+        .farm-zone:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            z-index: 5;
+        }
+
+        .zone-a {
+            top: 15%;
+            left: 10%;
+            width: 25%;
+            height: 35%;
+            background: rgba(111, 207, 151, 0.3);
+            border-color: #6FCF97;
+            z-index: 2;
+        }
+
+        .zone-b {
+            top: 45%;
+            left: 40%;
+            width: 30%;
+            height: 40%;
+            background: rgba(45, 156, 219, 0.3);
+            border-color: #2D9CDB;
+            z-index: 3;
+        }
+
+        .zone-c {
+            top: 20%;
+            left: 65%;
+            width: 20%;
+            height: 30%;
+            background: rgba(242, 201, 76, 0.3);
+            border-color: #F2C94C;
+            z-index: 2;
+        }
+
+        .zone-d {
+            top: 55%;
+            left: 15%;
+            width: 20%;
+            height: 25%;
+            background: rgba(155, 81, 224, 0.3);
+            border-color: #9B51E0;
+            z-index: 1;
+        }
+
+        /* Sensor Dots */
+        .sensor-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            z-index: 10;
+            animation: pulse 2s infinite;
+        }
+
+        .sensor-dot:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            white-space: nowrap;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .sensor-green {
+            background: #27AE60;
+        }
+
+        .sensor-yellow {
+            background: #F2C94C;
+            animation-delay: 0.5s;
+        }
+
+        .sensor-red {
+            background: #EB5757;
+            animation-delay: 1s;
+        }
+
+        /* Water Source */
+        .water-source {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(45, 156, 219, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(45, 156, 219, 0.3);
+            z-index: 4;
+        }
+
+        /* Legend */
+        .map-legend {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.95);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 20;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            gap: 6px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        /* Zone Labels */
+        .zone-label {
+            position: absolute;
+            background: rgba(255,255,255,0.9);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 6;
+        }
+
+        /* Farm House */
+        .farm-house {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: #8B4513;
+            width: 40px;
+            height: 30px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 4;
+        }
+
+        /* Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+            50% { transform: scale(1.1); box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+            100% { transform: scale(1); box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+        }
+
+        /* Finance Panel */
+        .finance-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+        }
+
+        .finance-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .finance-item span {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .finance-item strong {
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Simulation Controls */
+        .sim-box {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.9) 0%, rgba(33, 150, 83, 0.9) 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 40px;
+            margin-left: 15px;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+
+        .sim-box h5 {
+            font-size: 12px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-sim {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        .btn-sim:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .alert-popup {
+            display: none;
+            background: linear-gradient(to right, #FFEBEE, #FFCDD2);
+            color: #B71C1C;
+            padding: 18px 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--danger);
+            margin-bottom: 25px;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Poppins', sans-serif;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Chart Layout */
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .chart-container {
+            height: 250px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #E0E0E0;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* Status Indicator */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 12px;
+            background: var(--primary-light);
+            border-radius: 20px;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .status-indicator.danger {
+            background: #FFEBEE;
+            color: var(--danger);
+        }
+
+        .status-indicator.warning {
+            background: #FFF8E1;
+            color: #F57C00;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+
+        /* Chart improvements */
+        canvas {
+            font-family: 'Poppins', 'Roboto', sans-serif;
+        }
+
+        /* DEMO POPUP MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .demo-modal {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .demo-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .demo-modal-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .demo-modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .demo-modal-subtitle {
+            font-size: 14px;
+            color: var(--text-grey);
+            margin-bottom: 5px;
+        }
+
+        .demo-modal-content {
+            margin-bottom: 30px;
+        }
+
+        .demo-modal-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .demo-modal-features {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .demo-modal-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .demo-modal-feature i {
+            color: var(--primary);
+        }
+
+        .demo-modal-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .demo-btn-primary {
+            flex: 1;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .demo-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+        }
+
+        .demo-btn-secondary {
+            flex: 1;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid var(--border);
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .demo-btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .demo-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-grey);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .demo-modal-close:hover {
+            color: var(--danger);
+        }
+
+        /* Settings Page Styles */
+        .settings-page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .settings-section {
+            margin-bottom: 30px;
+        }
+
+        .settings-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .setting-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .setting-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 10px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.active {
+            border-color: var(--text-main);
+            transform: scale(1.1);
+        }
+
+        /* New Charts Layout */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .chart-card {
+            grid-column: span 1;
+        }
+
+        .wide-chart {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                width: 80px;
+                padding: 25px 10px;
+            }
+
+            .logo span, .menu-label, .sidebar li span {
+                display: none;
+            }
+
+            .logo {
+                justify-content: center;
+                padding: 0;
+            }
+
+            .sidebar li {
+                justify-content: center;
+                padding: 15px;
+            }
+
+            .sim-box {
+                padding: 15px 10px;
+                margin: 20px 5px 10px;
+            }
+
+            .demo-modal {
+                width: 95%;
+                padding: 30px 25px;
+            }
+
+            .farm-zone {
+                font-size: 10px;
+            }
+
+            .wide-chart {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-leaf"></i>
+            <span>SmartFarm AI</span>
+        </div>
+
+        <p class="menu-label">Management</p>
+        <ul>
+            <li class="active" id="dashboard-tab">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="demo-request" data-feature="Smart Manager">
+                <i class="fa-solid fa-robot"></i>
+                <span>Smart Manager</span>
+            </li>
+            <li class="demo-request" data-feature="Smart Prices">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Smart Prices</span>
+            </li>
+        </ul>
+
+        <p class="menu-label">Fintech Suite</p>
+        <ul>
+            <li class="demo-request" data-feature="Farm Capital">
+                <i class="fa-solid fa-piggy-bank"></i>
+                <span>Farm Capital</span>
+            </li>
+            <li class="demo-request" data-feature="Crowdfund">
+                <i class="fa-solid fa-users"></i>
+                <span>Crowdfund</span>
+            </li>
+            <li class="demo-request" data-feature="Micro-Insure">
+                <i class="fa-solid fa-shield-alt"></i>
+                <span>Micro-Insure</span>
+            </li>
+            <li class="demo-request" data-feature="Input Credit">
+                <i class="fa-solid fa-hand-holding-usd"></i>
+                <span>Input Credit</span>
+            </li>
+        </ul>
+
+        <p class="menu-label">System</p>
+        <ul>
+            <li class="settings-item" id="settings-tab">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </li>
+        </ul>
+
+
+    </aside>
+
+    <main class="main-content" id="dashboard">
+        <header>
+            <div class="farm-info">
+                <h1>SmartFarm Analytics Dashboard</h1>
+                <p class="farm-meta">
+                    <i class="fa-solid fa-location-dot"></i> <strong>Location:</strong> Nakuru County, Sector 4 &nbsp; | &nbsp;
+                    <i class="fa-solid fa-map"></i> <strong>Smart Manager:</strong> 120.5 Acres Recorded
+                </p>
+            </div>
+            <div class="user-profile">
+                <div class="status-indicator" id="ai-status">
+                    <i class="fa-solid fa-circle"></i> AI Sensors Active
+                </div>
+                <img src="https://i.pravatar.cc/42?img=12" style="border-radius: 50%; border: 3px solid var(--primary-light)" alt="User">
+            </div>
+        </header>
+
+        <div id="pest-alert" class="alert-popup">
+            <div>
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <strong>Critical Alert:</strong> AI Device #04 detected Fall Armyworm risk in Field B2. Immediate action recommended.
+            </div>
+            <button onclick="this.parentElement.style.display='none'" style="background:none; border:none; cursor:pointer; color: #B71C1C; font-size: 18px;">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+
+        <section class="top-stats">
+            <div class="stat-card">
+                <h4>Market Price (Maize)</h4>
+                <div class="value" id="price-val">$480.00</div>
+                <div class="trend up">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span id="price-trend">+2.4% vs last week</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <h4>Credit Score</h4>
+                <div class="value">840</div>
+                <div class="trend up">Excellent (Capital Ready)</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 84%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <h4>Input Credit</h4>
+                <div class="value">$1,250</div>
+                <div class="trend">Used of $5,000 limit</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <h4>AI Active Devices</h4>
+                <div class="value">08</div>
+                <div class="trend">All Solar-Powered Online</div>
+            </div>
+        </section>
+
+        <div class="chart-grid">
+            <!-- Row 1: Map and Weather -->
+            <div class="card chart-card">
+                <div class="card-title">
+                    GIS Field Activity Monitoring
+                    <span class="status-indicator"><i class="fa-solid fa-satellite"></i> Real-time</span>
+                </div>
+                <div class="map-view" id="map">
+                    <!-- Farm Zones -->
+                    <div class="farm-zone zone-a" onclick="selectZone('Zone A - Maize')">
+                        <span>ZONE A<br>Maize</span>
+                        <div class="zone-label" style="top: -25px; left: 50%; transform: translateX(-50%);">40 Acres</div>
+                    </div>
+
+                    <div class="farm-zone zone-b" onclick="selectZone('Zone B - Wheat')">
+                        <span>ZONE B<br>Wheat</span>
+                        <div class="zone-label" style="top: -25px; left: 50%; transform: translateX(-50%);">80.5 Acres</div>
+                    </div>
+
+                    <div class="farm-zone zone-c" onclick="selectZone('Zone C - Vegetables')">
+                        <span>ZONE C<br>Vegetables</span>
+                        <div class="zone-label" style="top: -25px; left: 50%; transform: translateX(-50%);">25 Acres</div>
+                    </div>
+
+                    <div class="farm-zone zone-d" onclick="selectZone('Zone D - Orchard')">
+                        <span>ZONE D<br>Orchard</span>
+                        <div class="zone-label" style="top: -25px; left: 50%; transform: translateX(-50%);">20 Acres</div>
+                    </div>
+
+                    <!-- Water Sources -->
+                    <div class="water-source" style="top: 60%; left: 25%;" data-tooltip="Water Source #1">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+
+                    <div class="water-source" style="top: 30%; left: 75%;" data-tooltip="Water Source #2">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+
+                    <!-- Farm House -->
+                    <div class="farm-house" data-tooltip="Main Farm House">
+                        <i class="fa-solid fa-home"></i>
+                    </div>
+
+                    <!-- Sensor Dots -->
+                    <div class="sensor-dot sensor-green" style="top: 30%; left: 20%;" data-tooltip="Sensor #01: Good"></div>
+                    <div class="sensor-dot sensor-green" style="top: 40%; left: 35%;" data-tooltip="Sensor #02: Good"></div>
+                    <div class="sensor-dot sensor-yellow" style="top: 50%; left: 55%;" data-tooltip="Sensor #03: Warning"></div>
+                    <div class="sensor-dot sensor-green" style="top: 60%; left: 70%;" data-tooltip="Sensor #04: Good"></div>
+                    <div class="sensor-dot sensor-red" style="top: 65%; left: 45%;" id="field-b2-sensor" data-tooltip="Sensor #05: Critical"></div>
+                    <div class="sensor-dot sensor-green" style="top: 25%; left: 85%;" data-tooltip="Sensor #06: Good"></div>
+                    <div class="sensor-dot sensor-green" style="top: 70%; left: 15%;" data-tooltip="Sensor #07: Good"></div>
+                    <div class="sensor-dot sensor-green" style="top: 15%; left: 50%;" data-tooltip="Sensor #08: Good"></div>
+
+                    <!-- Map Legend -->
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #6FCF97;"></div>
+                            <span>Zone A (Maize)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #2D9CDB;"></div>
+                            <span>Zone B (Wheat)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #F2C94C;"></div>
+                            <span>Zone C (Vegetables)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-title">
+                    Weather Forecast
+                    <span class="status-indicator"><i class="fa-solid fa-cloud-sun"></i> Next 7 Days</span>
+                </div>
+                <div class="chart-container"><canvas id="weatherChart"></canvas></div>
+            </div>
+
+            <!-- Row 2: Multiple Charts -->
+            <div class="card chart-card">
+                <div class="card-title">Crop Health Index</div>
+                <div class="chart-container"><canvas id="healthIndexChart"></canvas></div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-title">Soil Nutrient Levels</div>
+                <div class="chart-container"><canvas id="nutrientChart"></canvas></div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-title">Water Usage Analysis</div>
+                <div class="chart-container"><canvas id="waterUsageChart"></canvas></div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-title">Solar Energy Production</div>
+                <div class="chart-container"><canvas id="solarChart"></canvas></div>
+            </div>
+
+            <!-- Row 3: Wider Charts -->
+            <div class="card wide-chart">
+                <div class="card-title">Financial Performance (Revenue vs Expenses)</div>
+                <div class="chart-container"><canvas id="financialFlowChart"></canvas></div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-title">
+                    AI Pest Risk Profile
+                    <span class="status-indicator"><i class="fa-solid fa-brain"></i> AI Analysis</span>
+                </div>
+                <div class="chart-container"><canvas id="riskRadar"></canvas></div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-title">Yield Prediction 2024</div>
+                <div class="chart-container"><canvas id="yieldChart"></canvas></div>
+            </div>
+
+            <!-- Row 4: More Charts -->
+            <div class="card chart-card">
+                <div class="card-title">Equipment Utilization</div>
+                <div class="chart-container"><canvas id="equipmentChart"></canvas></div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-title">Labor Productivity</div>
+                <div class="chart-container"><canvas id="laborChart"></canvas></div>
+            </div>
+
+            <div class="card chart-card">
+                <div class="card-title">Carbon Footprint Tracking</div>
+                <div class="chart-container"><canvas id="carbonChart"></canvas></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Settings Page -->
+    <main class="main-content settings-page" id="settings">
+        <header>
+            <div class="farm-info">
+                <h1>Dashboard Settings</h1>
+                <p class="farm-meta">
+                    <i class="fa-solid fa-sliders"></i> Customize your SmartFarm AI dashboard experience
+                </p>
+            </div>
+            <div class="user-profile">
+                <button class="btn-primary" onclick="saveSettings()" style="width: auto; padding: 10px 20px;">
+                    <i class="fa-solid fa-save"></i> Save Settings
+                </button>
+            </div>
+        </header>
+
+        <div class="settings-section">
+            <h2 class="settings-title">Dashboard Preferences</h2>
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <h3 style="margin-bottom: 15px; color: var(--text-main);">Theme & Display</h3>
+                    <div class="setting-item">
+                        <span class="setting-label">Dark Mode</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Animations</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="animationsToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Color Theme</span>
+                        <div class="color-picker">
+                            <div class="color-option active" style="background: #27AE60;" onclick="selectColor('green')"></div>
+                            <div class="color-option" style="background: #2D9CDB;" onclick="selectColor('blue')"></div>
+                            <div class="color-option" style="background: #9B51E0;" onclick="selectColor('purple')"></div>
+                            <div class="color-option" style="background: #F2994A;" onclick="selectColor('orange')"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-card">
+                    <h3 style="margin-bottom: 15px; color: var(--text-main);">Data & Notifications</h3>
+                    <div class="setting-item">
+                        <span class="setting-label">Real-time Updates</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="realtimeToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Email Alerts</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="emailToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Push Notifications</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pushToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-card">
+                    <h3 style="margin-bottom: 15px; color: var(--text-main);">Chart Preferences</h3>
+                    <div class="setting-item">
+                        <span class="setting-label">Show Data Labels</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="labelsToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Animated Charts</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="chartAnimToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Auto-refresh Charts</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="refreshToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-card">
+                    <h3 style="margin-bottom: 15px; color: var(--text-main);">Farm Configuration</h3>
+                    <div class="setting-item">
+                        <span class="setting-label">Units System</span>
+                        <select style="padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);">
+                            <option>Metric (kg, ha)</option>
+                            <option>Imperial (lb, acre)</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Currency</span>
+                        <select style="padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);">
+                            <option>USD ($)</option>
+                            <option>EUR (€)</option>
+                            <option>GBP (£)</option>
+                            <option>KES (KSh)</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Time Zone</span>
+                        <select style="padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);">
+                            <option>Africa/Nairobi (EAT)</option>
+                            <option>UTC</option>
+                            <option>America/New_York (EST)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2 class="settings-title">Export & Data Management</h2>
+            <div class="settings-grid">
+                <div class="setting-card">
+                    <h3 style="margin-bottom: 15px; color: var(--text-main);">Data Export</h3>
+                    <div class="setting-item">
+                        <span class="setting-label">Export Format</span>
+                        <select style="padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border);">
+                            <option>CSV</option>
+                            <option>Excel</option>
+                            <option>PDF</option>
+                            <option>JSON</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" onclick="exportData()" style="margin-top: 20px;">
+                        <i class="fa-solid fa-download"></i> Export All Data
+                    </button>
+                </div>
+
+                <div class="setting-card">
+                    <h3 style="margin-bottom: 15px; color: var(--text-main);">API & Integration</h3>
+                    <div class="setting-item">
+                        <span class="setting-label">API Access</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="apiToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Webhook URL</span>
+                        <input type="text" placeholder="https://your-webhook.com" style="padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); width: 200px;">
+                    </div>
+                    <button class="btn-primary" onclick="generateApiKey()" style="margin-top: 20px;">
+                        <i class="fa-solid fa-key"></i> Generate API Key
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Demo Request Modal -->
+<div id="demoModal" class="modal-overlay">
+    <div class="demo-modal">
+        <button class="demo-modal-close" onclick="closeDemoModal()">
+            <i class="fa-solid fa-times"></i>
+        </button>
+
+        <div class="demo-modal-header">
+            <div class="demo-modal-icon">
+                <i class="fa-solid fa-rocket"></i>
+            </div>
+            <div>
+                <div class="demo-modal-title" id="demoFeatureTitle">Smart Manager Demo</div>
+                <div class="demo-modal-subtitle">Experience the power of AI-driven farm management</div>
+            </div>
+        </div>
+
+        <div class="demo-modal-content">
+            <p id="demoFeatureDescription">Get a personalized demo of our AI-powered farm management system. See how intelligent automation can optimize your operations and boost productivity.</p>
+
+            <div class="demo-modal-features">
+                <div class="demo-modal-feature">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <span>Live product demonstration</span>
+                </div>
+                <div class="demo-modal-feature">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <span>Personalized consultation</span>
+                </div>
+                <div class="demo-modal-feature">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <span>30-day free trial access</span>
+                </div>
+                <div class="demo-modal-feature">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <span>Expert implementation support</span>
+                </div>
+            </div>
+
+            <p>Join thousands of farmers who have transformed their operations with SmartFarm AI. Schedule your demo today!</p>
+        </div>
+
+        <div class="demo-modal-buttons">
+            <button class="demo-btn-primary" onclick="redirectToSignup()">
+                <i class="fa-solid fa-user-plus"></i> Sign Up for Demo
+            </button>
+            <button class="demo-btn-secondary" onclick="closeDemoModal()">
+                Maybe Later
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Register Chart.js plugins
+    Chart.register(ChartDataLabels);
+
+    // Feature descriptions for the demo modal
+    const featureDescriptions = {
+        "Smart Manager": "Get a demo of our AI-powered farm management system that automates crop monitoring, resource allocation, and predictive analytics for optimal farm operations.",
+        "Smart Prices": "Experience real-time market intelligence and predictive pricing models that help you maximize profits by selling at the right time and price.",
+        "Farm Capital": "Learn about our tailored financing solutions designed specifically for modern farming needs with competitive rates and flexible repayment terms.",
+        "Crowdfund": "See how our platform connects farmers with investors to fund expansion projects, technology upgrades, and sustainable farming initiatives.",
+        "Micro-Insure": "Explore our affordable insurance products that protect your crops and livestock against climate risks, pests, and market fluctuations.",
+        "Input Credit": "Discover our input financing program that provides access to quality seeds, fertilizers, and equipment with deferred payment options."
+    };
+
+    // NEW CHARTS IMPLEMENTATION
+
+    // 1. Weather Forecast Chart
+    const ctxWeather = document.getElementById('weatherChart').getContext('2d');
+    const weatherChart = new Chart(ctxWeather, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [
+                {
+                    label: 'Temperature (°C)',
+                    data: [22, 24, 26, 28, 25, 23, 21],
+                    borderColor: '#EB5757',
+                    backgroundColor: 'rgba(235, 87, 87, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    yAxisID: 'y'
+                },
+                {
+                    label: 'Rainfall (mm)',
+                    data: [0, 5, 12, 8, 2, 0, 0],
+                    borderColor: '#2D9CDB',
+                    backgroundColor: 'rgba(45, 156, 219, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                datalabels: { display: false }
+            },
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    title: { display: true, text: 'Temperature (°C)', font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: { display: true, text: 'Rainfall (mm)', font: { family: 'Poppins, Roboto, sans-serif' } },
+                    grid: { drawOnChartArea: false }
+                }
+            }
+        }
+    });
+
+    // 2. Soil Nutrient Levels Chart
+    const ctxNutrient = document.getElementById('nutrientChart').getContext('2d');
+    const nutrientChart = new Chart(ctxNutrient, {
+        type: 'bar',
+        data: {
+            labels: ['Nitrogen (N)', 'Phosphorus (P)', 'Potassium (K)', 'Calcium', 'Magnesium'],
+            datasets: [{
+                label: 'Soil Nutrient Levels',
+                data: [85, 65, 90, 75, 60],
+                backgroundColor: [
+                    '#27AE60',
+                    '#2D9CDB',
+                    '#F2C94C',
+                    '#9B51E0',
+                    '#F2994A'
+                ],
+                borderColor: [
+                    '#219653',
+                    '#1E88E5',
+                    '#FFB300',
+                    '#8E44AD',
+                    '#E67E22'
+                ],
+                borderWidth: 1,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    color: '#fff',
+                    font: { weight: 'bold', family: 'Poppins, Roboto, sans-serif' },
+                    formatter: (value) => `${value}%`
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                x: {
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                }
+            }
+        }
+    });
+
+    // 3. Water Usage Analysis Chart
+    const ctxWater = document.getElementById('waterUsageChart').getContext('2d');
+    const waterUsageChart = new Chart(ctxWater, {
+        type: 'doughnut',
+        data: {
+            labels: ['Irrigation', 'Livestock', 'Processing', 'Domestic'],
+            datasets: [{
+                data: [65, 15, 12, 8],
+                backgroundColor: [
+                    '#27AE60',
+                    '#2D9CDB',
+                    '#F2C94C',
+                    '#9B51E0'
+                ],
+                borderWidth: 2,
+                borderColor: '#fff',
+                hoverOffset: 15
+            }]
+        },
+        options: {
+            responsive: true,
+            cutout: '65%',
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        font: { family: 'Poppins, Roboto, sans-serif' },
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    bodyFont: { family: 'Poppins, Roboto, sans-serif' },
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw}%`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // 4. Solar Energy Production Chart
+    const ctxSolar = document.getElementById('solarChart').getContext('2d');
+    const solarChart = new Chart(ctxSolar, {
+        type: 'line',
+        data: {
+            labels: ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM'],
+            datasets: [{
+                label: 'Solar Production (kWh)',
+                data: [5, 45, 85, 75, 25, 0],
+                borderColor: '#F2C94C',
+                backgroundColor: 'rgba(242, 201, 76, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#F2C94C',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                datalabels: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'kWh', font: { family: 'Poppins, Roboto, sans-serif' } },
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                x: {
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                }
+            }
+        }
+    });
+
+    // 5. Yield Prediction Chart
+    const ctxYield = document.getElementById('yieldChart').getContext('2d');
+    const yieldChart = new Chart(ctxYield, {
+        type: 'bar',
+        data: {
+            labels: ['Maize', 'Wheat', 'Vegetables', 'Orchard'],
+            datasets: [
+                {
+                    label: '2023 Yield',
+                    data: [850, 620, 320, 180],
+                    backgroundColor: 'rgba(155, 81, 224, 0.7)',
+                    borderRadius: 6
+                },
+                {
+                    label: '2024 Prediction',
+                    data: [920, 680, 380, 210],
+                    backgroundColor: 'rgba(39, 174, 96, 0.7)',
+                    borderRadius: 6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                datalabels: {
+                    color: '#fff',
+                    font: { weight: 'bold', family: 'Poppins, Roboto, sans-serif' },
+                    formatter: (value) => `${value}kg`
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'Yield (kg/acre)', font: { family: 'Poppins, Roboto, sans-serif' } },
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                x: {
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                }
+            }
+        }
+    });
+
+    // 6. Equipment Utilization Chart
+    const ctxEquipment = document.getElementById('equipmentChart').getContext('2d');
+    const equipmentChart = new Chart(ctxEquipment, {
+        type: 'polarArea',
+        data: {
+            labels: ['Tractor', 'Harvester', 'Irrigation', 'Sprayer', 'Drone'],
+            datasets: [{
+                data: [85, 65, 90, 75, 95],
+                backgroundColor: [
+                    'rgba(39, 174, 96, 0.7)',
+                    'rgba(45, 156, 219, 0.7)',
+                    'rgba(242, 201, 76, 0.7)',
+                    'rgba(155, 81, 224, 0.7)',
+                    'rgba(235, 87, 87, 0.7)'
+                ],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        font: { family: 'Poppins, Roboto, sans-serif' },
+                        padding: 15
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    ticks: { display: false },
+                    grid: { color: 'rgba(0,0,0,0.1)' }
+                }
+            }
+        }
+    });
+
+    // 7. Labor Productivity Chart
+    const ctxLabor = document.getElementById('laborChart').getContext('2d');
+    const laborChart = new Chart(ctxLabor, {
+        type: 'radar',
+        data: {
+            labels: ['Efficiency', 'Skill Level', 'Safety', 'Teamwork', 'Attendance', 'Quality'],
+            datasets: [
+                {
+                    label: 'Current Month',
+                    data: [85, 78, 92, 88, 95, 82],
+                    backgroundColor: 'rgba(39, 174, 96, 0.2)',
+                    borderColor: '#27AE60',
+                    pointBackgroundColor: '#27AE60'
+                },
+                {
+                    label: 'Previous Month',
+                    data: [78, 72, 85, 80, 88, 75],
+                    backgroundColor: 'rgba(45, 156, 219, 0.2)',
+                    borderColor: '#2D9CDB',
+                    pointBackgroundColor: '#2D9CDB'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: { display: false },
+                    grid: { color: 'rgba(0,0,0,0.1)' },
+                    pointLabels: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                }
+            }
+        }
+    });
+
+    // 8. Carbon Footprint Chart
+    const ctxCarbon = document.getElementById('carbonChart').getContext('2d');
+    const carbonChart = new Chart(ctxCarbon, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+            datasets: [{
+                label: 'Carbon Emissions (tons CO₂)',
+                data: [45, 42, 38, 35, 32, 30, 28, 26],
+                borderColor: '#27AE60',
+                backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#27AE60',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    color: '#27AE60',
+                    font: { weight: 'bold', family: 'Poppins, Roboto, sans-serif' },
+                    formatter: (value) => `${value}t`
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'CO₂ Emissions (tons)', font: { family: 'Poppins, Roboto, sans-serif' } },
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                x: {
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                }
+            }
+        }
+    });
+
+    // EXISTING CHARTS (Updated for consistency)
+
+    // Crop Health Index Chart
+    const ctxHealth = document.getElementById('healthIndexChart').getContext('2d');
+    const healthIndexChart = new Chart(ctxHealth, {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+            datasets: [{
+                label: 'Health Index (0-100)',
+                data: [75, 78, 82, 80, 85, 83],
+                borderColor: '#27AE60',
+                backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#27AE60',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                datalabels: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                x: {
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                }
+            }
+        }
+    });
+
+    // Financial Flow Chart
+    const ctxFinancial = document.getElementById('financialFlowChart').getContext('2d');
+    const financialFlowChart = new Chart(ctxFinancial, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Revenue',
+                data: [5000, 6500, 7000, 6000, 7500, 8200],
+                backgroundColor: 'rgba(39, 174, 96, 0.8)',
+                borderRadius: 6
+            }, {
+                label: 'Expenses',
+                data: [3000, 3500, 4000, 3200, 4500, 4800],
+                backgroundColor: 'rgba(235, 87, 87, 0.8)',
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                datalabels: { display: false }
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                },
+                y: {
+                    stacked: true,
+                    grid: { color: 'rgba(0,0,0,0.05)' },
+                    ticks: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                }
+            }
+        }
+    });
+
+    // AI Risk Radar Chart
+    const ctxRisk = document.getElementById('riskRadar').getContext('2d');
+    let riskChart = new Chart(ctxRisk, {
+        type: 'radar',
+        data: {
+            labels: ['Pests', 'Fungi', 'Dryness', 'Salinity', 'Wind', 'Flood'],
+            datasets: [{
+                label: 'Risk Level',
+                data: [10, 15, 20, 5, 10, 8],
+                backgroundColor: 'rgba(45, 156, 219, 0.2)',
+                borderColor: '#2D9CDB',
+                pointBackgroundColor: '#2D9CDB',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: { display: false },
+                    grid: { color: 'rgba(0,0,0,0.1)' },
+                    pointLabels: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                datalabels: { display: false }
+            }
+        }
+    });
+
+    // MAP INTERACTION FUNCTIONS
+    function selectZone(zoneName) {
+        Toastify({
+            text: `Selected: ${zoneName}. Loading detailed analytics...`,
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #2D9CDB, #2196F3)",
+        }).showToast();
+
+        // Update zone visualization
+        const zones = document.querySelectorAll('.farm-zone');
+        zones.forEach(zone => zone.style.opacity = '0.6');
+        event.currentTarget.style.opacity = '1';
+        event.currentTarget.style.zIndex = '10';
+
+        // Update health index chart based on zone
+        updateHealthIndexForZone(zoneName);
+    }
+
+    function updateHealthIndexForZone(zoneName) {
+        let newData;
+        switch(zoneName) {
+            case 'Zone A - Maize':
+                newData = [75, 78, 82, 80, 85, 88];
+                break;
+            case 'Zone B - Wheat':
+                newData = [70, 72, 75, 73, 78, 65];
+                break;
+            case 'Zone C - Vegetables':
+                newData = [85, 87, 90, 88, 92, 91];
+                break;
+            case 'Zone D - Orchard':
+                newData = [80, 82, 84, 83, 86, 85];
+                break;
+            default:
+                newData = [75, 78, 82, 80, 85, 83];
+        }
+
+        healthIndexChart.data.datasets[0].data = newData;
+        healthIndexChart.update();
+    }
+
+    // DEMO REQUEST FUNCTIONALITY
+    function openDemoModal(feature) {
+        const modal = document.getElementById('demoModal');
+        const title = document.getElementById('demoFeatureTitle');
+        const description = document.getElementById('demoFeatureDescription');
+
+        // Update modal content based on the selected feature
+        title.textContent = `${feature} Demo`;
+        description.textContent = featureDescriptions[feature] || featureDescriptions["Smart Manager"];
+
+        // Show modal with animation
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        // Track the selected feature in a data attribute for signup
+        modal.dataset.selectedFeature = feature;
+    }
+
+    function closeDemoModal() {
+        const modal = document.getElementById('demoModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function redirectToSignup() {
+        const modal = document.getElementById('demoModal');
+        const feature = modal.dataset.selectedFeature || 'Smart Manager';
+
+        // Show loading state
+        const signupBtn = document.querySelector('.demo-btn-primary');
+        const originalText = signupBtn.innerHTML;
+        signupBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Redirecting...';
+        signupBtn.disabled = true;
+
+        // Simulate API call or redirect
+        setTimeout(() => {
+            Toastify({
+                text: `Thank you! You'll be redirected to sign up for ${feature} demo.`,
+                duration: 4000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "linear-gradient(to right, #27AE60, #219653)",
+                callback: function() {
+                    alert(`Success! In a real application, you would be redirected to the signup page for ${feature}. You'll receive a confirmation email shortly to schedule your demo.`);
+                    closeDemoModal();
+                }
+            }).showToast();
+
+            // Reset button
+            setTimeout(() => {
+                signupBtn.innerHTML = originalText;
+                signupBtn.disabled = false;
+            }, 1000);
+        }, 1500);
+    }
+
+    // SETTINGS PAGE FUNCTIONALITY
+    function showSettings() {
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('settings').style.display = 'block';
+
+        // Update sidebar active states
+        document.getElementById('dashboard-tab').classList.remove('active');
+        document.getElementById('settings-tab').classList.add('active');
+    }
+
+    function showDashboard() {
+        document.getElementById('settings').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+
+        // Update sidebar active states
+        document.getElementById('settings-tab').classList.remove('active');
+        document.getElementById('dashboard-tab').classList.add('active');
+    }
+
+    function saveSettings() {
+        Toastify({
+            text: "Settings saved successfully!",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #27AE60, #219653)",
+        }).showToast();
+
+        // Show success animation
+        const saveBtn = document.querySelector('.btn-primary[onclick="saveSettings()"]');
+        const originalText = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<i class="fa-solid fa-check"></i> Saved!';
+        saveBtn.style.background = '#27AE60';
+
+        setTimeout(() => {
+            saveBtn.innerHTML = originalText;
+            saveBtn.style.background = '';
+        }, 2000);
+    }
+
+    function selectColor(color) {
+        const colorOptions = document.querySelectorAll('.color-option');
+        colorOptions.forEach(option => option.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // In a real app, this would change the theme colors
+        Toastify({
+            text: `Theme changed to ${color} mode`,
+            duration: 2000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #2D9CDB, #2196F3)",
+        }).showToast();
+    }
+
+    function exportData() {
+        Toastify({
+            text: "Preparing data export...",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #9B51E0, #8E44AD)",
+        }).showToast();
+
+        setTimeout(() => {
+            Toastify({
+                text: "Data exported successfully! Check your downloads.",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "linear-gradient(to right, #27AE60, #219653)",
+            }).showToast();
+        }, 2000);
+    }
+
+    function generateApiKey() {
+        const apiKey = 'sfai_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        alert(`Your new API key: ${apiKey}\n\nCopy and save this key securely. It will not be shown again.`);
+    }
+
+    // SIMULATION FUNCTIONS
+    function triggerPestAlert() {
+        document.getElementById('pest-alert').style.display = 'flex';
+
+        // Highlight Zone B
+        const zoneB = document.querySelector('.zone-b');
+        zoneB.style.borderColor = '#EB5757';
+        zoneB.style.boxShadow = '0 0 15px rgba(235, 87, 87, 0.5)';
+        zoneB.style.animation = 'pulse 1s infinite';
+
+        // Update sensor
+        const sensor = document.getElementById('field-b2-sensor');
+        sensor.style.transform = 'scale(1.5)';
+        sensor.style.boxShadow = '0 0 20px rgba(235, 87, 87, 0.8)';
+        sensor.setAttribute('data-tooltip', 'Sensor #05: CRITICAL - Fall Armyworm detected');
+
+        // Update risk chart
+        riskChart.data.datasets[0].data[0] = 85;
+        riskChart.update();
+
+        // Update status
+        document.getElementById('ai-status').innerHTML = '<i class="fa-solid fa-circle" style="color: var(--danger)"></i> Threat Detected';
+        document.getElementById('ai-status').classList.add('danger');
+
+        // Update health index for Zone B
+        updateHealthIndexForZone('Zone B - Wheat');
+
+        // Show notification
+        Toastify({
+            text: "Pest alert simulated! Zone B wheat field at risk.",
+            duration: 4000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #EB5757, #C0392B)",
+        }).showToast();
+    }
+
+    function updateMarketData() {
+        document.getElementById('price-val').innerText = '$512.40';
+        document.getElementById('price-trend').innerHTML = '<i class="fa-solid fa-arrow-up"></i> +6.8% (Hike Detected)';
+
+        // Update financial chart
+        const revenueData = financialFlowChart.data.datasets[0].data;
+        const lastValue = revenueData[revenueData.length - 1];
+        revenueData[revenueData.length - 1] = lastValue * 1.1;
+        financialFlowChart.update();
+
+        // Update yield prediction
+        const yieldData = yieldChart.data.datasets[1].data;
+        yieldData[0] = Math.round(yieldData[0] * 1.08); // 8% increase for maize
+        yieldChart.update();
+
+        Toastify({
+            text: "Market price updated! Maize increased by 6.8%",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #27AE60, #219653)",
+        }).showToast();
+    }
+
+    function simulateRainfall() {
+        // Update weather chart with rainfall
+        const rainfallData = [0, 5, 12, 8, 25, 15, 5]; // Increased rainfall
+        weatherChart.data.datasets[1].data = rainfallData;
+        weatherChart.update();
+
+        // Update water usage chart
+        waterUsageChart.data.datasets[0].data[0] = 45; // Reduced irrigation
+        waterUsageChart.update();
+
+        // Update nutrient chart (rain affects nutrient levels)
+        nutrientChart.data.datasets[0].data = [78, 60, 85, 70, 55];
+        nutrientChart.update();
+
+        Toastify({
+            text: "Rainfall simulated! Irrigation needs reduced by 20%",
+            duration: 4000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "linear-gradient(to right, #2D9CDB, #1E88E5)",
+        }).showToast();
+    }
+
+    // Add click event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        // Demo request items
+        const demoItems = document.querySelectorAll('.demo-request');
+        demoItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const feature = this.dataset.feature;
+                openDemoModal(feature);
+            });
+        });
+
+        // Settings tab
+        document.getElementById('settings-tab').addEventListener('click', showSettings);
+
+        // Dashboard tab
+        document.getElementById('dashboard-tab').addEventListener('click', showDashboard);
+
+        // Modal close events
+        document.getElementById('demoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDemoModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeDemoModal();
+            }
+        });
+
+        // Add tooltip functionality for map elements
+        const mapElements = document.querySelectorAll('.sensor-dot, .water-source, .farm-house');
+        mapElements.forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                const tooltip = this.getAttribute('data-tooltip');
+                if (tooltip) {
+                    // Tooltip is shown via CSS
+                }
+            });
+        });
+
+        // Animate elements on load
+        setTimeout(() => {
+            const zones = document.querySelectorAll('.farm-zone');
+            zones.forEach((zone, index) => {
+                zone.style.transform = 'scale(0.9)';
+                zone.style.opacity = '0';
+                setTimeout(() => {
+                    zone.style.transition = 'all 0.5s ease';
+                    zone.style.transform = 'scale(1)';
+                    zone.style.opacity = '1';
+                }, 100 * index);
+            });
+
+            const sensors = document.querySelectorAll('.sensor-dot');
+            sensors.forEach((sensor, index) => {
+                sensor.style.transform = 'scale(0)';
+                setTimeout(() => {
+                    sensor.style.transition = 'transform 0.3s ease';
+                    sensor.style.transform = 'scale(1)';
+                }, 200 + (50 * index));
+            });
+
+            // Animate stats cards
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        }, 500);
+    });
+</script>
+
+<!-- Add Toastify for notifications -->
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<style>
+    .toastify {
+        font-family: 'Poppins', sans-serif;
+        border-radius: 10px;
+        font-weight: 500;
+    }
+</style>
+
+</body>
+</html>

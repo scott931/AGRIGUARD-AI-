@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arthena | Financial Future</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <section class="form-section">
+            <div class="brand">
+                <span class="logo-icon">✦</span> <strong>Arthena</strong>
+            </div>
+
+            <div class="content-wrapper">
+                <h1>Are you prepared for the future?</h1>
+                <p class="description">
+                    We all want to be the best parents we can be for our children, but there is often
+                    conflicting advice on how to raise a kid who is confident, kind and successful.
+                    Arthena can help you step by step.
+                </p>
+
+                <form class="signup-form">
+                    <h3>Sign up to book your <span>free</span> online consulting session</h3>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>First Name</label>
+                            <input type="text" placeholder="Jensen">
+                        </div>
+                        <div class="input-group">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Dorn">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="jensen@innova.be">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="••••••••••••">
+                    </div>
+
+                    <button type="submit" class="btn-primary">Get started for free</button>
+                </form>
+
+                <p class="footer-text">Already have an account? <a href="#">Log in instead</a></p>
+            </div>
+        </section>
+
+        <section class="image-section">
+            <div class="testimonial-overlay">
+                <blockquote>
+                    "When Mike was born, Arthena guided us step by step to obtain financial security"
+                </blockquote>
+                <cite>Emma (32) & Victor (34)</cite>
+                <div class="pagination">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+<style>
+    :root {
+    --primary-blue: #6366f1;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --bg-gray: #f9fafb;
+    --border-color: #e5e7eb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Left Column */
+.form-section {
+    flex: 1;
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    font-size: 1.2rem;
+    margin-bottom: 60px;
+}
+
+.logo-icon {
+    color: var(--primary-blue);
+    margin-right: 5px;
+}
+
+.content-wrapper {
+    max-width: 480px;
+    margin: auto 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.description {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+}
+
+/* Form Styles */
+.signup-form h3 {
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+.signup-form h3 span {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-light);
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-gray);
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    width: 100%;
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.footer-text {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.footer-text a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+/* Right Column */
+.image-section {
+    flex: 1;
+    background: url('https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&q=80&w=1000') center/cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 60px;
+    color: white;
+}
+
+.image-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+}
+
+.testimonial-overlay {
+    position: relative;
+    z-index: 1;
+    max-width: 400px;
+}
+
+blockquote {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+cite {
+    font-style: normal;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.pagination {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+}
+
+.dot.active {
+    background: white;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+    .image-section {
+        display: none; /* Hide on mobile like typical forms, or set height */
+    }
+    .form-section {
+        padding: 40px 20px;
+    }
+}
+</style>
+
+</html>
