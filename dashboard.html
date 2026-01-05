@@ -211,6 +211,23 @@
             background-image: none !important;
         }
         
+        /* Glass morphism effect for navbar on scroll in mobile view */
+        @media (max-width: 767px) {
+            .navbar-absolute.scrolled,
+            .navbar-absolute.w-nav.scrolled,
+            .nav-section .navbar-absolute.scrolled,
+            .nav-section .navbar-absolute.w-nav.scrolled,
+            .navbar-absolute.scrolled.w-nav,
+            .w-nav.navbar-absolute.scrolled {
+                background-color: rgba(3, 89, 37, 0.75) !important;
+                background: rgba(3, 89, 37, 0.75) !important;
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            }
+        }
+        
         /* Ensure scrolled state overrides transparent background */
         .navbar-absolute.scrolled[style*="background"],
         .navbar-absolute.w-nav.scrolled[style*="background"] {
@@ -1885,13 +1902,7 @@
             }
 
             .dashboard-wrapper .sidebar {
-                max-height: 250px;
-                padding: 10px 0;
-                width: 100%;
-                order: 2;
-                border-bottom: 1px solid var(--border);
-                overflow-y: auto;
-                overflow-x: hidden;
+                display: none;
             }
 
             .dashboard-wrapper .sidebar ul {
@@ -2232,8 +2243,7 @@
             }
 
             .dashboard-wrapper .sidebar {
-                max-height: 200px;
-                padding: 8px 0;
+                display: none;
             }
 
             .dashboard-wrapper .sidebar ul {
@@ -3055,7 +3065,7 @@
             </div>
         </a>
     </div>
-    <div class="menu-button w-nav-button"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee63cb3895632eb840cc1b_menu-btn.svg" loading="lazy" alt="icon" height="16" class="image-burger white" /></div>
+    <!-- <div class="menu-button w-nav-button"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee63cb3895632eb840cc1b_menu-btn.svg" loading="lazy" alt="icon" height="16" class="image-burger white" /></div> -->
     </div>
     </section>
     <!-- End Top Navigation Bar -->
