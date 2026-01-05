@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<!-- This site was created in Webflow. https://webflow.com -->
-<!-- Last Published: Fri Jun 27 2025 08:22:10 GMT+0000 (Coordinated Universal Time) -->
-<html data-wf-domain="freshfield-group-128.webflow.io" data-wf-page="67ee63cb3895632eb840c97c" data-wf-site="67ee63cb3895632eb840c962" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <title>AgriGuard AI </title>
-    <meta content="Freshfield Group - Webflow HTML website template" property="og:title" />
-    <meta content="Freshfield Group - Webflow HTML website template" property="twitter:title" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="Webflow" name="generator" />
+    <meta content="AgriGuard AI" property="og:title" />
+    <meta content="AgriGuard AI" property="twitter:title" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" name="viewport" />
     <link href="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/css/freshfield-group-128.webflow.shared.cfc87e387.css" rel="stylesheet" type="text/css" />
     <style>
+        /* ============================================
+           BASE/SHARED STYLES (All Devices)
+           ============================================ */
+        
+        /* Hide badge */
+        .w-webflow-badge {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+        
+        /* Animation Overrides */
         @media (min-width:992px) {
             html.w-mod-js:not(.w-mod-ix) [data-w-id="0f6c1119-093a-298c-7df2-d0e505a436b2"] {
                 opacity: 0;
@@ -48,23 +57,11 @@
             }
         }
 
-        /* Services grid layout */
+        /* Services grid layout - Base (Desktop default) */
         .services-collection-list {
             display: grid !important;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-        }
-
-        @media (max-width: 991px) {
-            .services-collection-list {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 767px) {
-            .services-collection-list {
-                grid-template-columns: 1fr;
-            }
         }
 
         /* Service card styling with theme color */
@@ -88,17 +85,9 @@
             background-image: none !important;
         }
 
-        /* Technology section 3-column grid responsive */
-        @media (max-width: 991px) {
+        /* Technology section - Base (Desktop default: 3 columns) */
             .technology-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .technology-grid {
-                grid-template-columns: 1fr !important;
-            }
+            grid-template-columns: repeat(3, 1fr) !important;
         }
 
         /* Founder image background */
@@ -122,14 +111,1038 @@
         .cta-card .cta-paragraph {
             color: #ffffff;
         }
+
+        /* Increase navigation logo size and adjust nav bar height to accommodate */
+        .navbar-absolute .brand img.logo,
+        .navbar-absolute .brand-tablet img.logo,
+        .navbar-absolute .brand .logo,
+        .navbar-absolute .brand-tablet .logo,
+        .navbar-absolute .nav-menu-wrapper .brand img,
+        .navbar-absolute .nav-menu-wrapper .brand-tablet img {
+            height: 90px !important;
+            max-height: 90px !important;
+            width: auto !important;
+            object-fit: contain;
+            display: block !important;
+        }
+
+        .navbar-absolute .brand,
+        .navbar-absolute .brand.w--current,
+        .navbar-absolute .brand-tablet,
+        .navbar-absolute .brand-tablet.w--current,
+        .navbar-absolute .nav-menu-wrapper .brand,
+        .navbar-absolute .nav-menu-wrapper .brand-tablet {
+            height: 90px !important;
+            max-height: 90px !important;
+            min-height: 90px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            vertical-align: middle !important;
+            overflow: visible !important;
+            line-height: 90px !important;
+            clip-path: none !important;
+            clip: auto !important;
+        }
+        
+        /* Increase navigation bar height to accommodate larger logo */
+        .navbar-absolute,
+        .navbar-absolute.w-nav {
+            padding-top: 20px !important;
+            padding-bottom: 20px !important;
+            overflow: visible !important;
+        }
+        
+        /* Maintain alignment of nav menu wrapper and prevent clipping */
+        .navbar-absolute .nav-menu-wrapper {
+            display: flex !important;
+            align-items: center !important;
+            height: auto !important;
+            overflow: visible !important;
+            clip-path: none !important;
+        }
+
+        /* Center align logo and menu items vertically */
+        .navbar-absolute .nav-menu-wrapper .brand,
+        .navbar-absolute .nav-menu-wrapper .brand.w-nav-brand {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            vertical-align: middle !important;
+        }
+
+        .navbar-absolute .nav-menu {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+        }
+
+        .navbar-absolute .menu-wrap {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0 !important;
+        }
+
+        .navbar-absolute .nav-link,
+        .navbar-absolute .nav-dropdown-toggle {
+            display: inline-flex !important;
+            align-items: center !important;
+            vertical-align: middle !important;
+            line-height: 1.2em !important;
+        }
+
+        .navbar-absolute .nav-link .clip,
+        .navbar-absolute .nav-dropdown-toggle .clip {
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        /* Ensure base container doesn't clip the logo */
+        .navbar-absolute .base-container,
+        .navbar-absolute .w-container {
+            overflow: visible !important;
+            clip-path: none !important;
+        }
+        
+        /* Ensure logo link doesn't clip */
+        .navbar-absolute .brand a,
+        .navbar-absolute .brand.w-nav-brand {
+            overflow: visible !important;
+            clip-path: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+        }
+
+        /* Navigation hover effect for all menu items */
+        .nav-link .clip,
+        .nav-dropdown-toggle .clip {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link .button-text-wrap,
+        .nav-dropdown-toggle .button-text-wrap {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link .button-text-wrap.bottom-wrap,
+        .nav-dropdown-toggle .button-text-wrap.bottom-wrap {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover .button-text-wrap:not(.bottom-wrap),
+        .nav-dropdown-toggle:hover .button-text-wrap:not(.bottom-wrap) {
+            transform: translateY(-100%);
+        }
+
+        .nav-link:hover .button-text-wrap.bottom-wrap,
+        .nav-dropdown-toggle:hover .button-text-wrap.bottom-wrap {
+            transform: translateY(-100%);
+        }
+
+        /* Mobile menu overlay - base styles (overridden by mobile solution) */
+        .w-nav-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            z-index: 9999 !important;
+            display: none !important;
+            opacity: 0 !important;
+            transition: opacity 0.3s ease !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Mobile menu button styling - hidden by default on desktop */
+        .w-nav-button {
+            z-index: 10000 !important;
+            position: relative !important;
+            display: none !important;
+        }
+
+        /* ============================================
+           DESKTOP STYLES (min-width: 992px)
+           ============================================ */
+        
+        @media (min-width: 992px) {
+            /* Desktop Navigation */
+            .w-nav-overlay {
+                display: none !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+
+            .w-nav-menu {
+                display: flex !important;
+                position: relative !important;
+                transform: none !important;
+                width: auto !important;
+                height: auto !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+                overflow: visible !important;
+            }
+
+            .w-nav-button {
+                display: none !important;
+            }
+            
+            .w-nav .w-nav-menu {
+                display: flex !important;
+            }
+            
+            /* Desktop Services Grid */
+            .services-collection-list {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 2rem;
+            }
+            
+            /* Desktop Technology Grid */
+            .technology-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+            
+            /* Desktop Solution Section */
+            .solution-section-wrapper {
+                gap: 40px !important;
+                flex-direction: row;
+            }
+        }
+
+        /* ============================================
+           MOBILE MENU FIX - COMPLETE SOLUTION
+           ============================================ */
+        
+        @media (max-width: 991px) {
+            /* ========== MENU BUTTON ========== */
+            .w-nav-button,
+            .menu-button {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 44px !important;
+                height: 44px !important;
+                cursor: pointer !important;
+                z-index: 1002 !important;
+                position: relative !important;
+                pointer-events: auto !important;
+                background: transparent !important;
+                border: none !important;
+            }
+            
+            /* Ensure button image doesn't block clicks */
+            .w-nav-button img,
+            .menu-button img {
+                pointer-events: none !important;
+            }
+            
+            /* Override any inline styles that might block clicks */
+            .w-nav-button[style*="pointer-events"],
+            .menu-button[style*="pointer-events"] {
+                pointer-events: auto !important;
+            }
+            
+            /* Override user-select that might interfere */
+            .w-nav-button,
+            .menu-button {
+                -webkit-user-select: none !important;
+                user-select: none !important;
+            }
+            
+            /* Ensure button is always on top and clickable */
+            .w-nav-button,
+            .menu-button {
+                z-index: 1002 !important;
+            }
+            
+            /* ========== MENU CONTAINER ========== */
+            .w-nav-menu {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 300px !important;
+                max-width: 85% !important;
+                height: 100vh !important;
+                background: #fff !important;
+                z-index: 1001 !important;
+                padding: 80px 30px 30px !important;
+                margin: 0 !important;
+                transform: translateX(-100%) !important;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                overflow-y: auto !important;
+                box-shadow: 3px 0 20px rgba(0,0,0,0.15) !important;
+            }
+            
+            /* Show menu when open */
+            .w-nav.w--open .w-nav-menu {
+                transform: translateX(0) !important;
+            }
+            
+            /* ========== OVERLAY ========== */
+            .w-nav-overlay {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                background: rgba(0,0,0,0.7) !important;
+                z-index: 1000 !important;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+            
+            /* Show overlay when menu is open */
+            .w-nav.w--open .w-nav-overlay {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            
+            /* ========== MENU ITEMS ========== */
+            .w-nav-menu .nav-link,
+            .w-nav-menu .nav-dropdown-toggle {
+                display: block !important;
+                padding: 12px 0 !important;
+                font-size: 16px !important;
+                border-bottom: 1px solid #f0f0f0 !important;
+            }
+            
+            .w-nav-menu .nav-dropdown-list {
+                position: static !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                margin-left: 20px !important;
+            }
+            
+            /* ========== BODY LOCK ========== */
+        body.w-nav-open,
+        html.w-nav-open {
+            overflow: hidden !important;
+                height: 100% !important;
+            }
+            
+            /* ========== LOGO ADJUSTMENT ========== */
+            .navbar-absolute .brand img.logo {
+                height: 60px !important;
+            }
+        }
+
+        /* Hide duplicate tablet-menu to prevent content disappearing */
+        .tablet-menu {
+            display: none !important;
+        }
+
+        .close-menu-button {
+            display: none !important;
+        }
+
+        .brand-tablet {
+            display: none !important;
+        }
+
+        /* ============================================
+           MOBILE & TABLET STYLES (max-width: 991px)
+           ============================================ */
+        
+        @media (max-width: 991px) {
+            /* Mobile/Tablet Services Grid */
+            .services-collection-list {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1.5rem;
+            }
+
+            /* Mobile/Tablet Technology Grid */
+            .technology-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1.5rem;
+            }
+
+            /* Mobile/Tablet Navigation Logo */
+            .navbar-absolute .brand img.logo,
+            .navbar-absolute .brand-tablet img.logo {
+                height: 70px !important;
+            }
+
+            .navbar-absolute .brand,
+            .navbar-absolute .brand-tablet {
+                height: 70px !important;
+                min-height: 70px !important;
+            }
+
+            .navbar-absolute {
+                padding: 15px 0 !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                z-index: 100 !important;
+                background-color: transparent !important;
+                margin: 0 !important;
+                height: auto !important;
+            }
+            
+            /* Ensure navbar doesn't create space in document flow */
+            .navbar-absolute.w-nav,
+            .w-nav.navbar-absolute {
+                position: absolute !important;
+                margin: 0 !important;
+                padding-top: 15px !important;
+                padding-bottom: 15px !important;
+            }
+            
+            /* Remove any height that might create space */
+            body > .navbar-absolute,
+            body > .w-nav.navbar-absolute {
+                position: absolute !important;
+                margin: 0 !important;
+            }
+            
+            /* Mobile/Tablet Hero Section - Start at top but content has proper spacing */
+            .home-1-banner-section {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                position: relative !important;
+                z-index: 1 !important;
+                top: 0 !important;
+            }
+            
+            /* Hero banner content should have proper top padding (not pushed to top) */
+            .home-1-banner {
+                padding-top: 120px !important; /* Space for navbar and content - pushed down */
+                padding-bottom: 0 !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                position: relative !important;
+                z-index: 1 !important;
+            }
+            
+            .home-1-banner-overlay,
+            .background-video {
+                z-index: 0 !important;
+                top: 0 !important;
+            }
+            
+            /* Remove any spacing from navbar container */
+            .navbar-absolute .base-container,
+            .navbar-absolute .w-container {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            
+            /* Container should have normal padding */
+            .home-1-banner-section .base-container,
+            .home-1-banner-section .w-container {
+                padding-top: 0 !important; /* Let .home-1-banner handle padding */
+                margin-top: 0 !important;
+            }
+            
+            /* Remove any white space from body/html */
+            body {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            
+            html {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            
+            .home-1-banner {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                position: relative !important;
+                z-index: 1 !important;
+            }
+            
+            .home-1-banner-overlay,
+            .background-video {
+                z-index: 0 !important;
+                top: 0 !important;
+            }
+            
+            /* Remove any container padding that might add space */
+            .home-1-banner-section .base-container,
+            .home-1-banner-section .w-container {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Remove padding from hero content wrappers */
+            .home-1-banner-top-wrapper,
+            .home-1-banner-left-wrapper,
+            .home-1-h1-wrapper {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Ensure hero banner content starts at top */
+            .home-1-banner > * {
+                padding-top: 0 !important;
+            }
+            
+            .home-1-banner > *:first-child {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+
+            /* Mobile/Tablet Typography */
+            .base-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .home-1-banner-text {
+                font-size: 18px !important;
+                line-height: 1.6;
+            }
+
+            .heading-wrap h2 {
+                font-size: 32px !important;
+                line-height: 1.3;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            /* Mobile/Tablet Numbers Grid */
+            .home-1-numbers-wrapper {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 30px;
+            }
+
+            .number-cell {
+                padding: 20px;
+            }
+
+            .large-text.numbers {
+                font-size: 48px !important;
+            }
+            
+            /* Mobile/Tablet Solution Section */
+            .solution-section-wrapper {
+                gap: 30px !important;
+                flex-direction: column;
+            }
+
+            .solution-section-wrapper .gray-card-text-wrapper {
+                flex: 1 1 100% !important;
+                width: 100%;
+            }
+
+            .solution-section-wrapper .home-1-gray-card-image {
+                flex: 1 1 100% !important;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .solution-buttons-wrapper {
+                flex-direction: column;
+                gap: 15px !important;
+            }
+
+            .solution-buttons-wrapper .primary-button {
+                width: 100%;
+            }
+        }
+
+        /* ============================================
+           SMALL MOBILE STYLES (max-width: 767px)
+           ============================================ */
+        
+        @media (max-width: 767px) {
+            /* Small Mobile Services Grid */
+            .services-collection-list {
+                grid-template-columns: 1fr !important;
+                gap: 1.2rem;
+            }
+
+            .services-collection-item {
+                padding: 1.5rem;
+            }
+
+            /* Small Mobile Technology Grid */
+            .technology-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.2rem;
+            }
+
+            .navbar-absolute .brand img.logo,
+            .navbar-absolute .brand-tablet img.logo {
+                height: 60px !important;
+            }
+
+            .navbar-absolute .brand,
+            .navbar-absolute .brand-tablet {
+                height: 60px !important;
+                min-height: 60px !important;
+            }
+
+            .navbar-absolute {
+                padding: 12px 0 !important;
+            }
+
+            .navbar-absolute .nav-menu {
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .navbar-absolute .nav-link,
+            .navbar-absolute .nav-dropdown-toggle {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+
+            .base-container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .home-1-banner-section {
+                min-height: 500px;
+                padding-top: 0 !important;
+                padding-bottom: 40px;
+                margin-top: 0 !important;
+                top: 0 !important;
+            }
+            
+            /* Hero banner content should have proper spacing (not pushed up) */
+            .home-1-banner {
+                padding-top: 110px !important; /* Space for navbar and content - pushed down */
+                padding-bottom: 0 !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+            }
+            
+            /* Container should have normal padding */
+            .home-1-banner-section .base-container,
+            .home-1-banner-section .w-container {
+                padding-top: 0 !important; /* Let .home-1-banner handle padding */
+                margin-top: 0 !important;
+            }
+
+            .home-1-banner-text {
+                font-size: 16px !important;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+
+            .heading-wrap h2 {
+                font-size: 28px !important;
+                line-height: 1.2;
+            }
+
+            .heading-wrap h1 {
+                font-size: 32px !important;
+                line-height: 1.2;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .section-label {
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+
+            .home-1-numbers-wrapper {
+                grid-template-columns: 1fr !important;
+                gap: 25px;
+            }
+
+            .number-cell {
+                padding: 15px;
+            }
+
+            .large-text.numbers {
+                font-size: 40px !important;
+            }
+
+            .number-cell h5 {
+                font-size: 16px;
+            }
+
+            .title-wrapper {
+                margin-bottom: 30px;
+            }
+
+            .paragraph-wrapper {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .primary-button,
+            .secondary-button {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            .underlined-link {
+                font-size: 14px;
+            }
+
+            .labels-wrapper {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .about-label {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .home-1-banner-left-wrapper {
+                width: 100%;
+            }
+
+            .home-1-h1-wrapper {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+
+        /* ============================================
+           EXTRA SMALL MOBILE STYLES (max-width: 479px)
+           ============================================ */
+        
+        @media (max-width: 479px) {
+            .navbar-absolute .brand img.logo,
+            .navbar-absolute .brand-tablet img.logo {
+                height: 50px !important;
+            }
+
+            .navbar-absolute .brand,
+            .navbar-absolute .brand-tablet {
+                height: 50px !important;
+                min-height: 50px !important;
+            }
+
+            .navbar-absolute {
+                padding: 10px 0 !important;
+            }
+
+            .navbar-absolute .nav-link,
+            .navbar-absolute .nav-dropdown-toggle {
+                font-size: 11px;
+                padding: 6px 8px;
+            }
+
+            .base-container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .home-1-banner-section {
+                min-height: 400px;
+                padding-top: 0 !important;
+                padding-bottom: 30px;
+                margin-top: 0 !important;
+                top: 0 !important;
+            }
+            
+            /* Hero banner content should have proper spacing (not pushed up) */
+            .home-1-banner {
+                padding-top: 100px !important; /* Space for navbar and content - pushed down */
+                padding-bottom: 0 !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+            }
+            
+            /* Container should have normal padding */
+            .home-1-banner-section .base-container,
+            .home-1-banner-section .w-container {
+                padding-top: 0 !important; /* Let .home-1-banner handle padding */
+                margin-top: 0 !important;
+            }
+
+            .home-1-banner-text {
+                font-size: 14px !important;
+                line-height: 1.4;
+            }
+
+            .heading-wrap h2 {
+                font-size: 24px !important;
+            }
+
+            .heading-wrap h1 {
+                font-size: 28px !important;
+            }
+
+            .section {
+                padding: 30px 0;
+            }
+
+            .services-collection-item {
+                padding: 1.2rem;
+            }
+
+            .home-1-numbers-wrapper {
+                gap: 20px;
+            }
+
+            .number-cell {
+                padding: 12px;
+            }
+
+            .large-text.numbers {
+                font-size: 36px !important;
+            }
+
+            .number-cell h5 {
+                font-size: 14px;
+            }
+
+            .paragraph-wrapper {
+                font-size: 14px;
+            }
+
+            .primary-button,
+            .secondary-button {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .about-label {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .labels-wrapper {
+                gap: 8px;
+            }
+        }
+
+        /* Landscape orientation adjustments */
+        @media (max-width: 991px) and (orientation: landscape) {
+            .home-1-banner-section {
+                min-height: 400px;
+            }
+        }
+
+        /* Large screens - ensure content doesn't get too wide */
+        @media (min-width: 1920px) {
+            .base-container {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ============================================
+           SHARED RESPONSIVE UTILITIES (All Devices)
+           ============================================ */
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        video,
+        iframe {
+            max-width: 100%;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+        }
+
+        /* CRITICAL: Force content visibility on mobile - override opacity:0 */
+        @media (max-width: 991px) {
+            /* Force all content to be visible on mobile */
+            [style*="opacity:0"],
+            [style*="opacity: 0"] {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Ensure all sections are visible */
+            section,
+            .section,
+            .home-1-banner-section,
+            .home-1-banner,
+            .home-1-banner-text,
+            .heading-wrap,
+            .section-label,
+            .paragraph-wrapper,
+            .home-1-numbers-wrapper,
+            .number-cell,
+            .services-collection-list,
+            .services-collection-item,
+            .home-1-cards-wrapper,
+            .light-gray-card,
+            .black-card,
+            .primary-card,
+            .gray-card,
+            .solution-section-wrapper,
+            .founder-image,
+            .founder-quote,
+            .cta-card {
+                opacity: 1 !important;
+                visibility: visible !important;
+                display: block !important;
+            }
+
+            /* Ensure text is visible */
+            h1, h2, h3, h4, h5, h6,
+            p, .home-1-banner-text,
+            .large-text,
+            .small-paragraph,
+            .paragraph-wrapper p {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Ensure buttons and links are visible */
+            .primary-button,
+            .secondary-button,
+            .underlined-link,
+            a {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Ensure images are visible */
+            img {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Override animation opacity on mobile */
+            [data-w-id] {
+                opacity: 1 !important;
+            }
+            
+            /* Small Mobile Content Visibility */
+            section:not(.w-nav-overlay),
+            .section,
+            .home-1-banner-section,
+            .home-1-banner,
+            .home-1-banner-text,
+            .heading-wrap,
+            .section-label,
+            .paragraph-wrapper,
+            .home-1-numbers-wrapper,
+            .number-cell,
+            .services-collection-list,
+            .services-collection-item,
+            .home-1-cards-wrapper,
+            .light-gray-card,
+            .black-card,
+            .primary-card,
+            .gray-card,
+            .solution-section-wrapper,
+            .founder-image,
+            .founder-quote,
+            .cta-card,
+            .home-1-testimonials-slider {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Small Mobile Text Visibility */
+            section h1,
+            section h2,
+            section h3,
+            section h4,
+            section h5,
+            section h6,
+            section p,
+            .home-1-banner-text,
+            .large-text,
+            .small-paragraph,
+            .paragraph-wrapper p,
+            .testimonial-card-text {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Small Mobile Buttons/Links Visibility */
+            section .primary-button,
+            section .secondary-button,
+            section .underlined-link,
+            section a:not(.w-nav-link) {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Small Mobile Images Visibility */
+            section img {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Small Mobile Containers Visibility */
+            .w-container,
+            .base-container,
+            .w-layout-blockcontainer {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            /* Small Mobile Animation Override */
+            section [data-w-id] {
+                opacity: 1 !important;
+            }
+        }
+
+        /* Prevent horizontal scroll */
+        body,
+        html {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        
+        /* Mobile: Ensure body/html have no top spacing */
+        @media (max-width: 991px) {
+            body,
+            html {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Ensure first section (hero) starts at absolute top */
+            body > section:first-child,
+            body > .home-1-banner-section:first-child {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Print styles */
+        @media print {
+            .navbar-absolute {
+                display: none;
+            }
+
+            .home-1-banner-section {
+                page-break-after: always;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
     <script type="text/javascript">
         WebFont.load({
             google: {
-                families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic", "Instrument Sans:regular,500"]
+                families: ["Poppins:300,400,500,600,700", "Roboto:300,400,500,700", "Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic", "Instrument Sans:regular,500"]
             }
         });
     </script>
@@ -140,8 +1153,8 @@
             n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
         }(window, document);
     </script>
-    <link href="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/680755f9b5cce629554ba0df_Agricultural%20Group-favicon.jpg" rel="shortcut icon" type="image/x-icon" />
-    <link href="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/68108f4948a5b79115a03b81_Freshfieldl%20Group-webclip.jpg" rel="apple-touch-icon" />
+    <link href="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/logo.png" rel="shortcut icon" type="image/png" />
+    <link href="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/logo.png" rel="apple-touch-icon" />
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M0ZWX8XVQQ"></script>
     <script type="text/javascript">
         window.dataLayer = window.dataLayer || [];
@@ -158,10 +1171,10 @@
 <body>
     <div data-animation="over-left" class="navbar-absolute w-nav" data-easing2="ease" data-easing="ease" data-collapse="medium" data-w-id="310be704-be0c-862c-40a7-a2176037624e" role="banner" data-no-scroll="1" data-duration="400" data-doc-height="1">
         <div class="base-container w-container">
-            <div class="nav-menu-wrapper"><a href="/home" aria-current="page" class="brand w-nav-brand w--current"><img src="cdn.prod.website-files.com/67ee63cb3895632eb840c962/logo.png" loading="lazy" alt="Logo" height="30" class="logo"/></a>
+            <div class="nav-menu-wrapper"><a href="/home" aria-current="page" class="brand w-nav-brand w--current"><img src="cdn.prod.website-files.com/67ee63cb3895632eb840c962/logo.png" loading="lazy" alt="Logo" height="90" class="logo"/></a>
                 <nav
                     role="navigation" class="nav-menu w-nav-menu">
-                    <div class="tablet-menu"><a href="/home" aria-current="page" class="brand-tablet w-nav-brand w--current"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3a7eeec27e86f08823bf4_0ea11bb1e0bb93359555ba23023d935d_Group%201%20%281%29.svg" loading="lazy" alt="Logo" height="30" class="logo"/></a>
+                    <div class="tablet-menu"><a href="/home" aria-current="page" class="brand-tablet w-nav-brand w--current"></a>
                         <div
                             class="close-menu-button w-nav-button"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee63cb3895632eb840cc1c_close-btn.svg" loading="lazy" alt="icon" class="nav-close-icon" /></div>
             </div>
@@ -176,17 +1189,8 @@
                         </div>
                     </div>
                 </a>
-                <a data-w-id="ba67b287-f196-4627-29a8-f080f7e8b145" href="index.html" class="nav-link w-inline-block">
-                    <div class="clip">
-                        <div class="button-text-wrap">
-                            <p class="nav-item-title">Impact</p>
-                        </div>
-                        <div class="button-text-wrap bottom-wrap">
-                            <p class="nav-item-title line">Impact</p>
-                        </div>
-                    </div>
-                </a>
-                <a data-w-id="a8cb650f-e8fd-ea12-ff85-ae122dc2f9b8" href="/about-us" class="nav-link w-inline-block">
+              
+                <a data-w-id="a8cb650f-e8fd-ea12-ff85-ae122dc2f9b8" href="#About-Section" class="nav-link w-inline-block">
                     <div class="clip">
                         <div class="button-text-wrap">
                             <p class="nav-item-title">About Us</p>
@@ -196,23 +1200,51 @@
                         </div>
                     </div>
                 </a>
-                <a data-w-id="33c1b07a-dbbb-a09c-c1f5-7a2d885cacd8" href="/services-1" class="nav-link w-inline-block">
+                <a data-w-id="impact-link" href="#Impact-Section" class="nav-link w-inline-block">
                     <div class="clip">
                         <div class="button-text-wrap">
-                            <p class="nav-item-title">Services</p>
+                            <p class="nav-item-title">Impact</p>
                         </div>
                         <div class="button-text-wrap bottom-wrap">
-                            <p class="nav-item-title line">Services</p>
+                            <p class="nav-item-title line">Impact</p>
                         </div>
                     </div>
                 </a>
-                <a data-w-id="16554bba-2364-14e7-9eb7-a198784f140b" href="/pricing" class="nav-link w-inline-block">
+                <a data-w-id="problem-link" href="#Problem-Section" class="nav-link w-inline-block">
                     <div class="clip">
                         <div class="button-text-wrap">
-                            <p class="nav-item-title">Pricing</p>
+                            <p class="nav-item-title">The Problem</p>
                         </div>
                         <div class="button-text-wrap bottom-wrap">
-                            <p class="nav-item-title line">Pricing</p>
+                            <p class="nav-item-title line">The Problem</p>
+                        </div>
+                    </div>
+                </a>
+                <div data-hover="true" data-delay="0" data-w-id="solutions-dropdown" class="nav-dropdown w-dropdown">
+                    <div data-w-id="solutions-dropdown-toggle" class="nav-dropdown-toggle w-dropdown-toggle">
+                        <div class="clip nav">
+                            <div class="button-text-wrap nav">
+                                <p class="nav-item-title">Solutions</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" class="nav-arrow" /></div>
+                            <div class="button-text-wrap bottom-wrap">
+                                <p class="nav-item-title">Solutions</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" /></div>
+                        </div>
+                    </div>
+                    <nav class="nav-dropdown-list w-dropdown-list">
+                        <div class="nav-dropdown-link-wrapper">
+                            <a href="#Services-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Our Innovation</a>
+                            <a href="#How-It-Works-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>How It Works</a>
+                            <a href="#Product-Suite-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Product Suite</a>
+                            <a href="#Financing-Ecosystem-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Financing Ecosystem</a>
+                        </div>
+                    </nav>
+                </div>
+                <a data-w-id="contact-link" href="signup.html" class="nav-link w-inline-block">
+                    <div class="clip">
+                        <div class="button-text-wrap">
+                            <p class="nav-item-title">Contact Us</p>
+                        </div>
+                        <div class="button-text-wrap bottom-wrap">
+                            <p class="nav-item-title line">Contact Us</p>
                         </div>
                     </div>
                 </a>
@@ -240,7 +1272,7 @@
                                     <div role="list" class="w-dyn-items">
                                         <div role="listitem" class="nav-collection-item w-dyn-item"><a href="/solutions/climate-resilient-program" class="nav-dropdown-link collection-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Services Details</a></div>
                                     </div>
-                            </div><a href="/gallery" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Gallery</a><a href="/career" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Careers</a>
+                            </div><!-- <a href="/gallery" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Gallery</a> --><a href="/career" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Careers</a>
                             <div
                                 class="nav-collection-list-wrapper w-dyn-list">
                                 <div role="list" class="w-dyn-items">
@@ -248,7 +1280,7 @@
                                 </div>
                         </div><a href="/testimonials" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Testimonials</a></div>
             </div>
-            <div class="nav-dropdown-column">
+            <!-- <div class="nav-dropdown-column">
                 <div class="nav-dropdown-link-wrapper"><a href="/faq" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>FAQ</a><a href="/blog-1" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Blog 1</a><a href="/blog-2"
                         class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Blog 2</a><a href="/blog-3" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Blog 3</a>
                     <div class="nav-collection-list-wrapper w-dyn-list">
@@ -260,18 +1292,18 @@
                         <div role="list" class="w-dyn-items">
                             <div role="listitem" class="nav-collection-item w-dyn-item"><a href="/blog-posts/the-role-of-agronomists-in-modern-farming" class="nav-dropdown-link collection-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Blog Post Page</a></div>
                         </div>
-                    </div><a href="/contact-us" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Contact Us</a></div>
-            </div>
+                    </div><a href="signup.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Contact Us</a></div>
+            </div> -->
             </nav>
         </div>
         <div class="header-button-wrapper tablet">
-            <a data-w-id="deb311af-814a-8da5-a9af-b069e736aa64" href="/contact-us" class="primary-button w-inline-block">
+            <a data-w-id="deb311af-814a-8da5-a9af-b069e736aa64" href="signup.html" class="primary-button w-inline-block">
                 <div class="clip">
                     <div class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
-                        <div>Bring AgriGuard AI</div>
+                        <div>Join AgriGuard AI</div>
                     </div>
                     <div class="button-text-wrap bottom-wrap">
-                        <div>Bring AgriGuard AI</div>
+                        <div>Join AgriGuard AI</div>
                     </div>
                 </div>
             </a>
@@ -279,13 +1311,13 @@
     </div>
     </nav>
     <div class="header-button-wrapper">
-        <a data-w-id="a8e8d4f5-e9d3-1973-c0d6-e00e6c804922" href="/contact-us" class="secondary-button w-inline-block">
+        <a data-w-id="a8e8d4f5-e9d3-1973-c0d6-e00e6c804922" href="signup.html" class="secondary-button w-inline-block">
             <div class="clip">
                 <div class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
-                    <div>Bring AgriGuard AI</div>
+                    <div>Join AgriGuard AI</div>
                 </div>
                 <div class="button-text-wrap bottom-wrap">
-                    <div>Bring AgriGuard AI</div>
+                    <div>Join AgriGuard AI</div>
                 </div>
             </div>
         </a>
@@ -323,7 +1355,7 @@
                         </div>
 
                         <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2108" style="opacity:0">
-                            <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="/contact-us" class="underlined-link w-inline-block">
+                            <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="signup.html" class="underlined-link w-inline-block">
                                 <div class="underlined-link-text-wrap">
                                     <div>Get a Demo</div>
                                     <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee96d781f57edc797a59ed_Frame%20(46).svg" loading="lazy" alt="icon" class="arrow-burron-icon" /></div>
@@ -331,7 +1363,7 @@
                             </a>
                         </div>
                         <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2108" style="opacity:0;margin-top: 30px;">
-                            <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="/contact-us" class="underlined-link w-inline-block">
+                            <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="dashboard.html" class="underlined-link w-inline-block">
                                 <div class="underlined-link-text-wrap">
                                     <div>See How It Works</div>
                                     <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee96d781f57edc797a59ed_Frame%20(46).svg" loading="lazy" alt="icon" class="arrow-burron-icon" /></div>
@@ -407,10 +1439,9 @@
 
                     <div
                         data-w-id="f60d6b5d-c8b9-ccd0-fcef-60e0dcef8924" style="opacity:0">
-                        <a data-w-id="20c04489-b589-79f2-fb08-3ca99145ef6f" href="/about-us" class="primary-button w-inline-block">
+                        <a data-w-id="20c04489-b589-79f2-fb08-3ca99145ef6f" href="#Gloria-Mbatha-Section" class="primary-button w-inline-block">
                             <div class="clip">
-                                <div style=""
-                                    class="button-text-wrap">
+                                <div class="button-text-wrap">
                                     <!-- <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" /> -->
                                     <div>Our Founder</div>
                                 </div>
@@ -425,7 +1456,7 @@
         </div>
         </div>
     </section>
-    <section class="section">
+    <section id="Impact-Section" class="section">
         <div class="w-layout-blockcontainer base-container w-container">
 
                         <div class="title-wrapper testimonials-home-1">
@@ -472,10 +1503,9 @@
 
                     <div
                         data-w-id="f60d6b5d-c8b9-ccd0-fcef-60e0dcef8924" style="opacity:0">
-                        <a data-w-id="20c04489-b589-79f2-fb08-3ca99145ef6f" href="/about-us" class="primary-button w-inline-block">
+                        <a data-w-id="20c04489-b589-79f2-fb08-3ca99145ef6f" href="signup.html" class="primary-button w-inline-block">
                             <div class="clip">
-                                <div style=""
-                                    class="button-text-wrap">
+                                <div class="button-text-wrap">
                                     <!-- <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" /> -->
                                     <div>Read More Stories</div>
                                 </div>
@@ -489,12 +1519,12 @@
             </div>
         </div>
     </section>
-    <section class="section without-space">
+    <section id="Services-Section" class="section without-space">
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="home-1-services">
                 <div class="home-1-service-section-title-wrapper">
                     <div data-w-id="f6d11b66-08ee-ac8c-a0b9-b2182a63eec7" style="opacity:0" class="section-label">
-                        <div>OUR INNOVATION</div>
+                        <div>Our Innovation</div>
                     </div>
                     <div class="home-1-services-text-wrapper">
                         <h2 data-w-id="f6d11b66-08ee-ac8c-a0b9-b2182a63eecc" style="opacity:0">A new way to finance farmers — powered by real-time monitoring.</h2>
@@ -577,12 +1607,12 @@
         </div>
         </div>
     </section>
-    <section class="section without-top-spacing">
+    <section id="Problem-Section" class="section without-top-spacing">
         <div class="w-layout-blockcontainer base-container w-container">
 
             <div class="title-wrapper testimonials-home-1">
                 <div data-w-id="cd1639ad-0b29-38de-7a81-4609676a64a4" style="opacity:0" class="section-label">
-                    <div>THE PROBLEM</div>
+                    <div>The Problem</div>
                 </div>
                 <div class="heading-wrap">
                     <h2 data-w-id="cd1639ad-0b29-38de-7a81-4609676a64a9" style="opacity:0">Problem  in the field.</h2>
@@ -676,7 +1706,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
 
     <section class="section">
         <div class="w-layout-blockcontainer base-container w-container">
-            <div data-w-id="1a45aec6-27b0-0c1d-a3e0-3437c249064d" style="opacity:0; max-width:1100px; width:100%; display:flex; flex-wrap:wrap; gap:170px;; align-items:center;" class="gray-card">
+            <div data-w-id="1a45aec6-27b0-0c1d-a3e0-3437c249064d" style="opacity:0; max-width:1100px; width:100%; display:flex; flex-wrap:wrap; gap:170px; align-items:center;" class="gray-card solution-section-wrapper">
                 <div class="gray-card-text-wrapper" style="flex:1 1 320px;">
                     <div data-w-id="8e78b66e-bed4-87f9-c390-a9cc9a4bd5da" style="opacity:0" class="large-text">The Solution</div>
                     <p data-w-id="ce1f796e-bdd7-92e1-539b-ce3770105170" style="opacity:0">
@@ -704,9 +1734,9 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
                             <p class="small-paragraph">Verified data derisks loans, insurance, crowdfunding, and input credit.</p>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 20px; margin-top: 42px;">
+                    <div style="display: flex; gap: 20px; margin-top: 42px;" class="solution-buttons-wrapper">
                         <div data-w-id="1981c144-7e46-d3e9-925b-9457dfc7e0f8" style="opacity:0" class="solution-button-wrapper">
-                            <a data-w-id="85459d89-4893-e035-a900-ee8e75b11c5a" href="/contact-us" class="primary-button w-inline-block">
+                            <a data-w-id="85459d89-4893-e035-a900-ee8e75b11c5a" href="dashboard.html" class="primary-button w-inline-block">
                                 <div class="clip">
                                     <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
                                         class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
@@ -719,7 +1749,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
                             </a>
                         </div>
                         <!-- <div data-w-id="1981c144-7e46-d3e9-925b-9457dfc7e0f8" style="opacity:0" class="solution-button-wrapper">
-                            <a data-w-id="85459d89-4893-e035-a900-ee8e75b11c5a" href="/contact-us" class="primary-button w-inline-block">
+                            <a data-w-id="85459d89-4893-e035-a900-ee8e75b11c5a" href="signup.html" class="primary-button w-inline-block">
                                 <div class="clip">
                                     <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
                                         class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
@@ -745,11 +1775,11 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
         </div>
     </section>
     <!-- HOW IT WORKS Section -->
-    <section class="section">
+    <section id="How-It-Works-Section" class="section">
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="title-wrapper">
                 <div data-w-id="how-it-works-label" class="section-label">
-                    <div>HOW IT WORKS</div>
+                    <div>How It Works</div>
                 </div>
                 <div class="heading-wrap">
                     <h2 data-w-id="how-it-works-title">From farm data to fair financing</h2>
@@ -786,7 +1816,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
                 </div>
             </div>
             <div data-w-id="how-it-works-button" style="margin-top: 50px; justify-content: center;" class="tm40-button-wrapper">
-                <a data-w-id="how-it-works-button-link" href="/contact-us" class="primary-button w-inline-block">
+                <a data-w-id="how-it-works-button-link" href="signup.html" class="primary-button w-inline-block">
                     <div class="clip">
                         <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
                             class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
@@ -801,11 +1831,11 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
         </div>
     </section>
     <!-- PRODUCT SUITE Section -->
-    <section class="section gray-bg">
+    <section id="Product-Suite-Section" class="section gray-bg">
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="title-wrapper">
                 <div data-w-id="product-suite-label" class="section-label">
-                    <div>PRODUCT SUITE</div>
+                    <div>Product Suite</div>
                 </div>
                 <div class="heading-wrap">
                     <h2 data-w-id="product-suite-title">The AgriGuard Smart Farm Suite</h2>
@@ -865,7 +1895,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
                 </div>
             </div>
             <div data-w-id="product-suite-button" style="margin-top: 50px; justify-content: center; display: flex;" class="tm40-button-wrapper">
-                <a data-w-id="product-suite-button-link" href="/services-1" class="primary-button w-inline-block">
+                <a data-w-id="product-suite-button-link" href="dashboard.html" class="primary-button w-inline-block">
                     <div class="clip">
                         <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
                             class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
@@ -913,7 +1943,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
                         </div>
 
                         <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2108" style="opacity:0">
-                            <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="/contact-us" class="underlined-link w-inline-block">
+                            <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="signup.html" class="underlined-link w-inline-block">
                                 <div class="underlined-link-text-wrap">
                                     <div>Get a Demo</div>
                                     <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee96d781f57edc797a59ed_Frame%20(46).svg" loading="lazy" alt="icon" class="arrow-burron-icon" /></div>
@@ -921,7 +1951,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
                             </a>
                         </div>
                         <div data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2108" style="opacity:0;margin-top: 30px;">
-                            <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="/contact-us" class="underlined-link w-inline-block">
+                            <a data-w-id="eb4cd57a-4a15-4380-cd2d-81105d6f2109" href="dashboard.html" class="underlined-link w-inline-block">
                                 <div class="underlined-link-text-wrap">
                                     <div>See How It Works</div>
                                     <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee96d781f57edc797a59ed_Frame%20(46).svg" loading="lazy" alt="icon" class="arrow-burron-icon" /></div>
@@ -951,11 +1981,11 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
         </div>
     </section>
     <!-- FINANCING ECOSYSTEM Section -->
-    <section class="section gray-bg">
+    <section id="Financing-Ecosystem-Section" class="section gray-bg">
         <div class="w-layout-blockcontainer base-container w-container">
             <div class="title-wrapper">
                 <div data-w-id="financing-label" class="section-label">
-                    <div>FINANCING ECOSYSTEM</div>
+                    <div>Financing Ecosystem</div>
                 </div>
                 <div class="heading-wrap">
                     <h2 data-w-id="financing-title">Data replaces collateral — and opens opportunity</h2>
@@ -991,7 +2021,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
                 </div>
             </div>
             <div data-w-id="financing-button" style="margin-top: 50px; justify-content: center;" class="tm40-button-wrapper">
-                <a data-w-id="financing-button-link" href="/contact-us" class="primary-button w-inline-block">
+                <a data-w-id="financing-button-link" href="signup.html" class="primary-button w-inline-block">
                     <div class="clip">
                         <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
                             class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
@@ -1047,7 +2077,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
             </div>
         </div>
     </section>
-    <section class="section without-top-spacing">
+    <section id="Gloria-Mbatha-Section" class="section without-top-spacing">
         <div class="w-layout-blockcontainer base-container w-container">
             <div data-w-id="e56be7fb-3157-aa3b-cb97-be1762213ecf" style="opacity:0" class="home-1-team-block">
                 <div class="primary-bg"></div>
@@ -1195,14 +2225,14 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
                         <p data-w-id="b63b9378-d842-6a2d-9354-30a5172ffdda" style="opacity:0" class="cta-paragraph">Whether you’re a farmer, distributor, or partner, we’re here to support your goals with sustainable solutions and global expertise. </p>
                     </div>
                     <div data-w-id="b77bd290-bf28-cc41-8f9f-bc0d6a1fb3ae" style="opacity:0">
-                        <a data-w-id="1c1267d4-d9d3-0d77-523d-b83a9423e672" href="/contact-us" class="primary-button cta w-inline-block">
+                        <a data-w-id="1c1267d4-d9d3-0d77-523d-b83a9423e672" href="signup.html" class="primary-button cta w-inline-block">
                             <div class="clip">
                                 <div style="-webkit-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
                                     class="button-text-wrap">
                                     <!-- <img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" /> -->
-                                    <div>Bring AgriGuard AI</div>
+                                    <div>Join AgriGuard AI</div>
                                 </div>                                <div class="button-text-wrap bottom-wrap">
-                                    <div>Bring AgriGuard AI</div>
+                                    <div>Join AgriGuard AI</div>
                                 </div>
                             </div>
                         </a>
@@ -1226,7 +2256,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
         <div class="base-container w-container">
             <div class="footer-wrapper">
                 <div class="footer-brand-wrapper">
-                    <div class="footer-logo-wrapper"><a href="/home" aria-current="page" class="footer-brand w-nav-brand w--current"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3a7eeec27e86f08823bf4_0ea11bb1e0bb93359555ba23023d935d_Group%201%20%281%29.svg" loading="lazy" alt="Logo" height="30" class="footer-logo"/></a>
+                    <div class="footer-logo-wrapper"><a href="/home" aria-current="page" class="footer-brand w-nav-brand w--current" style="height: auto !important;"><img src="./cdn.prod.website-files.com/67ee63cb3895632eb840c962/logo.png" loading="lazy" alt="Logo" height="80" class="footer-logo" style="height: 120px !important; width: auto;"/></a>
                         <div
                             class="footer-text">Low-cost, solar-powered AI for crop monitoring and farmer financing.</div>
                 </div>
@@ -1238,24 +2268,34 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
             </div>
             <div class="footer-links-wrap">
                 <div class="footer-links-wrapper">
-                    <h6>Home</h6><a href="/home" aria-current="page" class="footer-link w--current">Home 1</a><a href="/home-2" class="footer-link">Home 2</a><a href="/home-3" class="footer-link">Home 3</a></div>
+                    <h6>Navigation</h6>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="#About-Section" class="footer-link">About Us</a>
+                    <a href="#Impact-Section" class="footer-link">Impact</a>
+                    <a href="#Services-Section" class="footer-link">Our Innovation</a>
+                    <a href="#Problem-Section" class="footer-link">The Problem</a>
+                    <a href="#How-It-Works-Section" class="footer-link">How It Works</a>
+                    <a href="#Product-Suite-Section" class="footer-link">Product Suite</a>
+                    <a href="#Financing-Ecosystem-Section" class="footer-link">Financing Ecosystem</a>
+                    <a href="signup.html" class="footer-link">Contact Us</a>
+                </div>
                 <div class="footer-links-wrapper">
-                    <h6>Company</h6><a href="/about-us" class="footer-link">About us</a><a href="/our-team" class="footer-link">Our Team</a><a href="/pricing" class="footer-link">Pricing</a><a href="/testimonials" class="footer-link">Testimonials</a></div>
+                    <h6>Company</h6><a href="#About-Section" class="footer-link">About us</a><a href="/our-team" class="footer-link">Our Team</a><a href="/pricing" class="footer-link">Pricing</a><a href="/testimonials" class="footer-link">Testimonials</a></div>
                 <div
                     class="footer-links-wrapper">
                     <h6>Services</h6>
                     <div class="w-dyn-list">
                         <div role="list" class="footer-collection-list w-dyn-items">
-                            <div role="listitem" class="w-dyn-item"><a href="/solutions/climate-resilient-program" class="footer-link">Climate-Resilient Program</a></div>
-                            <div role="listitem" class="w-dyn-item"><a href="/solutions/technology-integration" class="footer-link">Technology integration</a></div>
-                            <div role="listitem" class="w-dyn-item"><a href="/solutions/organic-practices" class="footer-link">Organic practices</a></div>
-                            <div role="listitem" class="w-dyn-item"><a href="/solutions/supply-chain-support" class="footer-link">Supply chain support</a></div>
-                            <div role="listitem" class="w-dyn-item"><a href="/solutions/sustainable-irrigation" class="footer-link">Sustainable irrigation</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="#Services-Section" class="footer-link">Our Innovation</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="#Product-Suite-Section" class="footer-link">Product Suite</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="#Financing-Ecosystem-Section" class="footer-link">Financing Ecosystem</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="#How-It-Works-Section" class="footer-link">How It Works</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="signup.html" class="footer-link">Contact Us</a></div>
                         </div>
                     </div>
             </div>
-            <div class="footer-links-wrapper">
-                <h6>Information</h6><a href="/blog-1" class="footer-link">Blog</a><a href="/faq" class="footer-link">FAQ</a><a href="/gallery" class="footer-link">Gallery</a></div>
+            <!-- <div class="footer-links-wrapper">
+                <h6>Information</h6><a href="/blog-1" class="footer-link">Blog</a><a href="/faq" class="footer-link">FAQ</a><a href="/gallery" class="footer-link">Gallery</a></div> -->
         </div>
     </div>
     <div class="footer-bottom-wrapper">
@@ -1263,31 +2303,304 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
 
     </div>
     </div>
-    <!-- <div class="promotion-labels-wrapper-to-remove">
-        <div class="promotion-label-left">
-            <div class="promotion-label-holder">
-                <div class="promotion-label-paragraph">Boost Your Webflow with Pro Apps! Get 20% Off with Code <span class="promotion-coupon">WEBFLOW20</span> </div>
-                <a href="https://webflow.com/@flowstar" target="_blank" class="promotion-label-button w-inline-block">
-                    <div>Try Now!</div>
-                </a>
-                <div data-w-id="2cff7b51-aa36-858d-2f5a-2e0c95b158f8" class="promotion-label-close"><img loading="lazy" src="https://cdn.prod.website-files.com/66bb06c2f20b291fb1359254/66bb06c2f20b291fb135945a_Close%20Pop-up.svg" alt="" class="close-image" /></div>
-            </div>
-        </div>
-        <div class="promotion-label-right"><a href="https://webflow.com/templates/designers/128-digital" target="_blank" class="promotion-label-more-templates w-inline-block"><img width="16" height="16" alt="128 logo" src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/681868ee3fe08ddfa9259f56_Logo%20Dark.svg" loading="lazy" class="promotion-icon"/><div>More Templates</div></a>
-            <a
-                href="https://webflow.com/dashboard/marketplace-checkout/redirect?rtype=Template&amp;rid=681856a6d5d09d6c0452e1a1" target="_blank" class="promotion-label-buy-this-template w-inline-block"><img width="16" height="16" alt="" src="https://cdn.prod.website-files.com/66bb06c2f20b291fb1359254/66bb06c2f20b291fb135945b_icon.svg" loading="lazy" class="promotion-icon" />
-                <div>Buy this Template</div>
-                </a>
-        </div>
-    </div> -->
     </div>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67ee63cb3895632eb840c962" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/js/webflow.schunk.8d94419b171b7d30.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/js/webflow.schunk.61b534daaaeddbc7.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/js/webflow.schunk.9dfb96661114d3db.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/js/webflow.7093eada.ea782a54e635492e.js" type="text/javascript"></script>
+
+<!-- Mobile Menu Enhancement - Complete Solution -->
+<script type="text/javascript">
+// Mobile Menu Enhancement
+document.addEventListener('DOMContentLoaded', function() {
+    // Fix for mobile menu
+    const nav = document.querySelector('.w-nav');
+    const menuButton = document.querySelector('.w-nav-button') || document.querySelector('.menu-button');
+    const overlay = document.querySelector('.w-nav-overlay');
+    
+    // Function to sync menu state with body class
+    function syncMenuState() {
+        if (window.innerWidth <= 991) {
+            if (nav && nav.classList.contains('w--open')) {
+                document.body.classList.add('w-nav-open');
+                document.documentElement.classList.add('w-nav-open');
+            } else {
+                document.body.classList.remove('w-nav-open');
+                document.documentElement.classList.remove('w-nav-open');
+            }
+        }
+    }
+    
+    // Watch for menu state changes using MutationObserver
+    if (nav) {
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    syncMenuState();
+                }
+            });
+        });
+        
+        observer.observe(nav, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+        
+        // Initial sync
+        syncMenuState();
+    }
+    
+    // Ensure menu button is clickable and works
+    // Try both selectors to find the button
+    const allMenuButtons = document.querySelectorAll('.w-nav-button, .menu-button');
+    
+    allMenuButtons.forEach(function(btn) {
+        // Make sure button is visible and clickable
+        btn.style.pointerEvents = 'auto';
+        btn.style.cursor = 'pointer';
+        btn.setAttribute('tabindex', '0');
+        btn.setAttribute('role', 'button');
+        
+        // Remove any inline styles that might block clicks
+        if (btn.style.pointerEvents === 'none') {
+            btn.style.pointerEvents = 'auto';
+        }
+        
+        // Remove any user-select that might interfere
+        btn.style.userSelect = 'none';
+        btn.style.webkitUserSelect = 'none';
+        
+        // Ensure button click works - add fallback if menu doesn't handle it
+        btn.addEventListener('click', function(e) {
+                // If menu hasn't toggled after 150ms, do it ourselves
+            const wasOpen = nav.classList.contains('w--open');
+            setTimeout(function() {
+                const isOpen = nav.classList.contains('w--open');
+                // If state didn't change, menu might not have handled it
+                if (wasOpen === isOpen && window.innerWidth <= 991) {
+                    // Manually toggle
+                    if (wasOpen) {
+                nav.classList.remove('w--open');
+                    } else {
+                        nav.classList.add('w--open');
+                    }
+                }
+                syncMenuState();
+            }, 150);
+        }, { passive: true, capture: false });
+        
+        // Also handle touch events for mobile
+        btn.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            btn.click();
+        }, { passive: false });
+    });
+    
+    // Close menu when clicking overlay
+            if (overlay) {
+                overlay.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+            if (nav && nav.classList.contains('w--open')) {
+                // Trigger menu close by clicking the button
+                    if (menuButton) {
+                        menuButton.click();
+                } else {
+                    nav.classList.remove('w--open');
+                    syncMenuState();
+                }
+                    }
+                });
+            }
+            
+    // Close menu when clicking menu links
+    const menuLinks = document.querySelectorAll('.w-nav-menu a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 991) {
+                setTimeout(() => {
+                    if (nav && nav.classList.contains('w--open')) {
+                        if (menuButton) {
+                            menuButton.click();
+                } else {
+                            nav.classList.remove('w--open');
+                            syncMenuState();
+                        }
+                    }
+                }, 300);
+                    }
+                });
+            });
+            
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && nav && nav.classList.contains('w--open')) {
+            if (menuButton) {
+                menuButton.click();
+            } else {
+                nav.classList.remove('w--open');
+                syncMenuState();
+            }
+        }
+    });
+    
+    // Fix for resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            if (window.innerWidth > 991) {
+                // On desktop, ensure menu is not in mobile state
+                if (nav) {
+                    nav.classList.remove('w--open');
+                    document.body.classList.remove('w-nav-open');
+                    document.documentElement.classList.remove('w-nav-open');
+                }
+            } else {
+                // On mobile, sync the state
+                syncMenuState();
+            }
+        }, 250);
+    });
+    
+    // Ensure proper initialization on load
+            setTimeout(function() {
+        if (window.innerWidth <= 991) {
+            syncMenuState();
+        }
+            }, 200);
+});
+</script>
+
+<!-- Mobile Content Visibility Fix - Ensure content is visible even if animations don't fire -->
+<script type="text/javascript">
+    (function() {
+        function ensureMobileContentVisible() {
+            // Only run on mobile devices
+            if (window.innerWidth > 991) {
+                return;
+            }
+
+            // Single initialization for content visibility
+            var contentInitialized = false;
+            
+            function initContentVisibility() {
+                if (contentInitialized) return;
+                contentInitialized = true;
+                
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                        setTimeout(makeContentVisible, 100);
+                    }, { once: true });
+            } else {
+                    setTimeout(makeContentVisible, 100);
+            }
+        }
+        
+            initContentVisibility();
+        
+            // Single load event listener
+        window.addEventListener('load', function() {
+                if (!contentInitialized) {
+                    setTimeout(makeContentVisible, 500);
+                }
+            }, { once: true });
+        }
+
+        function makeContentVisible() {
+            // Only run on mobile
+            if (window.innerWidth > 991) {
+                return;
+            }
+
+            // Find all elements with opacity:0 that are content (not menu)
+            var allElements = document.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]');
+            
+            allElements.forEach(function(el) {
+                // Skip menu elements
+                if (el.closest('.w-nav-menu') || 
+                    el.closest('.w-nav-overlay') || 
+                    el.classList.contains('w-nav-menu') ||
+                    el.classList.contains('w-nav-overlay')) {
+                    return;
+                }
+
+                // Make content visible
+                if (el.closest('section') || 
+                    el.closest('.section') || 
+                    el.closest('.home-1-banner') ||
+                    el.closest('.home-1-numbers-wrapper') ||
+                    el.closest('.services-collection-list') ||
+                    el.closest('.home-1-cards-wrapper') ||
+                    el.closest('.gray-card') ||
+                    el.closest('.cta-card')) {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                }
+            });
+
+            // Force visibility on all sections
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.style.opacity = '1';
+                section.style.visibility = 'visible';
+                section.style.display = 'block';
+            });
+
+            // Force visibility on text elements
+            var textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, .home-1-banner-text, .large-text, .small-paragraph');
+            textElements.forEach(function(el) {
+                if (!el.closest('.w-nav-menu')) {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                }
+            });
+
+            // Force visibility on buttons and links (except menu)
+            var buttons = document.querySelectorAll('.primary-button, .secondary-button, .underlined-link, a');
+            buttons.forEach(function(el) {
+                if (!el.closest('.w-nav-menu') && !el.closest('.w-nav-overlay')) {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                }
+            });
+        }
+
+        // Run the fix
+        ensureMobileContentVisible();
+
+        // Debounced resize handler for content visibility (consolidated with menu handler)
+        var contentResizeTimeout;
+        var wasMobileContent = window.innerWidth <= 991;
+        var contentResizeHandler = function() {
+            clearTimeout(contentResizeTimeout);
+            contentResizeTimeout = setTimeout(function() {
+                var nowMobile = window.innerWidth <= 991;
+                if (nowMobile && !wasMobileContent) {
+                    makeContentVisible();
+                }
+                wasMobileContent = nowMobile;
+            }, 300); // Slightly longer debounce for content
+        };
+        
+        // Use passive listener for better performance
+        window.addEventListener('resize', contentResizeHandler, { passive: true });
+    })();
+    
+    // Remove badge if it appears
+    (function() {
+        function removeWebflowBadge() {
+            const badge = document.querySelector('.w-webflow-badge');
+            if (badge) {
+                badge.remove();
+            }
+        }
+        // Remove immediately and also watch for dynamically added badge
+        removeWebflowBadge();
+        setInterval(removeWebflowBadge, 100);
+        // Also use MutationObserver to catch it when added
+        const observer = new MutationObserver(removeWebflowBadge);
+        observer.observe(document.body, { childList: true, subtree: true });
+    })();
+</script>
+
 </body>
 
-</html>
 </html>

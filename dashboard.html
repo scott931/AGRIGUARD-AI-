@@ -3,13 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartFarm AI - Analytics Dashboard</title>
+    <title>AgriGuard AI AI - Analytics Dashboard</title>
+    <!-- Inherited CSS from index.html for navigation and footer -->
+    <link href="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/css/freshfield-group-128.webflow.shared.cfc87e387.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <style>
-        :root {
+        /* Hide badge */
+        .w-webflow-badge {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+        
+        /* ============================================
+           CSS ORGANIZATION STRUCTURE
+           ============================================
+           
+           This stylesheet is organized into clear sections for maintainability:
+           
+           1. BASE & SHARED STYLES
+              - CSS Variables (Color scheme, design tokens)
+              - Base HTML/Body styles
+              - Navigation base styles
+              - Dashboard wrapper base styles
+              - Component base styles (cards, charts, etc.)
+              - Animations and keyframes
+              - Print styles
+              
+           2. DESKTOP STYLES (min-width: 992px)
+              - Desktop navigation (menu always visible)
+              - Desktop layout optimizations
+              
+           3. SMALL DESKTOP STYLES (max-width: 1200px)
+              - Compact desktop layout adjustments
+              - Collapsed sidebar styles
+              
+           4. TABLET STYLES (max-width: 991px)
+              - Tablet navigation (hamburger menu)
+              - Tablet layout (sidebar below content)
+              - Tablet-specific spacing and sizing
+              
+           5. MOBILE STYLES (max-width: 767px)
+              - Mobile navigation (slide-out menu)
+              - Single column layouts
+              - Touch-friendly elements (min 44px)
+              - Mobile-optimized charts and cards
+              
+           6. SMALL MOBILE STYLES (max-width: 479px)
+              - Extra small screen optimizations
+              - Reduced font sizes and spacing
+              
+           7. LANDSCAPE ORIENTATION STYLES
+              - Landscape-specific adjustments
+              
+           8. RESPONSIVE UTILITIES
+              - Shared responsive helper classes
+              
+           ============================================ */
+        
+        /* ============================================
+           BASE & SHARED STYLES
+           Styles that apply to all screen sizes
+           ============================================ */
+        
+        /* CSS Variables - Color Scheme & Design Tokens */
+        .dashboard-wrapper {
             --primary: #27AE60;
             --primary-light: #E9F7EF;
             --primary-dark: #219653;
@@ -30,47 +91,628 @@
             --sidebar-width: 260px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', 'Roboto', sans-serif;
+        /* Base Body & HTML Styles */
+        body {
+            padding-top: 130px !important;
+        }
+        
+        /* Dashboard Component Styles - Scoped to avoid conflicts */
+        /* Navigation and Footer CSS are inherited from shared stylesheet - no custom CSS needed */
+        
+        /* Ensure page is scrollable - override shared CSS */
+        html {
+            overflow-y: scroll !important;
+            overflow-x: hidden !important;
+            height: auto !important;
+            max-height: none !important;
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            overflow: hidden;
-            font-family: 'Poppins', 'Roboto', sans-serif;
+            overflow-y: scroll !important;
+            overflow-x: hidden !important;
+            height: auto !important;
+            min-height: auto !important;
+            max-height: none !important;
+            position: relative !important;
+            /* Prevent page background from changing color on scroll */
+            background-color: #fff !important;
+            background: #fff !important;
+        }
+        
+        html {
+            /* Prevent html background from changing color on scroll */
+            background-color: #fff !important;
+            background: #fff !important;
+        }
+        
+        /* Override no-scroll classes and shared CSS height constraints */
+        html.w-mod-no-scroll,
+        body.w-mod-no-scroll,
+        html[style*="overflow"],
+        body[style*="overflow"] {
+            overflow-y: scroll !important;
+            overflow: scroll !important;
+            height: auto !important;
+            max-height: none !important;
+        }
+        
+        /* Navigation container - separate section */
+        .nav-section {
+            position: static;
+            width: 100%;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            /* Don't create containing block for fixed children */
+            transform: none;
+            /* Allow fixed navigation to escape */
+            overflow: visible;
+            /* Don't interfere with fixed positioning */
+            isolation: auto;
+            contain: none;
+        }
+        
+        /* Ensure navigation section doesn't affect other sections */
+        .nav-section + .dashboard-wrapper {
+            margin-top: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Navigation bar - fixed at top with scroll color effect (matches index.html) */
+        .navbar-absolute,
+        .navbar-absolute.w-nav,
+        .nav-section .navbar-absolute,
+        .nav-section .navbar-absolute.w-nav {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: auto !important;
+            inset: 0% 0% auto !important;
+            overflow: visible !important;
+            height: auto !important;
+            max-height: none !important;
+            width: 100% !important;
+            transform: none !important;
+            will-change: auto !important;
+            background-color: rgb(3, 89, 37) !important;
+            background: rgb(3, 89, 37) !important;
+            transition: background-color 0.3s ease !important;
+            z-index: 10000 !important;
+            margin: 0 !important;
+            padding: 15px 0 !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Override any inline styles to ensure fixed positioning */
+        .navbar-absolute[style*="position: static"],
+        .navbar-absolute[style*="position:static"],
+        .navbar-absolute[style*="position: sticky"],
+        .navbar-absolute[style*="position:sticky"] {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            inset: 0% 0% auto !important;
+        }
+        
+        /* Navigation with scroll effect - green background when scrolled */
+        .navbar-absolute.scrolled,
+        .navbar-absolute.w-nav.scrolled,
+        .nav-section .navbar-absolute.scrolled,
+        .nav-section .navbar-absolute.w-nav.scrolled,
+        .navbar-absolute.scrolled.w-nav,
+        .w-nav.navbar-absolute.scrolled {
+            background-color: rgb(3, 89, 37) !important;
+            background: rgb(3, 89, 37) !important;
+            background-image: none !important;
+        }
+        
+        /* Ensure scrolled state overrides transparent background */
+        .navbar-absolute.scrolled[style*="background"],
+        .navbar-absolute.w-nav.scrolled[style*="background"] {
+            background-color: rgb(3, 89, 37) !important;
+            background: rgb(3, 89, 37) !important;
+        }
+        
+        /* Disable scroll animations on navigation */
+        [data-w-id="310be704-be0c-862c-40a7-a2176037624e"] {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        /* Prevent navigation scroll color changes from affecting page */
+        .navbar-absolute,
+        .navbar-absolute * {
+            /* Navigation scroll effects should only affect navigation */
+            contain: layout style paint !important;
+        }
+        
+        /* Override any scroll-based background changes */
+        body[style*="background"],
+        html[style*="background"],
+        body[class*="w-mod"],
+        html[class*="w-mod"] {
+            background-color: #fff !important;
+            background: #fff !important;
+        }
+        
+        .w-nav[data-no-scroll="1"],
+        .base-container,
+        .nav-menu-wrapper,
+        .nav-menu {
+            position: relative !important;
+            overflow: visible !important;
+            height: auto !important;
+            max-height: none !important;
+        }
+        
+        /* Ensure navigation doesn't prevent body scroll */
+        body:has(.navbar-absolute[data-no-scroll="1"]),
+        html:has(.navbar-absolute[data-no-scroll="1"]) {
+            overflow-y: scroll !important;
+            overflow: scroll !important;
+        }
+        
+        /* Isolate navigation scroll effects - prevent affecting page */
+        /* Navigation internal elements are handled by their parent rules */
+        
+        /* Prevent any scroll-related transforms on navigation from affecting page */
+        .navbar-absolute,
+        .navbar-absolute * {
+            pointer-events: auto !important;
+        }
+        
+        /* Mobile menu overlay - fix positioning and functionality */
+        .w-nav-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            z-index: 10001 !important;
+            display: none !important;
+            opacity: 0 !important;
+            transition: opacity 0.3s ease !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        /* Show overlay when menu is open */
+        .w-nav[data-nav-menu-open="true"] .w-nav-overlay,
+        .w-nav.w--open .w-nav-overlay,
+        .w-nav[data-w-state="open"] .w-nav-overlay {
+            display: block !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            visibility: visible !important;
+        }
+
+        /* Mobile menu button styling - hidden by default */
+        .w-nav-button {
+            z-index: 10003 !important;
+            position: relative !important;
+            display: none !important;
+        }
+
+        /* ============================================
+           DESKTOP STYLES (min-width: 992px)
+           Desktop-specific styles and overrides
+           ============================================ */
+        
+        @media (min-width: 992px) {
+            /* Desktop Navigation - Menu always visible */
+            .w-nav-overlay {
+                display: none !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+
+            .w-nav-menu {
+                display: flex !important;
+                position: relative !important;
+                transform: none !important;
+                width: auto !important;
+                height: auto !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+                overflow: visible !important;
+            }
+
+            .w-nav-button {
+                display: none !important;
+            }
+            
+            /* Ensure desktop menu is always visible */
+            .w-nav .w-nav-menu {
+                display: flex !important;
+            }
+        }
+
+        /* ============================================
+           TABLET STYLES (max-width: 991px)
+           Tablet and small desktop adaptations
+           ============================================ */
+        
+        /* ===== MOBILE MENU FIXES ===== */
+        @media (max-width: 991px) {
+            /* Ensure menu button is visible and clickable */
+            .w-nav-button,
+            .menu-button {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 44px !important;
+                height: 44px !important;
+                min-width: 44px !important;
+                min-height: 44px !important;
+                padding: 8px !important;
+                background: transparent !important;
+                border: none !important;
+                cursor: pointer !important;
+                pointer-events: auto !important;
+                z-index: 10003 !important;
+                position: relative !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                touch-action: manipulation !important;
+                user-select: none !important;
+                -webkit-user-select: none !important;
+            }
+            
+            /* Fix button image */
+            .w-nav-button img,
+            .menu-button img,
+            .w-nav-button .image-burger,
+            .menu-button .image-burger {
+                display: block !important;
+                width: 20px !important;
+                height: 20px !important;
+                pointer-events: none !important;
+                user-select: none !important;
+                -webkit-user-select: none !important;
+            }
+            
+            /* Fix menu positioning */
+            .w-nav-menu {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 280px !important;
+                max-width: 85% !important;
+                height: 100vh !important;
+                background: #fff !important;
+                transform: translateX(-100%) !important;
+                transition: transform 0.3s ease !important;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1) !important;
+                overflow-y: auto !important;
+                z-index: 10002 !important;
+                margin: 0 !important;
+                padding: 20px !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+            
+            /* Show menu when open */
+            .w-nav.w--open .w-nav-menu {
+                transform: translateX(0) !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                pointer-events: auto !important;
+            }
+            
+            /* Fix overlay */
+            .w-nav-overlay {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                background: rgba(0,0,0,0.5) !important;
+                z-index: 10001 !important;
+                display: none !important;
+            }
+            
+            .w-nav.w--open .w-nav-overlay {
+                display: block !important;
+            }
+            
+            /* Prevent body scroll when menu is open */
+            body.w-nav-open {
+                overflow: hidden !important;
+                position: fixed !important;
+                width: 100% !important;
+            }
+            
+            /* Ensure dashboard content stays below menu when open */
+            .dashboard-wrapper {
+                position: relative !important;
+                z-index: 1 !important;
+            }
+        }
+
+        /* Prevent body scroll when menu is open */
+        body.w-nav-open,
+        html.w-nav-open {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        /* Ensure menu and overlay are always on top */
+        @media (max-width: 991px) {
+            .w-nav-menu {
+                z-index: 10002 !important;
+            }
+            
+            .w-nav-overlay {
+                z-index: 10001 !important;
+            }
+            
+            .w-nav-button,
+            .menu-button {
+                z-index: 10003 !important;
+            }
+            
+            /* Ensure navbar is below menu when menu is open */
+            .w-nav.w--open .navbar-absolute,
+            .w-nav[data-nav-menu-open="true"] .navbar-absolute {
+                z-index: 10000 !important;
+            }
+        }
+
+        /* Ensure menu items are clickable */
+        .w-nav-menu a {
+            pointer-events: auto !important;
+            z-index: 10001 !important;
+            position: relative !important;
+        }
+
+        /* Hide duplicate tablet-menu to prevent content disappearing */
+        .tablet-menu {
+            display: none !important;
+        }
+
+        .close-menu-button {
+            display: none !important;
+        }
+
+        .brand-tablet {
+            display: none !important;
+        }
+
+        /* Increase navigation logo size and adjust nav bar height to accommodate */
+        .navbar-absolute .brand img.logo,
+        .navbar-absolute .brand-tablet img.logo,
+        .navbar-absolute .brand .logo,
+        .navbar-absolute .brand-tablet .logo,
+        .navbar-absolute .nav-menu-wrapper .brand img,
+        .navbar-absolute .nav-menu-wrapper .brand-tablet img {
+            height: 90px !important;
+            max-height: 90px !important;
+            width: auto !important;
+            object-fit: contain;
+            display: block !important;
+        }
+
+        .navbar-absolute .brand,
+        .navbar-absolute .brand.w--current,
+        .navbar-absolute .brand-tablet,
+        .navbar-absolute .brand-tablet.w--current,
+        .navbar-absolute .nav-menu-wrapper .brand,
+        .navbar-absolute .nav-menu-wrapper .brand-tablet {
+            height: 90px !important;
+            max-height: 90px !important;
+            min-height: 90px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            vertical-align: middle !important;
+            overflow: visible !important;
+            line-height: 90px !important;
+            clip-path: none !important;
+            clip: auto !important;
+        }
+        
+        /* Increase navigation bar height to accommodate larger logo */
+        .navbar-absolute,
+        .navbar-absolute.w-nav {
+            padding-top: 20px !important;
+            padding-bottom: 20px !important;
+            overflow: visible !important;
+        }
+        
+        /* Maintain alignment of nav menu wrapper and prevent clipping */
+        .navbar-absolute .nav-menu-wrapper {
+            display: flex !important;
+            align-items: center !important;
+            height: auto !important;
+            overflow: visible !important;
+            clip-path: none !important;
+        }
+
+        /* Center align logo and menu items vertically */
+        .navbar-absolute .nav-menu-wrapper .brand,
+        .navbar-absolute .nav-menu-wrapper .brand.w-nav-brand {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            vertical-align: middle !important;
+        }
+
+        .navbar-absolute .nav-menu {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+        }
+
+        .navbar-absolute .menu-wrap {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0 !important;
+        }
+
+        .navbar-absolute .nav-link,
+        .navbar-absolute .nav-dropdown-toggle {
+            display: inline-flex !important;
+            align-items: center !important;
+            vertical-align: middle !important;
+        }
+        
+        /* Ensure base container doesn't clip the logo */
+        .navbar-absolute .base-container,
+        .navbar-absolute .w-container {
+            overflow: visible !important;
+            clip-path: none !important;
+        }
+        
+        /* Ensure logo link doesn't clip */
+        .navbar-absolute .brand a,
+        .navbar-absolute .brand.w-nav-brand {
+            overflow: visible !important;
+            clip-path: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+        }
+        
+        /* Ensure footer is visible and positioned correctly */
+        .footer {
+            position: relative !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            margin-top: 40px !important;
+            clear: both !important;
+            width: 100% !important;
+            min-height: auto !important;
+            padding-top: 70px !important;
+            padding-bottom: 30px !important;
+            z-index: 10 !important;
+            background-color: inherit !important;
+        }
+        
+        .footer-bottom-wrapper {
+            position: relative !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            z-index: 10 !important;
+        }
+        
+        /* Reset styles only for dashboard wrapper */
+        .dashboard-wrapper * {
+            box-sizing: border-box;
+        }
+
+        .dashboard-wrapper {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-family: 'Poppins', 'Roboto', sans-serif;
+            width: 100%;
+            height: auto;
+            min-height: auto;
+            max-height: none;
+            margin: 80px auto 40px auto;
+            padding: 0;
+            border-radius: 16px;
+            overflow: visible;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            pointer-events: auto;
+        }
+
+        @media (max-width: 991px) {
+            .dashboard-wrapper {
+                margin: 70px auto 30px auto;
+                min-height: auto;
+                width: calc(100% - 40px);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .dashboard-wrapper {
+                margin: 70px auto 20px auto;
+                min-height: auto;
+                width: calc(100% - 30px);
+            }
+        }
+
+        .dashboard-wrapper h1, 
+        .dashboard-wrapper h2, 
+        .dashboard-wrapper h3, 
+        .dashboard-wrapper h4, 
+        .dashboard-wrapper h5, 
+        .dashboard-wrapper h6 {
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
         }
 
-        .app-container {
+        .dashboard-wrapper .app-container {
             display: flex;
-            height: 100vh;
+            width: calc(100% - 80px);
+            height: calc(100vh - 300px);
+            max-height: calc(100vh - 300px);
+            min-height: 800px;
             font-family: 'Poppins', 'Roboto', sans-serif;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            margin-top: 100px;
+            margin-right: 40px;
+            margin-left: 40px;
+            border: 1px solid rgb(3, 89, 37);
+            border-radius: 12px;
+            /* Performance optimization: use GPU acceleration for smoother resizing */
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        @media (max-width: 991px) {
+            .dashboard-wrapper .app-container {
+                height: calc(100vh - 280px);
+                max-height: calc(100vh - 280px);
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .dashboard-wrapper .app-container {
+                height: calc(100vh - 260px);
+                max-height: calc(100vh - 260px);
+            }
         }
 
-        /* Sidebar */
-        .sidebar {
+        /* Sidebar - Scoped to dashboard */
+        .dashboard-wrapper .sidebar {
             width: var(--sidebar-width);
-            background: linear-gradient(180deg, #1D1F27 0%, #2D3436 100%);
-            color: white;
+            background: white;
+            color: black;
             padding: 25px 0;
             display: flex;
             flex-direction: column;
             position: relative;
             z-index: 10;
+            flex-shrink: 0;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
-        .logo {
+        .dashboard-wrapper .logo {
             font-size: 22px;
             font-weight: 700;
-            color: white;
+            color: black;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -79,15 +721,20 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .logo i {
+        .dashboard-wrapper .logo img {
+            height: 160px !important;
+            width: auto !important;
+        }
+
+        .dashboard-wrapper .logo i {
             font-size: 24px;
             color: var(--primary);
         }
 
-        .menu-label {
+        .dashboard-wrapper .menu-label {
             font-size: 11px;
             text-transform: uppercase;
-            color: #95A5A6;
+            color: #333333;
             margin: 25px 0 15px;
             letter-spacing: 1px;
             font-weight: 500;
@@ -95,17 +742,17 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .sidebar ul {
+        .dashboard-wrapper .sidebar ul {
             list-style: none;
             padding: 0 15px;
         }
 
-        .sidebar li {
+        .dashboard-wrapper .sidebar li {
             padding: 14px 20px;
             display: flex;
             align-items: center;
             gap: 14px;
-            color: #BDC3C7;
+            color: #1D1F27;
             cursor: pointer;
             border-radius: 10px;
             transition: all 0.2s ease;
@@ -114,44 +761,47 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .sidebar li.active {
+        .dashboard-wrapper .sidebar li.active {
             background: linear-gradient(90deg, rgba(39, 174, 96, 0.2) 0%, rgba(39, 174, 96, 0.1) 100%);
-            color: white;
+            color: #1D1F27;
             font-weight: 500;
             border-left: 3px solid var(--primary);
         }
 
-        .sidebar li:hover:not(.active) {
-            background: rgba(255,255,255,0.05);
+        .dashboard-wrapper .sidebar li:hover:not(.active) {
+            background: rgba(0, 0, 0, 0.05);
             transform: translateX(2px);
-            color: white;
+            color: #1D1F27;
         }
 
-        .sidebar li.settings-item {
+        .dashboard-wrapper .sidebar li.settings-item {
             margin-top: 30px;
             background: rgba(155, 81, 224, 0.1);
             border-left: 3px solid var(--purple);
         }
 
-        .sidebar li.settings-item:hover {
+        .dashboard-wrapper .sidebar li.settings-item:hover {
             background: rgba(155, 81, 224, 0.2);
         }
 
-        .sidebar li i {
+        .dashboard-wrapper .sidebar li i {
             width: 20px;
             text-align: center;
             font-size: 16px;
         }
 
-        /* Main Content */
-        .main-content {
+        /* Main Content - Scoped to dashboard */
+        .dashboard-wrapper .main-content {
             flex: 1;
             padding: 25px 30px;
             overflow-y: auto;
+            overflow-x: hidden;
             font-family: 'Poppins', 'Roboto', sans-serif;
+            min-width: 0;
+            height: 100%;
         }
 
-        header {
+        .dashboard-wrapper header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -160,35 +810,35 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .farm-info h1 {
+        .dashboard-wrapper .farm-info h1 {
             font-size: 26px;
             color: var(--text-main);
             font-weight: 700;
             font-family: 'Poppins', sans-serif;
         }
 
-        .farm-meta {
+        .dashboard-wrapper .farm-meta {
             font-size: 14px;
             color: var(--text-grey);
             margin-top: 8px;
             font-family: 'Poppins', sans-serif;
         }
 
-        .user-profile {
+        .dashboard-wrapper .user-profile {
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
         /* Stats Row */
-        .top-stats {
+        .dashboard-wrapper .top-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
 
-        .stat-card {
+        .dashboard-wrapper .stat-card {
             background: var(--white);
             padding: 22px;
             border-radius: 14px;
@@ -197,12 +847,12 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .stat-card:hover {
+        .dashboard-wrapper .stat-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
         }
 
-        .stat-card h4 {
+        .dashboard-wrapper .stat-card h4 {
             font-size: 12px;
             color: var(--text-grey);
             text-transform: uppercase;
@@ -212,7 +862,7 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .stat-card .value {
+        .dashboard-wrapper .stat-card .value {
             font-size: 28px;
             font-weight: 700;
             color: var(--text-main);
@@ -220,7 +870,7 @@
             margin-bottom: 5px;
         }
 
-        .stat-card .trend {
+        .dashboard-wrapper .stat-card .trend {
             font-size: 13px;
             margin-top: 5px;
             display: flex;
@@ -228,17 +878,17 @@
             gap: 5px;
         }
 
-        .up { color: var(--primary); }
-        .down { color: var(--danger); }
+        .dashboard-wrapper .up { color: var(--primary); }
+        .dashboard-wrapper .down { color: var(--danger); }
 
         /* Main Grid */
-        .dashboard-grid {
+        .dashboard-wrapper .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 25px;
         }
 
-        .card {
+        .dashboard-wrapper .card {
             background: var(--white);
             border-radius: 16px;
             padding: 24px;
@@ -246,13 +896,15 @@
             border: 1px solid var(--border);
             margin-bottom: 25px;
             transition: box-shadow 0.2s ease;
+            /* Performance optimization: prevent layout shifts during resize */
+            contain: layout style;
         }
 
-        .card:hover {
+        .dashboard-wrapper .card:hover {
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
         }
 
-        .card-title {
+        .dashboard-wrapper .card-title {
             font-size: 17px;
             font-weight: 600;
             margin-bottom: 20px;
@@ -557,6 +1209,20 @@
         .chart-container {
             height: 250px;
             position: relative;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            /* Performance optimization: prevent layout thrashing during resize */
+            will-change: auto;
+            contain: layout style;
+        }
+        
+        /* Ensure canvas elements don't overflow */
+        .chart-container canvas {
+            max-width: 100% !important;
+            height: 100% !important;
+            width: 100% !important;
+            object-fit: contain;
         }
 
         .progress-bar {
@@ -626,6 +1292,34 @@
         /* Chart improvements */
         canvas {
             font-family: 'Poppins', 'Roboto', sans-serif;
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
+        /* Ensure all chart containers prevent overflow */
+        .chart-card {
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .chart-card .chart-container {
+            overflow: hidden !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box;
+        }
+        
+        /* Global fix for all canvas elements in charts */
+        .chart-container > canvas,
+        .chart-card canvas,
+        canvas[id*="Chart"],
+        canvas[id*="chart"] {
+            max-width: 100% !important;
+            width: 100% !important;
+            height: 100% !important;
+            box-sizing: border-box;
         }
 
         /* DEMO POPUP MODAL */
@@ -915,69 +1609,1463 @@
         /* New Charts Layout */
         .chart-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 25px;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .chart-card {
             grid-column: span 1;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .wide-chart {
-            grid-column: span 2;
+            grid-column: span 1;
         }
 
+        /* ============================================
+           SMALL DESKTOP STYLES (max-width: 1200px)
+           Compact desktop layout adjustments
+           ============================================ */
+        
         @media (max-width: 1200px) {
-            .dashboard-grid {
+            .dashboard-wrapper .dashboard-grid {
                 grid-template-columns: 1fr;
             }
 
-            .sidebar {
+            .dashboard-wrapper .sidebar {
                 width: 80px;
                 padding: 25px 10px;
             }
 
-            .logo span, .menu-label, .sidebar li span {
+            .dashboard-wrapper .logo span, 
+            .dashboard-wrapper .menu-label, 
+            .dashboard-wrapper .sidebar li span {
                 display: none;
             }
 
-            .logo {
+            .dashboard-wrapper .logo {
                 justify-content: center;
                 padding: 0;
             }
 
-            .sidebar li {
+            .dashboard-wrapper .logo img {
+                height: 50px !important;
+            }
+
+            .dashboard-wrapper .sidebar li {
                 justify-content: center;
                 padding: 15px;
             }
 
-            .sim-box {
+            .dashboard-wrapper .sim-box {
                 padding: 15px 10px;
                 margin: 20px 5px 10px;
             }
 
-            .demo-modal {
+            .dashboard-wrapper .demo-modal {
                 width: 95%;
                 padding: 30px 25px;
             }
 
-            .farm-zone {
+            .dashboard-wrapper .farm-zone {
                 font-size: 10px;
             }
 
-            .wide-chart {
+            .dashboard-wrapper .wide-chart {
                 grid-column: span 1;
             }
         }
+        
+        /* Sign Up Button Container */
+        .signup-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+        
+        .signup-button {
+            display: inline-block;
+            background-color: rgb(3, 89, 37);
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .signup-button:hover {
+            background-color: #035925;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(3, 89, 37, 0.3);
+        }
+        
+        @media (max-width: 767px) {
+            .signup-button-container {
+                margin: 30px auto;
+                padding: 0 20px;
+            }
+            
+            .signup-button {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Navigation hover effect for all menu items */
+        .nav-link .clip,
+        .nav-dropdown-toggle .clip {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link .button-text-wrap,
+        .nav-dropdown-toggle .button-text-wrap {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link .button-text-wrap.bottom-wrap,
+        .nav-dropdown-toggle .button-text-wrap.bottom-wrap {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover .button-text-wrap:not(.bottom-wrap),
+        .nav-dropdown-toggle:hover .button-text-wrap:not(.bottom-wrap) {
+            transform: translateY(-100%);
+        }
+
+        .nav-link:hover .button-text-wrap.bottom-wrap,
+        .nav-dropdown-toggle:hover .button-text-wrap.bottom-wrap {
+            transform: translateY(-100%);
+        }
+
+        /* ============================================
+           TABLET STYLES (max-width: 991px) - CONTINUED
+           Additional tablet-specific dashboard styles
+           ============================================ */
+        
+        @media (max-width: 991px) {
+            body {
+                padding-top: 100px !important;
+            }
+
+            .dashboard-wrapper {
+                margin: 60px auto 20px auto;
+                width: calc(100% - 20px);
+                padding: 0;
+            }
+
+            .dashboard-wrapper .app-container {
+                flex-direction: column;
+                width: calc(100% - 20px);
+                margin: 20px 10px;
+                height: auto;
+                min-height: auto;
+                max-height: none;
+                border-radius: 8px;
+            }
+
+            .dashboard-wrapper .sidebar {
+                width: 100%;
+                height: auto;
+                max-height: 300px;
+                padding: 15px 0;
+                order: 2;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .dashboard-wrapper .main-content {
+                order: 1;
+                padding: 20px 15px;
+                width: 100%;
+            }
+
+            .dashboard-wrapper .logo {
+                padding: 0 15px;
+                margin-bottom: 20px;
+            }
+
+            .dashboard-wrapper .logo img {
+                height: 80px !important;
+            }
+
+            .dashboard-wrapper .top-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .dashboard-wrapper .stat-card {
+                padding: 18px;
+            }
+
+            .dashboard-wrapper .stat-card .value {
+                font-size: 24px;
+            }
+
+            .dashboard-wrapper .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .dashboard-wrapper .card {
+                padding: 20px;
+            }
+
+            .dashboard-wrapper header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .dashboard-wrapper .farm-info h1 {
+                font-size: 22px;
+            }
+
+            .dashboard-wrapper .user-profile {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar-absolute .brand img.logo,
+            .navbar-absolute .brand-tablet img.logo {
+                height: 60px !important;
+            }
+
+            .navbar-absolute .brand,
+            .navbar-absolute .brand-tablet {
+                height: 60px !important;
+                min-height: 60px !important;
+            }
+
+            .navbar-absolute {
+                padding: 10px 0 !important;
+            }
+        }
+
+        /* ============================================
+           MOBILE STYLES (max-width: 767px)
+           Mobile phone adaptations and optimizations
+           ============================================ */
+        
+        @media (max-width: 767px) {
+            body {
+                padding-top: 90px !important;
+            }
+
+            .dashboard-wrapper {
+                margin: 50px auto 15px auto;
+                width: calc(100% - 10px);
+                border-radius: 8px;
+            }
+
+            .dashboard-wrapper .app-container {
+                width: calc(100% - 10px);
+                margin: 15px 5px;
+                border-radius: 6px;
+                flex-direction: column;
+                height: auto;
+                min-height: auto;
+                max-height: none;
+            }
+
+            .dashboard-wrapper .sidebar {
+                max-height: 250px;
+                padding: 10px 0;
+                width: 100%;
+                order: 2;
+                border-bottom: 1px solid var(--border);
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .dashboard-wrapper .sidebar ul {
+                padding: 0 10px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .dashboard-wrapper .sidebar li {
+                flex: 1 1 calc(50% - 5px);
+                min-width: 0;
+                padding: 12px 10px;
+                margin: 0;
+                font-size: 12px;
+                touch-action: manipulation;
+            }
+
+            .dashboard-wrapper .logo {
+                padding: 0 10px;
+                margin-bottom: 15px;
+            }
+
+            .dashboard-wrapper .logo img {
+                height: 60px !important;
+                max-width: 100%;
+            }
+
+            .dashboard-wrapper .menu-label {
+                padding: 0 10px;
+                font-size: 10px;
+                margin: 15px 0 10px;
+            }
+
+            .dashboard-wrapper .main-content {
+                padding: 15px 10px;
+                order: 1;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            .dashboard-wrapper .top-stats {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .dashboard-wrapper .stat-card {
+                padding: 15px;
+                min-width: 0;
+            }
+
+            .dashboard-wrapper .stat-card h4 {
+                font-size: 11px;
+            }
+
+            .dashboard-wrapper .stat-card .value {
+                font-size: 20px;
+                word-break: break-word;
+            }
+
+            .dashboard-wrapper .stat-card .trend {
+                font-size: 12px;
+            }
+
+            .dashboard-wrapper header {
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .dashboard-wrapper .farm-info {
+                width: 100%;
+            }
+
+            .dashboard-wrapper .farm-info h1 {
+                font-size: 18px;
+                line-height: 1.3;
+            }
+
+            .dashboard-wrapper .farm-meta {
+                font-size: 11px;
+                line-height: 1.5;
+                word-break: break-word;
+            }
+
+            .dashboard-wrapper .user-profile {
+                width: 100%;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .dashboard-wrapper .status-indicator {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+
+            .dashboard-wrapper .card {
+                padding: 15px;
+                margin-bottom: 15px;
+                min-width: 0;
+                overflow-x: hidden;
+            }
+
+            .dashboard-wrapper .card-title {
+                font-size: 15px;
+                margin-bottom: 15px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .dashboard-wrapper .dashboard-grid {
+                gap: 15px;
+            }
+
+            .map-view {
+                height: 200px;
+                min-height: 200px;
+            }
+
+            .dashboard-wrapper .farm-zone {
+                font-size: 8px;
+                padding: 5px;
+                min-width: 60px;
+            }
+
+            .dashboard-wrapper .farm-zone span {
+                font-size: 8px;
+                line-height: 1.2;
+            }
+
+            .zone-label {
+                font-size: 9px !important;
+                padding: 2px 6px !important;
+            }
+
+            .sensor-dot {
+                width: 12px;
+                height: 12px;
+            }
+
+            .water-source {
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+            }
+
+            .farm-house {
+                width: 32px;
+                height: 24px;
+                font-size: 12px;
+            }
+
+            .map-legend {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 9px;
+            }
+
+            .dashboard-wrapper .sim-box {
+                padding: 15px;
+                margin: 15px 5px 10px;
+            }
+
+            .dashboard-wrapper .demo-modal {
+                width: 95%;
+                max-width: 95%;
+                padding: 20px 15px;
+                margin: 10px;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .chart-card {
+                grid-column: span 1;
+            }
+
+            .chart-container {
+                height: 200px;
+                min-height: 200px;
+                position: relative;
+                overflow: hidden !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .chart-container canvas {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain;
+            }
+            
+            .chart-card {
+                overflow: hidden !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .setting-card {
+                padding: 15px;
+            }
+
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .demo-modal-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .demo-btn-primary,
+            .demo-btn-secondary {
+                width: 100%;
+            }
+
+            .btn-primary {
+                padding: 14px 20px;
+                font-size: 14px;
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            .alert-popup {
+                padding: 15px;
+                font-size: 13px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .alert-popup button {
+                align-self: flex-end;
+                min-width: 44px;
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            .navbar-absolute .brand img.logo,
+            .navbar-absolute .brand-tablet img.logo {
+                height: 50px !important;
+            }
+
+            .navbar-absolute .brand,
+            .navbar-absolute .brand-tablet {
+                height: 50px !important;
+                min-height: 50px !important;
+            }
+
+            .navbar-absolute {
+                padding: 8px 0 !important;
+            }
+
+            .navbar-absolute .nav-menu {
+                flex-wrap: wrap;
+            }
+
+            .navbar-absolute .nav-link,
+            .navbar-absolute .nav-dropdown-toggle {
+                font-size: 12px;
+                padding: 8px 10px;
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            /* Ensure tables are scrollable on mobile */
+            .dashboard-wrapper table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .dashboard-wrapper table thead,
+            .dashboard-wrapper table tbody,
+            .dashboard-wrapper table tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            /* Improve touch targets */
+            .dashboard-wrapper button,
+            .dashboard-wrapper .btn-sim,
+            .dashboard-wrapper a.button {
+                min-height: 44px;
+                min-width: 44px;
+                touch-action: manipulation;
+            }
+
+            /* Prevent horizontal scroll */
+            .dashboard-wrapper * {
+                max-width: 100%;
+            }
+
+            /* Improve text readability */
+            .dashboard-wrapper p,
+            .dashboard-wrapper span,
+            .dashboard-wrapper div {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+        }
+
+        /* ============================================
+           SMALL MOBILE STYLES (max-width: 479px)
+           Small mobile phone optimizations
+           ============================================ */
+        
+        @media (max-width: 479px) {
+            body {
+                padding-top: 80px !important;
+            }
+
+            .dashboard-wrapper {
+                margin: 40px auto 10px auto;
+                width: 100%;
+                border-radius: 6px;
+            }
+
+            .dashboard-wrapper .app-container {
+                width: 100%;
+                margin: 10px 0;
+                border-radius: 4px;
+            }
+
+            .dashboard-wrapper .sidebar {
+                max-height: 200px;
+                padding: 8px 0;
+            }
+
+            .dashboard-wrapper .sidebar ul {
+                padding: 0 8px;
+                gap: 4px;
+            }
+
+            .dashboard-wrapper .sidebar li {
+                flex: 1 1 100%;
+                font-size: 11px;
+                padding: 10px 8px;
+                margin-bottom: 4px;
+            }
+
+            .dashboard-wrapper .logo {
+                padding: 0 8px;
+                margin-bottom: 12px;
+            }
+
+            .dashboard-wrapper .logo img {
+                height: 50px !important;
+            }
+
+            .dashboard-wrapper .menu-label {
+                padding: 0 8px;
+                font-size: 9px;
+                margin: 12px 0 8px;
+            }
+
+            .dashboard-wrapper .main-content {
+                padding: 12px 8px;
+            }
+
+            .dashboard-wrapper .top-stats {
+                gap: 10px;
+            }
+
+            .dashboard-wrapper .stat-card {
+                padding: 12px;
+            }
+
+            .dashboard-wrapper .stat-card h4 {
+                font-size: 10px;
+            }
+
+            .dashboard-wrapper .stat-card .value {
+                font-size: 18px;
+            }
+
+            .dashboard-wrapper .stat-card .trend {
+                font-size: 11px;
+            }
+
+            .dashboard-wrapper header {
+                margin-bottom: 15px;
+                padding-bottom: 8px;
+            }
+
+            .dashboard-wrapper .farm-info h1 {
+                font-size: 16px;
+            }
+
+            .dashboard-wrapper .farm-meta {
+                font-size: 10px;
+            }
+
+            .dashboard-wrapper .card {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+
+            .dashboard-wrapper .card-title {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+
+            .chart-grid {
+                gap: 12px;
+            }
+
+            .chart-container {
+                height: 180px;
+                min-height: 180px;
+                overflow: hidden !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .chart-container canvas {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain;
+            }
+            
+            .chart-card {
+                overflow: hidden !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .map-view {
+                height: 180px;
+                min-height: 180px;
+            }
+
+            .dashboard-wrapper .farm-zone {
+                font-size: 7px;
+                padding: 4px;
+            }
+
+            .dashboard-wrapper .farm-zone span {
+                font-size: 7px;
+            }
+
+            .zone-label {
+                font-size: 8px !important;
+                padding: 2px 4px !important;
+            }
+
+            .sensor-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .water-source {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+            }
+
+            .farm-house {
+                width: 28px;
+                height: 20px;
+                font-size: 10px;
+            }
+
+            .map-legend {
+                bottom: 8px;
+                right: 8px;
+                padding: 6px 10px;
+                font-size: 8px;
+            }
+
+            .dashboard-wrapper .sim-box {
+                padding: 12px;
+                margin: 12px 5px 8px;
+            }
+
+            .btn-sim {
+                padding: 10px;
+                font-size: 11px;
+            }
+
+            .dashboard-wrapper .demo-modal {
+                width: 98%;
+                max-width: 98%;
+                padding: 15px 12px;
+                margin: 5px;
+            }
+
+            .demo-modal-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .demo-modal-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .demo-modal-title {
+                font-size: 20px;
+            }
+
+            .demo-modal-content p {
+                font-size: 14px;
+            }
+
+            .settings-grid {
+                gap: 12px;
+            }
+
+            .setting-card {
+                padding: 12px;
+            }
+
+            .navbar-absolute .brand img.logo {
+                height: 45px !important;
+            }
+
+            .navbar-absolute .brand {
+                height: 45px !important;
+                min-height: 45px !important;
+            }
+
+            .navbar-absolute {
+                padding: 6px 0 !important;
+            }
+
+            /* Ensure all interactive elements are touch-friendly */
+            .dashboard-wrapper button,
+            .dashboard-wrapper .btn-primary,
+            .dashboard-wrapper .btn-sim,
+            .dashboard-wrapper a.button,
+            .dashboard-wrapper .toggle-switch {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            .toggle-switch {
+                min-width: 50px;
+            }
+        }
+
+        /* ============================================
+           LANDSCAPE ORIENTATION STYLES
+           Tablet and mobile landscape adjustments
+           ============================================ */
+        
+        @media (max-width: 991px) and (orientation: landscape) {
+            .dashboard-wrapper .app-container {
+                height: auto;
+                min-height: 500px;
+            }
+
+            .dashboard-wrapper .sidebar {
+                max-height: 200px;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE UTILITIES
+           Shared responsive helper styles
+           ============================================ */
+        
+        .dashboard-wrapper img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .dashboard-wrapper table {
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+        }
+
+        @media (max-width: 767px) {
+            .dashboard-wrapper table {
+                font-size: 12px;
+            }
+
+            .dashboard-wrapper .chart-container {
+                overflow: hidden !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .dashboard-wrapper canvas {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain;
+            }
+        }
+
+        /* ============================================
+           PRINT STYLES
+           Print-specific styles
+           ============================================ */
+        
+        @media print {
+            .dashboard-wrapper .sidebar {
+                display: none;
+            }
+
+            .dashboard-wrapper .app-container {
+                flex-direction: column;
+            }
+
+            .navbar-absolute {
+                display: none;
+            }
+        }
     </style>
+    <!-- Initialization script -->
+    <script type="text/javascript">
+        ! function(o, c) {
+            var n = c.documentElement,
+                t = " w-mod-";
+            n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
+        }(window, document);
+    </script>
+    <!-- Force enable page scrolling - aggressive override -->
+    <script type="text/javascript">
+        (function() {
+            function forceScroll() {
+                var html = document.documentElement;
+                var body = document.body;
+                
+                // Remove all height constraints
+                html.style.setProperty('height', 'auto', 'important');
+                html.style.setProperty('max-height', 'none', 'important');
+                body.style.setProperty('height', 'auto', 'important');
+                body.style.setProperty('min-height', 'auto', 'important');
+                body.style.setProperty('max-height', 'none', 'important');
+                
+                // Force scroll
+                html.style.setProperty('overflow-y', 'scroll', 'important');
+                html.style.setProperty('overflow', 'scroll', 'important');
+                body.style.setProperty('overflow-y', 'scroll', 'important');
+                body.style.setProperty('overflow', 'scroll', 'important');
+                
+                // Remove blocking classes
+                html.classList.remove('w-mod-no-scroll');
+                body.classList.remove('w-mod-no-scroll');
+                
+                // Prevent navigation from blocking scroll
+                var nav = document.querySelector('.navbar-absolute[data-no-scroll="1"]');
+                if (nav) {
+                    nav.removeAttribute('data-no-scroll');
+                    nav.style.setProperty('position', 'relative', 'important');
+                    nav.style.setProperty('overflow', 'visible', 'important');
+                    // Disable scroll animation
+                    nav.removeAttribute('data-w-id');
+                    nav.style.setProperty('background-color', 'transparent', 'important');
+                    nav.style.setProperty('background', 'transparent', 'important');
+                }
+                
+                // Disable scroll animations on navigation element
+                var navWithId = document.querySelector('[data-w-id="310be704-be0c-862c-40a7-a2176037624e"]');
+                if (navWithId) {
+                    navWithId.removeAttribute('data-w-id');
+                    navWithId.style.setProperty('opacity', '1', 'important');
+                    navWithId.style.setProperty('transform', 'none', 'important');
+                    navWithId.style.setProperty('background-color', 'transparent', 'important');
+                }
+            }
+            
+            // Run immediately and multiple times
+            forceScroll();
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', forceScroll);
+            }
+            window.addEventListener('load', forceScroll);
+            
+            // Continuous override
+            var intervals = [50, 100, 200, 500, 1000, 2000];
+            intervals.forEach(function(delay) {
+                setTimeout(forceScroll, delay);
+            });
+            
+            // Also run on any script load
+            var observer = new MutationObserver(forceScroll);
+            observer.observe(document.body, { attributes: true, attributeFilter: ['class', 'style'] });
+            observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style'] });
+            
+            // Watch for navigation changes
+            var navObserver = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'data-no-scroll') {
+                        forceScroll();
+                    }
+                });
+            });
+            var navElement = document.querySelector('.navbar-absolute');
+            if (navElement) {
+                navObserver.observe(navElement, { attributes: true, attributeFilter: ['data-no-scroll'] });
+            }
+        })();
+    </script>
+    
+    <!-- Force navigation to be static and isolate scroll effects -->
+    <script type="text/javascript">
+        (function() {
+            var nav = document.querySelector('.navbar-absolute');
+            var html = document.documentElement;
+            var body = document.body;
+            
+            function init() {
+                if (!nav) nav = document.querySelector('.navbar-absolute');
+                if (!nav) return;
+                
+                // Ensure navigation is fixed at top - override all positioning (matches index.html)
+                function makeNavFixed() {
+                    // Remove all positioning properties first
+                    nav.style.removeProperty('position');
+                    nav.style.removeProperty('top');
+                    nav.style.removeProperty('bottom');
+                    nav.style.removeProperty('left');
+                    nav.style.removeProperty('right');
+                    nav.style.removeProperty('inset');
+                    
+                    // Force fixed positioning at top
+                    nav.style.setProperty('position', 'fixed', 'important');
+                    nav.style.setProperty('top', '0', 'important');
+                    nav.style.setProperty('left', '0', 'important');
+                    nav.style.setProperty('right', '0', 'important');
+                    nav.style.setProperty('bottom', 'auto', 'important');
+                    nav.style.setProperty('inset', '0% 0% auto', 'important');
+                    
+                    // Remove any transform that might move it
+                    nav.style.removeProperty('transform');
+                    nav.style.setProperty('transform', 'none', 'important');
+                }
+                
+                // Run immediately
+                makeNavFixed();
+                
+                // Watch for any style changes and immediately override
+                var navStyleObserver = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                            // Check if position was changed
+                            var computedStyle = window.getComputedStyle(nav);
+                            var position = computedStyle.position;
+                            if (position !== 'fixed') {
+                                makeNavFixed();
+                            }
+                        }
+                    });
+                });
+                
+                navStyleObserver.observe(nav, { 
+                    attributes: true, 
+                    attributeFilter: ['style', 'class'] 
+                });
+                
+                // Prevent page background from changing color on scroll
+                function preventPageColorChange() {
+                    // Force white background on body and html
+                    body.style.setProperty('background-color', '#fff', 'important');
+                    body.style.setProperty('background', '#fff', 'important');
+                    html.style.setProperty('background-color', '#fff', 'important');
+                    html.style.setProperty('background', '#fff', 'important');
+                }
+                
+                // Run immediately
+                preventPageColorChange();
+                
+                // Prevent navigation scroll effects from bubbling to page
+                nav.addEventListener('scroll', function(e) {
+                    e.stopPropagation();
+                }, true);
+                
+                // Add scroll effect to navigation bar only
+                function handleScroll() {
+                    if (!nav) nav = document.querySelector('.navbar-absolute');
+                    if (!nav) return;
+                    
+                    // Prevent page background color changes
+                    preventPageColorChange();
+                    
+                    // Ensure navigation stays fixed at top
+                    makeNavFixed();
+                    
+                    // Get current scroll position
+                    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+                    
+                    // Add/remove scrolled class based on scroll position
+                    if (scrollTop > 50) {
+                        // Scrolled down - add green background to navigation ONLY
+                        nav.classList.add('scrolled');
+                    } else {
+                        // At top - remove green background from navigation
+                        nav.classList.remove('scrolled');
+                    }
+                }
+                
+                // Attach scroll listener
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                
+                // Also check on initial load
+                handleScroll();
+                
+                // Optimized: Use MutationObserver instead of frequent setInterval
+                var navStyleObserver = new MutationObserver(function() {
+                    makeNavFixed();
+                    preventPageColorChange();
+                });
+                
+                // Only observe when needed, not continuously
+                navStyleObserver.observe(nav, { 
+                    attributes: true, 
+                    attributeFilter: ['style', 'class'] 
+                });
+                
+                // Fallback check less frequently (every 2 seconds instead of 50ms)
+                var navCheckInterval = setInterval(function() {
+                    var computedStyle = window.getComputedStyle(nav);
+                    if (computedStyle.position !== 'fixed') {
+                        makeNavFixed();
+                    }
+                }, 2000);
+                
+                // Clean up interval when page unloads
+                window.addEventListener('beforeunload', function() {
+                    clearInterval(navCheckInterval);
+                });
+                
+                // Disable scroll interactions that might change page background
+                function disableWebflowScrollInteractions() {
+                    // Remove any scroll interaction classes
+                    body.classList.remove('w-mod-ix');
+                    html.classList.remove('w-mod-ix');
+                    
+                    // Disable any scroll-based background changes
+                    var allElements = document.querySelectorAll('*');
+                    allElements.forEach(function(el) {
+                        if (el !== nav && el !== body && el !== html) {
+                            // Check if element has scroll interaction
+                            if (el.hasAttribute('data-w-id') || el.classList.contains('w-mod-ix')) {
+                                // Disable scroll interactions on non-navigation elements
+                                el.classList.remove('w-mod-ix');
+                            }
+                        }
+                    });
+                }
+                
+                // Run on load
+                window.addEventListener('load', disableWebflowScrollInteractions);
+                
+                // Optimized: Run less frequently (every 5 seconds instead of 200ms)
+                // Use MutationObserver for more efficient monitoring
+                var webflowInteractionObserver = new MutationObserver(function(mutations) {
+                    var needsCleanup = false;
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && 
+                            (mutation.attributeName === 'class' || mutation.attributeName === 'data-w-id')) {
+                            needsCleanup = true;
+                        }
+                    });
+                    if (needsCleanup) {
+                        disableWebflowScrollInteractions();
+                    }
+                });
+                
+                // Observe body and html for class changes
+                webflowInteractionObserver.observe(body, { 
+                    attributes: true, 
+                    attributeFilter: ['class'] 
+                });
+                webflowInteractionObserver.observe(html, { 
+                    attributes: true, 
+                    attributeFilter: ['class'] 
+                });
+                
+                // Fallback interval only for critical cases (much less frequent)
+                var webflowCheckInterval = setInterval(function() {
+                    if (body.classList.contains('w-mod-ix') || html.classList.contains('w-mod-ix')) {
+                        disableWebflowScrollInteractions();
+                    }
+                }, 5000);
+                
+                // Clean up interval when page unloads
+                window.addEventListener('beforeunload', function() {
+                    clearInterval(webflowCheckInterval);
+                });
+                
+                // Watch for background color changes on body/html
+                var bgObserver = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && 
+                            (mutation.attributeName === 'style' || mutation.attributeName === 'class')) {
+                            // Check if background color was changed
+                            var bodyBg = window.getComputedStyle(body).backgroundColor;
+                            var htmlBg = window.getComputedStyle(html).backgroundColor;
+                            
+                            // If background is not white, force it back
+                            if (bodyBg !== 'rgb(255, 255, 255)' && bodyBg !== 'white') {
+                                preventPageColorChange();
+                            }
+                            if (htmlBg !== 'rgb(255, 255, 255)' && htmlBg !== 'white') {
+                                preventPageColorChange();
+                            }
+                        }
+                    });
+                });
+                
+                bgObserver.observe(body, { attributes: true, attributeFilter: ['style', 'class'] });
+                bgObserver.observe(html, { attributes: true, attributeFilter: ['style', 'class'] });
+            }
+            
+            // Initialize when nav is available (optimized with exponential backoff)
+            if (!nav) {
+                var checkAttempts = 0;
+                var maxAttempts = 20; // Max 20 attempts (about 2 seconds total)
+                
+                function checkNav() {
+                    nav = document.querySelector('.navbar-absolute');
+                    if (nav) {
+                        init();
+                    } else if (checkAttempts < maxAttempts) {
+                        checkAttempts++;
+                        // Exponential backoff: 50ms, 100ms, 150ms, etc.
+                        setTimeout(checkNav, 50 + (checkAttempts * 50));
+                    }
+                }
+                checkNav();
+            } else {
+                // Nav already exists, initialize immediately
+                init();
+            }
+            
+            // Also initialize on DOM ready and load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (!nav) nav = document.querySelector('.navbar-absolute');
+                    if (nav) init();
+                });
+            }
+            window.addEventListener('load', function() {
+                if (!nav) nav = document.querySelector('.navbar-absolute');
+                if (nav) init();
+            });
+            
+            // Optimized standalone scroll handler - throttled for performance
+            var scrollThrottleTimer = null;
+            var lastScrollTop = 0;
+            
+            function applyScrollEffect() {
+                var navElement = document.querySelector('.navbar-absolute');
+                if (!navElement) {
+                    return;
+                }
+                
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                
+                // Only update if scroll position changed significantly (more than 10px)
+                if (Math.abs(scrollTop - lastScrollTop) < 10) {
+                    return;
+                }
+                
+                lastScrollTop = scrollTop;
+                
+                // Use requestAnimationFrame for smooth updates
+                requestAnimationFrame(function() {
+                    if (scrollTop > 50) {
+                        navElement.classList.add('scrolled');
+                    } else {
+                        navElement.classList.remove('scrolled');
+                    }
+                });
+            }
+            
+            // Single optimized scroll listener with throttling
+            window.addEventListener('scroll', function() {
+                if (scrollThrottleTimer) {
+                    return;
+                }
+                scrollThrottleTimer = requestAnimationFrame(function() {
+                    applyScrollEffect();
+                    scrollThrottleTimer = null;
+                });
+            }, { passive: true });
+            
+            // Check on initial load (only once)
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    setTimeout(applyScrollEffect, 100);
+                });
+            } else {
+                setTimeout(applyScrollEffect, 100);
+            }
+        })();
+    </script>
 </head>
 <body>
+    <!-- Top Navigation Bar - Separated Section -->
+    <section class="nav-section">
+    <div data-animation="over-left" class="navbar-absolute w-nav" data-easing2="ease" data-easing="ease" data-collapse="medium" data-w-id="310be704-be0c-862c-40a7-a2176037624e" role="banner" data-no-scroll="1" data-duration="400" data-doc-height="1">
+        <div class="base-container w-container">
+            <div class="nav-menu-wrapper"><a href="index.html" aria-current="page" class="brand w-nav-brand w--current"><img src="./cdn.prod.website-files.com/67ee63cb3895632eb840c962/logo.png" loading="lazy" alt="Logo" height="90" class="logo"/></a>
+                <nav
+                    role="navigation" class="nav-menu w-nav-menu">
+                 
+            <div class="menu-wrap">
+                <a data-w-id="ba67b287-f196-4627-29a8-f080f7e8b145" href="index.html" class="nav-link w-inline-block">
+                    <div class="clip">
+                        <div class="button-text-wrap">
+                            <p class="nav-item-title">Home</p>
+                        </div>
+                        <div class="button-text-wrap bottom-wrap">
+                            <p class="nav-item-title line">Home</p>
+                        </div>
+                    </div>
+                </a>
+            
+                <a data-w-id="a8cb650f-e8fd-ea12-ff85-ae122dc2f9b8" href="index.html#About-Section" class="nav-link w-inline-block">
+                    <div class="clip">
+                        <div class="button-text-wrap">
+                            <p class="nav-item-title">About Us</p>
+                        </div>
+                        <div class="button-text-wrap bottom-wrap">
+                            <p class="nav-item-title line">About Us</p>
+                        </div>
+                    </div>
+                </a>
+                <a data-w-id="impact-link" href="index.html#Impact-Section" class="nav-link w-inline-block">
+                    <div class="clip">
+                        <div class="button-text-wrap">
+                            <p class="nav-item-title">Impact</p>
+                        </div>
+                        <div class="button-text-wrap bottom-wrap">
+                            <p class="nav-item-title line">Impact</p>
+                        </div>
+                    </div>
+                </a>
+                <a data-w-id="problem-link" href="index.html#Problem-Section" class="nav-link w-inline-block">
+                    <div class="clip">
+                        <div class="button-text-wrap">
+                            <p class="nav-item-title">The Problem</p>
+                        </div>
+                        <div class="button-text-wrap bottom-wrap">
+                            <p class="nav-item-title line">The Problem</p>
+                        </div>
+                    </div>
+                </a>
+                <div data-hover="true" data-delay="0" data-w-id="solutions-dropdown" class="nav-dropdown w-dropdown">
+                    <div data-w-id="solutions-dropdown-toggle" class="nav-dropdown-toggle w-dropdown-toggle">
+                        <div class="clip nav">
+                            <div class="button-text-wrap nav">
+                                <p class="nav-item-title">Solutions</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" class="nav-arrow" /></div>
+                            <div class="button-text-wrap bottom-wrap">
+                                <p class="nav-item-title">Solutions</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" /></div>
+                        </div>
+                    </div>
+                    <nav class="nav-dropdown-list w-dropdown-list">
+                        <div class="nav-dropdown-link-wrapper">
+                            <a href="index.html#Services-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Our Innovation</a>
+                            <a href="index.html#How-It-Works-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>How It Works</a>
+                            <a href="index.html#Product-Suite-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Product Suite</a>
+                            <a href="index.html#Financing-Ecosystem-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Financing Ecosystem</a>
+                        </div>
+                    </nav>
+                </div>
+                <a data-w-id="contact-link" href="signup.html" class="nav-link w-inline-block">
+                    <div class="clip">
+                        <div class="button-text-wrap">
+                            <p class="nav-item-title">Contact Us</p>
+                        </div>
+                        <div class="button-text-wrap bottom-wrap">
+                            <p class="nav-item-title line">Contact Us</p>
+                        </div>
+                    </div>
+                </a>
+                <div data-hover="true" data-delay="0" data-w-id="759a51eb-eddc-7cf1-e791-b0db9ba66b7d" class="nav-dropdown w-dropdown">
+                    <!-- <div data-w-id="759a51eb-eddc-7cf1-e791-b0db9ba66b7e" class="nav-dropdown-toggle w-dropdown-toggle">
+                        <div class="clip nav">
+                            <div class="button-text-wrap nav">
+                                <p class="nav-item-title">All Pages</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" class="nav-arrow" /></div>
+                            <div class="button-text-wrap bottom-wrap">
+                                <p class="nav-item-title">All Pages</p><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee998a353426309c7bba40_Frame%20(47).svg" loading="lazy" alt="icon" /></div>
+                        </div>
+                    </div> -->
+                    <nav class="nav-dropdown-list megamenu w-dropdown-list">
+                        <div class="nav-dropdown-column">
+                            <div class="nav-dropdown-link-wrapper"><a href="index.html" aria-current="page" class="nav-dropdown-link w-dropdown-link w--current"><span class="nav-dropdown-link-line"> </span>Home 1</a><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Home 2</a>
+                                <a
+                                    href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Home 3</a><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>About Us</a><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Our Team</a>
+                                    <a
+                                        href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Pricing</a><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Services 1</a></div>
+                        </div>
+                        <div class="nav-dropdown-column">
+                            <div class="nav-dropdown-link-wrapper"><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Services 2</a><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Services 3</a>
+                                <div
+                                    class="nav-collection-list-wrapper w-dyn-list">
+                                    <div role="list" class="w-dyn-items">
+                                        <div role="listitem" class="nav-collection-item w-dyn-item"><a href="index.html" class="nav-dropdown-link collection-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Services Details</a></div>
+                                    </div>
+                            </div><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Gallery</a><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Careers</a>
+                            <div
+                                class="nav-collection-list-wrapper w-dyn-list">
+                                <div role="list" class="w-dyn-items">
+                                    <div role="listitem" class="nav-collection-item w-dyn-item"><a href="index.html" class="nav-dropdown-link collection-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Career Details</a></div>
+                                </div>
+                        </div><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Testimonials</a></div>
+            </div>
+            <!-- <div class="nav-dropdown-column">
+                <div class="nav-dropdown-link-wrapper"><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>FAQ</a><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Blog 1</a><a href="index.html"
+                        class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Blog 2</a><a href="index.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Blog 3</a>
+                    <div class="nav-collection-list-wrapper w-dyn-list">
+                        <div role="list" class="w-dyn-items">
+                            <div role="listitem" class="nav-collection-item w-dyn-item"><a href="index.html" class="nav-dropdown-link collection-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Blog Category</a></div>
+                        </div>
+                    </div>
+                    <div class="nav-collection-list-wrapper w-dyn-list">
+                        <div role="list" class="w-dyn-items">
+                            <div role="listitem" class="nav-collection-item w-dyn-item"><a href="index.html" class="nav-dropdown-link collection-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Blog Post Page</a></div>
+                        </div>
+                    </div><a href="signup.html" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Contact Us</a></div>
+            </div> -->
+            </nav>
+        </div>
+        <div class="header-button-wrapper tablet">
+            <a data-w-id="deb311af-814a-8da5-a9af-b069e736aa64" href="signup.html" class="primary-button w-inline-block">
+                <div class="clip">
+                    <div class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
+                        <div>Join AgriGuard AI</div>
+                    </div>
+                    <div class="button-text-wrap bottom-wrap">
+                        <div>Join AgriGuard AI</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    </nav>
+    <div class="header-button-wrapper">
+        <a data-w-id="a8e8d4f5-e9d3-1973-c0d6-e00e6c804922" href="signup.html" class="secondary-button w-inline-block">
+            <div class="clip">
+                <div class="button-text-wrap"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee959464ed700c7614bdba_Rectangle%201%20(1).svg" loading="lazy" alt="" />
+                    <div>Join AgriGuard AI</div>
+                </div>
+                <div class="button-text-wrap bottom-wrap">
+                    <div>Join AgriGuard AI</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="menu-button w-nav-button"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67ee63cb3895632eb840cc1b_menu-btn.svg" loading="lazy" alt="icon" height="16" class="image-burger white" /></div>
+    </div>
+    </section>
+    <!-- End Top Navigation Bar -->
 
+<div class="dashboard-wrapper">
 <div class="app-container">
     <aside class="sidebar">
         <div class="logo">
-            <i class="fa-solid fa-leaf"></i>
-            <span>SmartFarm AI</span>
+            <img src="./cdn.prod.website-files.com/67ee63cb3895632eb840c962/logo.png" alt="AgriGuard AI AI" style="height: 160px; width: auto;">
         </div>
 
         <p class="menu-label">Management</p>
@@ -1018,7 +3106,7 @@
 
         <p class="menu-label">System</p>
         <ul>
-            <li class="settings-item" id="settings-tab">
+            <li class="settings-item demo-request" id="settings-tab" data-feature="Settings">
                 <i class="fa-solid fa-gear"></i>
                 <span>Settings</span>
             </li>
@@ -1030,7 +3118,7 @@
     <main class="main-content" id="dashboard">
         <header>
             <div class="farm-info">
-                <h1>SmartFarm Analytics Dashboard</h1>
+                <h1>AgriGuard AI Dashboard</h1>
                 <p class="farm-meta">
                     <i class="fa-solid fa-location-dot"></i> <strong>Location:</strong> Nakuru County, Sector 4 &nbsp; | &nbsp;
                     <i class="fa-solid fa-map"></i> <strong>Smart Manager:</strong> 120.5 Acres Recorded
@@ -1187,11 +3275,6 @@
             </div>
 
             <!-- Row 3: Wider Charts -->
-            <div class="card wide-chart">
-                <div class="card-title">Financial Performance (Revenue vs Expenses)</div>
-                <div class="chart-container"><canvas id="financialFlowChart"></canvas></div>
-            </div>
-
             <div class="card chart-card">
                 <div class="card-title">
                     AI Pest Risk Profile
@@ -1216,6 +3299,12 @@
                 <div class="chart-container"><canvas id="laborChart"></canvas></div>
             </div>
 
+            <!-- Row 5: Financial Performance and Carbon Footprint -->
+            <div class="card chart-card">
+                <div class="card-title">Financial Performance (Revenue vs Expenses)</div>
+                <div class="chart-container"><canvas id="financialFlowChart"></canvas></div>
+            </div>
+
             <div class="card chart-card">
                 <div class="card-title">Carbon Footprint Tracking</div>
                 <div class="chart-container"><canvas id="carbonChart"></canvas></div>
@@ -1229,7 +3318,7 @@
             <div class="farm-info">
                 <h1>Dashboard Settings</h1>
                 <p class="farm-meta">
-                    <i class="fa-solid fa-sliders"></i> Customize your SmartFarm AI dashboard experience
+                    <i class="fa-solid fa-sliders"></i> Customize your AgriGuard AI AI dashboard experience
                 </p>
             </div>
             <div class="user-profile">
@@ -1389,6 +3478,64 @@
         </div>
     </main>
 </div>
+</div>
+<!-- End Dashboard Wrapper -->
+
+<!-- Sign Up Button -->
+<div class="signup-button-container">
+    <a href="signup.html" class="signup-button">Sign Up</a>
+</div>
+
+    <div class="footer">
+        <div class="base-container w-container">
+            <div class="footer-wrapper">
+                <div class="footer-brand-wrapper">
+                    <div class="footer-logo-wrapper"><a href="index.html" aria-current="page" class="footer-brand w-nav-brand w--current" style="height: auto !important;"><img src="./cdn.prod.website-files.com/67ee63cb3895632eb840c962/logo.png" loading="lazy" alt="Logo" height="80" class="footer-logo" style="height: 120px !important; width: auto;"/></a>
+                        <div
+                            class="footer-text">Low-cost, solar-powered AI for crop monitoring and farmer financing.</div>
+                </div>
+                <div class="social-wrapper"><a href="https://www.instagram.com/" target="_blank" class="social-link-block w-inline-block"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3ab344ecca7dc1cd63a7f_Frame%20(51).svg" loading="lazy" alt="icon" class="footer-social-image"/><div>Instagram</div></a>
+                    <a
+                        href="https://www.youtube.com" target="_blank" class="social-link-block w-inline-block"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3ab34a3858a3217cf3377_Frame%20(52).svg" loading="lazy" alt="icon" class="footer-social-image" />
+                        <div>YouTube</div>
+                        </a><a href="https://www.facebook.com" target="_blank" class="social-link-block w-inline-block"><img src="https://cdn.prod.website-files.com/67ee63cb3895632eb840c962/67f3ab342807ac6c42f3be59_Frame%20(53).svg" loading="lazy" alt="icon" class="footer-social-image"/><div>Facebook</div></a></div>
+            </div>
+            <div class="footer-links-wrap">
+                <div class="footer-links-wrapper">
+                    <h6>Navigation</h6>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="index.html#About-Section" class="footer-link">About Us</a>
+                    <a href="index.html#Impact-Section" class="footer-link">Impact</a>
+                    <a href="index.html#Services-Section" class="footer-link">Our Innovation</a>
+                    <a href="index.html#Problem-Section" class="footer-link">The Problem</a>
+                    <a href="index.html#How-It-Works-Section" class="footer-link">How It Works</a>
+                    <a href="index.html#Product-Suite-Section" class="footer-link">Product Suite</a>
+                    <a href="index.html#Financing-Ecosystem-Section" class="footer-link">Financing Ecosystem</a>
+                    <a href="signup.html" class="footer-link">Contact Us</a>
+                </div>
+                <div class="footer-links-wrapper">
+                    <h6>Company</h6><a href="index.html#About-Section" class="footer-link">About us</a><a href="index.html" class="footer-link">Our Team</a><a href="index.html" class="footer-link">Pricing</a><a href="index.html" class="footer-link">Testimonials</a></div>
+                <div
+                    class="footer-links-wrapper">
+                    <h6>Services</h6>
+                    <div class="w-dyn-list">
+                        <div role="list" class="footer-collection-list w-dyn-items">
+                            <div role="listitem" class="w-dyn-item"><a href="index.html#Services-Section" class="footer-link">Our Innovation</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="index.html#Product-Suite-Section" class="footer-link">Product Suite</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="index.html#Financing-Ecosystem-Section" class="footer-link">Financing Ecosystem</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="index.html#How-It-Works-Section" class="footer-link">How It Works</a></div>
+                            <div role="listitem" class="w-dyn-item"><a href="signup.html" class="footer-link">Contact Us</a></div>
+                        </div>
+                    </div>
+            </div>
+            <!-- <div class="footer-links-wrapper">
+                <h6>Information</h6><a href="index.html" class="footer-link">Blog</a><a href="index.html" class="footer-link">FAQ</a><a href="index.html" class="footer-link">Gallery</a></div> -->
+        </div>
+    </div>
+    <div class="footer-bottom-wrapper">
+        <div class="footer-copyright">©AgriGuard AI. All Rights Reserved. <a href="index.html" class="footer-licensing-link">Licensing</a></div>
+
+</div>
 
 <!-- Demo Request Modal -->
 <div id="demoModal" class="modal-overlay">
@@ -1429,12 +3576,12 @@
                 </div>
             </div>
 
-            <p>Join thousands of farmers who have transformed their operations with SmartFarm AI. Schedule your demo today!</p>
+            <p>Join thousands of farmers who have transformed their operations with AgriGuard AI AI. Schedule your demo today!</p>
         </div>
 
         <div class="demo-modal-buttons">
             <button class="demo-btn-primary" onclick="redirectToSignup()">
-                <i class="fa-solid fa-user-plus"></i> Sign Up for Demo
+                <i class="fa-solid fa-user-plus"></i> Sign Up
             </button>
             <button class="demo-btn-secondary" onclick="closeDemoModal()">
                 Maybe Later
@@ -1454,7 +3601,8 @@
         "Farm Capital": "Learn about our tailored financing solutions designed specifically for modern farming needs with competitive rates and flexible repayment terms.",
         "Crowdfund": "See how our platform connects farmers with investors to fund expansion projects, technology upgrades, and sustainable farming initiatives.",
         "Micro-Insure": "Explore our affordable insurance products that protect your crops and livestock against climate risks, pests, and market fluctuations.",
-        "Input Credit": "Discover our input financing program that provides access to quality seeds, fertilizers, and equipment with deferred payment options."
+        "Input Credit": "Discover our input financing program that provides access to quality seeds, fertilizers, and equipment with deferred payment options.",
+        "Settings": "Access advanced dashboard customization options, data export features, API integrations, and system configuration settings to personalize your AgriGuard AI AI experience."
     };
 
     // NEW CHARTS IMPLEMENTATION
@@ -1488,11 +3636,16 @@
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
             plugins: {
                 legend: {
                     position: 'bottom',
-                    labels: { font: { family: 'Poppins, Roboto, sans-serif' } }
+                    labels: { 
+                        font: { family: 'Poppins, Roboto, sans-serif', size: 12 },
+                        boxWidth: 12,
+                        padding: 10
+                    }
                 },
                 datalabels: { display: false }
             },
@@ -1938,6 +4091,146 @@
         }
     });
 
+    // Optimized Chart Responsiveness Handler
+    let isResizing = false;
+    let lastWindowWidth = window.innerWidth;
+    let chartResizeTimer = null;
+    
+    function handleChartResize() {
+        // Prevent multiple simultaneous resize operations
+        if (isResizing) {
+            return;
+        }
+        
+        const currentWidth = window.innerWidth;
+        
+        // Only resize if width actually changed significantly (more than 50px)
+        if (Math.abs(currentWidth - lastWindowWidth) < 50 && chartResizeTimer !== null) {
+            return;
+        }
+        
+        isResizing = true;
+        lastWindowWidth = currentWidth;
+        
+        // Use requestAnimationFrame for smooth performance
+        requestAnimationFrame(function() {
+            try {
+                const isMobile = currentWidth <= 767;
+                const isTablet = currentWidth <= 991 && currentWidth > 767;
+                
+                // Get all chart instances
+                const charts = [
+                    weatherChart, nutrientChart, waterUsageChart, solarChart,
+                    yieldChart, equipmentChart, laborChart, financialFlowChart,
+                    carbonChart, riskChart, healthIndexChart
+                ].filter(chart => chart !== undefined && chart !== null);
+
+                charts.forEach(chart => {
+                    if (chart && chart.canvas && chart.canvas.parentElement) {
+                        // Update maintainAspectRatio for mobile
+                        if (isMobile) {
+                            chart.options.maintainAspectRatio = false;
+                            // Adjust font sizes for mobile
+                            if (chart.options.plugins && chart.options.plugins.legend) {
+                                chart.options.plugins.legend.labels.font = chart.options.plugins.legend.labels.font || {};
+                                chart.options.plugins.legend.labels.font.size = 10;
+                            }
+                        } else if (isTablet) {
+                            chart.options.maintainAspectRatio = false;
+                            chart.options.maintainAspectRatio = 1.5;
+                        } else {
+                            chart.options.maintainAspectRatio = false;
+                        }
+                        
+                        // Resize chart only if canvas is visible
+                        if (chart.canvas.offsetParent !== null) {
+                            chart.resize();
+                        }
+                    }
+                });
+            } catch (error) {
+                console.warn('Chart resize error:', error);
+            } finally {
+                isResizing = false;
+            }
+        });
+    }
+
+    // Optimized unified resize handler with proper debouncing
+    let unifiedResizeTimer = null;
+    let isHandlingResize = false;
+    
+    function handleUnifiedResize() {
+        if (isHandlingResize) {
+            return;
+        }
+        
+        // Clear existing timer
+        if (unifiedResizeTimer) {
+            clearTimeout(unifiedResizeTimer);
+        }
+        
+        // Debounce resize operations
+        unifiedResizeTimer = setTimeout(function() {
+            isHandlingResize = true;
+            
+            // Use requestAnimationFrame for smooth performance
+            requestAnimationFrame(function() {
+                try {
+                    // Handle chart resize
+                    handleChartResize();
+                    
+                    // Handle mobile menu resize (only if switching to/from mobile)
+                    if (typeof fixMobileMenu === 'function') {
+                        const wasMobile = window.innerWidth <= 991;
+                        // Only reinitialize if actually needed
+                        if (wasMobile) {
+                            setTimeout(fixMobileMenu, 100);
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Resize handler error:', error);
+                } finally {
+                    isHandlingResize = false;
+                }
+            });
+        }, 300); // Increased debounce time for better performance
+    }
+
+    // Single optimized resize listener
+    window.addEventListener('resize', handleUnifiedResize, { passive: true });
+
+    // Handle orientation change on mobile (with longer delay for stability)
+    let orientationTimer = null;
+    window.addEventListener('orientationchange', function() {
+        if (orientationTimer) {
+            clearTimeout(orientationTimer);
+        }
+        orientationTimer = setTimeout(function() {
+            // Wait for orientation to complete
+            setTimeout(function() {
+                handleChartResize();
+            }, 300);
+        }, 100);
+    }, { passive: true });
+
+    // Initial call after charts are created (only once)
+    let initialChartResizeDone = false;
+    function initializeCharts() {
+        if (!initialChartResizeDone) {
+            initialChartResizeDone = true;
+            setTimeout(function() {
+                handleChartResize();
+            }, 500);
+        }
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeCharts);
+    } else {
+        initializeCharts();
+    }
+
     // MAP INTERACTION FUNCTIONS
     function selectZone(zoneName) {
         Toastify({
@@ -1993,7 +4286,9 @@
 
         // Show modal with animation
         modal.style.display = 'flex';
+        // Only block scroll when modal is actually visible
         document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
 
         // Track the selected feature in a data attribute for signup
         modal.dataset.selectedFeature = feature;
@@ -2002,7 +4297,12 @@
     function closeDemoModal() {
         const modal = document.getElementById('demoModal');
         modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        // Restore scrolling
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        // Force enable scrolling with CSS override
+        document.body.style.setProperty('overflow-y', 'auto', 'important');
+        document.documentElement.style.setProperty('overflow-y', 'auto', 'important');
     }
 
     function redirectToSignup() {
@@ -2213,8 +4513,8 @@
             });
         });
 
-        // Settings tab
-        document.getElementById('settings-tab').addEventListener('click', showSettings);
+        // Settings tab - now handled by demo-request class to show popup
+        // document.getElementById('settings-tab').addEventListener('click', showSettings);
 
         // Dashboard tab
         document.getElementById('dashboard-tab').addEventListener('click', showDashboard);
@@ -2290,6 +4590,185 @@
         font-weight: 500;
     }
 </style>
+
+<!-- Navigation Scripts -->
+<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67ee63cb3895632eb840c962" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+<!-- Minimal Mobile Menu Helper -->
+<script type="text/javascript">
+// Mobile menu helper
+(function() {
+    function fixMobileMenu() {
+        // Only on mobile
+        if (window.innerWidth > 991) return;
+        
+        var menuButton = document.querySelector('.w-nav-button') || document.querySelector('.menu-button');
+        var nav = document.querySelector('.w-nav');
+        var navMenu = document.querySelector('.w-nav-menu');
+        
+        if (!menuButton || !nav || !navMenu) {
+            console.log('Menu elements check:', {
+                button: !!menuButton,
+                nav: !!nav,
+                menu: !!navMenu
+            });
+            return;
+        }
+        
+        // Make sure button works
+        menuButton.style.pointerEvents = 'auto';
+        menuButton.style.cursor = 'pointer';
+        menuButton.style.display = 'flex';
+        menuButton.style.visibility = 'visible';
+        menuButton.style.opacity = '1';
+        
+        // Ensure image doesn't block clicks
+        var img = menuButton.querySelector('img');
+        if (img) {
+            img.style.pointerEvents = 'none';
+        }
+        
+        // Remove any conflicting click handlers
+        menuButton.onclick = null;
+        
+        // Add a simple safety net
+        menuButton.addEventListener('click', function(e) {
+            console.log('Menu button clicked');
+            
+            // Let menu handle it, but ensure menu opens/closes
+            setTimeout(function() {
+                var isOpen = nav.classList.contains('w--open');
+                
+                if (isOpen && navMenu) {
+                    navMenu.style.transform = 'translateX(0)';
+                    navMenu.style.visibility = 'visible';
+                    navMenu.style.opacity = '1';
+                    navMenu.style.pointerEvents = 'auto';
+                    
+                    // Show overlay
+                    var overlay = document.querySelector('.w-nav-overlay');
+                    if (overlay) {
+                        overlay.style.display = 'block';
+                    }
+                    
+                    // Prevent body scroll
+                    var scrollY = window.scrollY;
+                    document.body.style.position = 'fixed';
+                    document.body.style.top = '-' + scrollY + 'px';
+                    document.body.style.width = '100%';
+                    document.body.style.overflow = 'hidden';
+                    document.body.classList.add('w-nav-open');
+                } else if (navMenu) {
+                    navMenu.style.transform = 'translateX(-100%)';
+                    navMenu.style.visibility = 'hidden';
+                    navMenu.style.opacity = '0';
+                    navMenu.style.pointerEvents = 'none';
+                    
+                    // Hide overlay
+                    var overlay = document.querySelector('.w-nav-overlay');
+                    if (overlay) {
+                        overlay.style.display = 'none';
+                    }
+                    
+                    // Restore body scroll
+                    var scrollY = document.body.style.top;
+                    document.body.style.position = '';
+                    document.body.style.top = '';
+                    document.body.style.width = '';
+                    document.body.style.overflow = '';
+                    document.body.classList.remove('w-nav-open');
+                    if (scrollY) {
+                        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+                    }
+                }
+            }, 50);
+        }, false);
+        
+        // Close menu when clicking overlay
+        var overlay = document.querySelector('.w-nav-overlay');
+        if (overlay) {
+            overlay.addEventListener('click', function() {
+                if (menuButton) {
+                    menuButton.click();
+                }
+            });
+        }
+        
+        // Close menu when clicking menu links
+        var menuLinks = navMenu.querySelectorAll('a');
+        menuLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                setTimeout(function() {
+                    if (menuButton && nav.classList.contains('w--open')) {
+                        menuButton.click();
+                    }
+                }, 100);
+            });
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && nav.classList.contains('w--open')) {
+                if (menuButton) {
+                    menuButton.click();
+                }
+            }
+        });
+        
+        console.log('✅ Mobile menu helper initialized');
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(fixMobileMenu, 100);
+        });
+    } else {
+        setTimeout(fixMobileMenu, 100);
+    }
+    
+    // Also run after scripts load
+    window.addEventListener('load', function() {
+        setTimeout(fixMobileMenu, 500);
+    });
+    
+    // Re-initialize on resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth <= 991) {
+            setTimeout(fixMobileMenu, 100);
+        }
+    });
+    
+    // Debug function - run in console to check menu status
+    window.debugMenu = function() {
+        console.log('Menu Debug Info:', {
+            button: document.querySelector('.w-nav-button') || document.querySelector('.menu-button'),
+            nav: document.querySelector('.w-nav'),
+            menu: document.querySelector('.w-nav-menu'),
+            isOpen: document.querySelector('.w-nav') ? document.querySelector('.w-nav').classList.contains('w--open') : false,
+            buttonDisplay: document.querySelector('.w-nav-button') ? window.getComputedStyle(document.querySelector('.w-nav-button')).display : 'N/A',
+            buttonVisibility: document.querySelector('.w-nav-button') ? window.getComputedStyle(document.querySelector('.w-nav-button')).visibility : 'N/A',
+            buttonPointerEvents: document.querySelector('.w-nav-button') ? window.getComputedStyle(document.querySelector('.w-nav-button')).pointerEvents : 'N/A'
+        });
+    };
+})();
+
+// Remove badge if it appears
+(function() {
+    function removeWebflowBadge() {
+        const badge = document.querySelector('.w-webflow-badge');
+        if (badge) {
+            badge.remove();
+        }
+    }
+    // Remove immediately and also watch for dynamically added badge
+    removeWebflowBadge();
+    setInterval(removeWebflowBadge, 100);
+    // Also use MutationObserver to catch it when added
+    const observer = new MutationObserver(removeWebflowBadge);
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
 
 </body>
 </html>

@@ -1,11 +1,12 @@
 html {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    font-family: sans-serif;
+    font-family: 'Poppins', 'Roboto', sans-serif;
 }
 
 body {
     margin: 0;
+    font-family: 'Poppins', 'Roboto', sans-serif;
 }
 
 article,
@@ -261,7 +262,7 @@ body {
     background-color: #fff;
     min-height: 100%;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', 'Roboto', sans-serif;
     font-size: 14px;
     line-height: 20px;
 }
@@ -2213,7 +2214,7 @@ textarea.w-select {
 
 body {
     color: var(--black);
-    font-family: Instrument Sans, sans-serif;
+    font-family: 'Poppins', 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.2em;
 }

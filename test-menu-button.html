@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Button Test - Dashboard</title>
+    <style>
+        /* Hide Webflow Badge */
+        .w-webflow-badge {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #27AE60;
+            margin-bottom: 20px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border-left: 4px solid #27AE60;
+        }
+        
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .test-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+        
+        .test-item label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .test-item .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .test-button {
+            background: #27AE60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        
+        .test-button:hover {
+            background: #219653;
+        }
+        
+        iframe {
+            width: 100%;
+            border: 2px solid #27AE60;
+            border-radius: 6px;
+            margin-top: 10px;
+            height: 600px;
+        }
+        
+        .log-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 3px 0;
+        }
+        
+        .log-entry.info {
+            color: #4ec9b0;
+        }
+        
+        .log-entry.success {
+            color: #4ec9b0;
+        }
+        
+        .log-entry.error {
+            color: #f48771;
+        }
+        
+        .log-entry.warn {
+            color: #dcdcaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 Menu Button Click Test</h1>
+        
+        <div class="test-section">
+            <h2>1. Element Detection</h2>
+            <div class="test-item">
+                <label>Menu Button Found:</label>
+                <span class="status" id="button-found">Checking...</span>
+            </div>
+            <div class="test-item">
+                <label>Navigation Element Found:</label>
+                <span class="status" id="nav-found">Checking...</span>
+            </div>
+            <div class="test-item">
+                <label>Menu Element Found:</label>
+                <span class="status" id="menu-found">Checking...</span>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>2. Button Properties</h2>
+            <div class="test-item">
+                <label>Button Display:</label>
+                <span class="status" id="button-display">Checking...</span>
+            </div>
+            <div class="test-item">
+                <label>Button Pointer Events:</label>
+                <span class="status" id="button-pointer">Checking...</span>
+            </div>
+            <div class="test-item">
+                <label>Button Z-Index:</label>
+                <span class="status" id="button-zindex">Checking...</span>
+            </div>
+            <div class="test-item">
+                <label>Image Pointer Events:</label>
+                <span class="status" id="image-pointer">Checking...</span>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>3. Event Listeners</h2>
+            <div class="test-item">
+                <label>Click Handler Attached:</label>
+                <span class="status" id="click-handler">Checking...</span>
+            </div>
+            <div class="test-item">
+                <label>Touch Handler Attached:</label>
+                <span class="status" id="touch-handler">Checking...</span>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>4. Interactive Test</h2>
+            <button class="test-button" onclick="testMenuButton()">Test Menu Button Click</button>
+            <button class="test-button" onclick="simulateClick()">Simulate Click Programmatically</button>
+            <button class="test-button" onclick="checkMenuState()">Check Menu State</button>
+            <button class="test-button" onclick="clearLogs()">Clear Logs</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>5. Live Dashboard Test</h2>
+            <p>Open the dashboard in mobile view and test the menu button:</p>
+            <iframe id="dashboard-iframe" src="dashboard.html"></iframe>
+        </div>
+        
+        <div class="test-section">
+            <h2>6. Test Logs</h2>
+            <div class="log-container" id="test-logs">
+                <div class="log-entry info">Test log initialized...</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function log(message, type = 'info') {
+            const logs = document.getElementById('test-logs');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry ' + type;
+            entry.textContent = new Date().toLocaleTimeString() + ' - ' + message;
+            logs.appendChild(entry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+        
+        function clearLogs() {
+            document.getElementById('test-logs').innerHTML = '<div class="log-entry info">Logs cleared...</div>';
+        }
+        
+        function checkElements() {
+            const iframe = document.getElementById('dashboard-iframe');
+            try {
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                const menuButton = doc.querySelector('.w-nav-button') || doc.querySelector('.menu-button');
+                const nav = doc.querySelector('.w-nav');
+                const navMenu = doc.querySelector('.w-nav-menu');
+                
+                // Update status
+                document.getElementById('button-found').textContent = menuButton ? 'PASS' : 'FAIL';
+                document.getElementById('button-found').className = 'status ' + (menuButton ? 'pass' : 'fail');
+                
+                document.getElementById('nav-found').textContent = nav ? 'PASS' : 'FAIL';
+                document.getElementById('nav-found').className = 'status ' + (nav ? 'pass' : 'fail');
+                
+                document.getElementById('menu-found').textContent = navMenu ? 'PASS' : 'FAIL';
+                document.getElementById('menu-found').className = 'status ' + (navMenu ? 'pass' : 'fail');
+                
+                if (menuButton) {
+                    const style = window.getComputedStyle(menuButton);
+                    document.getElementById('button-display').textContent = style.display === 'none' ? 'HIDDEN' : 'VISIBLE';
+                    document.getElementById('button-display').className = 'status ' + (style.display !== 'none' ? 'pass' : 'fail');
+                    
+                    document.getElementById('button-pointer').textContent = style.pointerEvents;
+                    document.getElementById('button-pointer').className = 'status ' + (style.pointerEvents === 'auto' ? 'pass' : 'fail');
+                    
+                    document.getElementById('button-zindex').textContent = style.zIndex;
+                    document.getElementById('button-zindex').className = 'status ' + (parseInt(style.zIndex) >= 10000 ? 'pass' : 'fail');
+                    
+                    const img = menuButton.querySelector('img');
+                    if (img) {
+                        const imgStyle = window.getComputedStyle(img);
+                        document.getElementById('image-pointer').textContent = imgStyle.pointerEvents;
+                        document.getElementById('image-pointer').className = 'status ' + (imgStyle.pointerEvents === 'none' ? 'pass' : 'fail');
+                    }
+                }
+                
+                log('Elements checked', 'success');
+            } catch (e) {
+                log('Error checking elements: ' + e.message, 'error');
+            }
+        }
+        
+        function testMenuButton() {
+            const iframe = document.getElementById('dashboard-iframe');
+            try {
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                const menuButton = doc.querySelector('.w-nav-button') || doc.querySelector('.menu-button');
+                
+                if (!menuButton) {
+                    log('Menu button not found!', 'error');
+                    return;
+                }
+                
+                log('Testing menu button click...', 'info');
+                
+                // Create and dispatch click event
+                const clickEvent = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: iframe.contentWindow
+                });
+                
+                menuButton.dispatchEvent(clickEvent);
+                
+                setTimeout(() => {
+                    const nav = doc.querySelector('.w-nav');
+                    const isOpen = nav && (nav.classList.contains('w--open') || nav.hasAttribute('data-nav-menu-open'));
+                    log('Menu state after click: ' + (isOpen ? 'OPEN' : 'CLOSED'), isOpen ? 'success' : 'info');
+                    checkMenuState();
+                }, 200);
+            } catch (e) {
+                log('Error testing button: ' + e.message, 'error');
+            }
+        }
+        
+        function simulateClick() {
+            const iframe = document.getElementById('dashboard-iframe');
+            try {
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                const menuButton = doc.querySelector('.w-nav-button') || doc.querySelector('.menu-button');
+                
+                if (!menuButton) {
+                    log('Menu button not found!', 'error');
+                    return;
+                }
+                
+                log('Simulating click programmatically...', 'info');
+                menuButton.click();
+                
+                setTimeout(() => {
+                    checkMenuState();
+                }, 200);
+            } catch (e) {
+                log('Error simulating click: ' + e.message, 'error');
+            }
+        }
+        
+        function checkMenuState() {
+            const iframe = document.getElementById('dashboard-iframe');
+            try {
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                const nav = doc.querySelector('.w-nav');
+                const navMenu = doc.querySelector('.w-nav-menu');
+                
+                if (!nav || !navMenu) {
+                    log('Navigation elements not found', 'error');
+                    return;
+                }
+                
+                const isOpen = nav.classList.contains('w--open') || 
+                              nav.hasAttribute('data-nav-menu-open') ||
+                              nav.getAttribute('data-w-state') === 'open';
+                
+                const menuStyle = window.getComputedStyle(navMenu);
+                const menuVisible = menuStyle.visibility === 'visible' && 
+                                   menuStyle.opacity !== '0' &&
+                                   menuStyle.transform !== 'translateX(-100%)';
+                
+                log('Menu State Check:', 'info');
+                log('  - w--open class: ' + nav.classList.contains('w--open'), isOpen ? 'success' : 'info');
+                log('  - data-nav-menu-open: ' + nav.hasAttribute('data-nav-menu-open'), isOpen ? 'success' : 'info');
+                log('  - data-w-state: ' + nav.getAttribute('data-w-state'), 'info');
+                log('  - Menu visible: ' + menuVisible, menuVisible ? 'success' : 'info');
+                log('  - Transform: ' + menuStyle.transform, 'info');
+                log('  - Visibility: ' + menuStyle.visibility, 'info');
+                log('  - Opacity: ' + menuStyle.opacity, 'info');
+            } catch (e) {
+                log('Error checking menu state: ' + e.message, 'error');
+            }
+        }
+        
+        // Check for event listeners
+        function checkEventListeners() {
+            const iframe = document.getElementById('dashboard-iframe');
+            try {
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                const menuButton = doc.querySelector('.w-nav-button') || doc.querySelector('.menu-button');
+                
+                if (!menuButton) {
+                    document.getElementById('click-handler').textContent = 'FAIL';
+                    document.getElementById('click-handler').className = 'status fail';
+                    return;
+                }
+                
+                // Check if button has onclick or event listeners
+                const hasOnclick = menuButton.onclick !== null;
+                const hasAttributes = menuButton.hasAttribute('onclick') || 
+                                     menuButton.hasAttribute('data-w-id');
+                
+                document.getElementById('click-handler').textContent = (hasOnclick || hasAttributes) ? 'PASS' : 'PENDING';
+                document.getElementById('click-handler').className = 'status ' + ((hasOnclick || hasAttributes) ? 'pass' : 'pending');
+                
+                log('Event listeners checked', 'success');
+            } catch (e) {
+                log('Error checking listeners: ' + e.message, 'error');
+            }
+        }
+        
+        // Initialize
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                checkElements();
+                checkEventListeners();
+                log('Test page initialized', 'success');
+            }, 2000);
+        });
+        
+        // Periodic checks
+        setInterval(() => {
+            checkElements();
+        }, 3000);
+        
+        // Remove Webflow badge if it appears
+        (function() {
+            function removeWebflowBadge() {
+                const badge = document.querySelector('.w-webflow-badge');
+                if (badge) {
+                    badge.remove();
+                }
+            }
+            removeWebflowBadge();
+            setInterval(removeWebflowBadge, 100);
+            const observer = new MutationObserver(removeWebflowBadge);
+            observer.observe(document.body, { childList: true, subtree: true });
+        })();
+    </script>
+</body>
+</html>
+
