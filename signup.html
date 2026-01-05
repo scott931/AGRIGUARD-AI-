@@ -166,15 +166,17 @@
 
 .container {
     display: flex;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 body {
     font-family: 'Poppins', 'Roboto', sans-serif;
     color: var(--text-dark);
     line-height: 1.6;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* Left Column */
@@ -185,7 +187,8 @@ body {
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
-    height: 100vh;
+    min-height: 100vh;
+    width: 100%;
 }
 
 .brand {
@@ -317,7 +320,8 @@ textarea {
     padding: 60px;
     color: white;
     overflow: hidden;
-    height: 100vh;
+    min-height: 100vh;
+    width: 100%;
 }
 
 .image-carousel {
@@ -391,33 +395,84 @@ cite {
     .form-section {
         padding: 40px 50px;
     }
+    
+    .content-wrapper {
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 900px) {
     .container {
         flex-direction: column;
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
+        position: relative;
     }
     
     .image-section {
-        height: 300px;
-        min-height: 300px;
-        padding: 40px 30px;
-        flex-shrink: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        min-height: 100vh;
+        padding: 0;
+        z-index: 1;
+    }
+    
+    .testimonial-overlay {
+        display: none;
     }
     
     .form-section {
+        position: relative;
+        z-index: 2;
         padding: 30px 20px;
-        height: calc(100vh - 300px);
-        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        overflow-y: visible;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+    }
+    
+    .brand {
+        margin-bottom: 30px;
     }
     
     h1 {
         font-size: 2rem;
+        margin-bottom: 20px;
     }
     
     .logo-img {
         height: 90px;
+        max-width: 100%;
+    }
+    
+    .content-wrapper {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-section {
+        padding: 25px 20px;
+        background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .image-section {
+        height: 100%;
+        min-height: 100vh;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    .logo-img {
+        height: 70px;
     }
 }
 
@@ -428,25 +483,117 @@ cite {
     }
     
     .image-section {
-        height: 250px;
-        min-height: 250px;
-        padding: 30px 20px;
+        height: 100%;
+        min-height: 100vh;
     }
     
     .form-section {
-        height: calc(100vh - 250px);
+        padding: 20px 15px;
+        min-height: 100vh;
+        background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .brand {
+        margin-bottom: 20px;
     }
     
     .logo-img {
-        height: 80px;
+        height: 60px;
     }
     
-    blockquote {
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .input-group {
+        margin-bottom: 18px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    textarea {
+        padding: 14px 15px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .btn-primary {
+        padding: 16px;
         font-size: 1rem;
+        margin-top: 15px;
     }
     
-    cite {
+    .checkbox-label {
         font-size: 0.85rem;
+    }
+    
+    label {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-section {
+        height: 100%;
+        min-height: 100vh;
+    }
+    
+    .form-section {
+        padding: 15px 12px;
+        min-height: 100vh;
+        background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .brand {
+        margin-bottom: 15px;
+    }
+    
+    .logo-img {
+        height: 50px;
+    }
+    
+    h1 {
+        font-size: 1.35rem;
+        margin-bottom: 12px;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+    }
+    
+    .checkbox-group {
+        gap: 10px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    textarea {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+@media (max-width: 360px) {
+    .form-section {
+        padding: 12px 10px;
+        background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .image-section {
+        height: 100%;
+        min-height: 100vh;
+    }
+    
+    h1 {
+        font-size: 1.2rem;
+    }
+    
+    .logo-img {
+        height: 45px;
     }
 }
 </style>
