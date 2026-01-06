@@ -1135,6 +1135,377 @@
                 page-break-after: always;
             }
         }
+
+        /* ============================================
+           PRICING SECTION STYLES
+           ============================================ */
+        .pricing-section {
+            position: relative;
+            padding: 100px 0;
+            background: #000000;
+            overflow: hidden;
+        }
+
+        .pricing-background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(3, 89, 37, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(3, 89, 37, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #000000 0%, #002c11 100%);
+            z-index: 0;
+        }
+
+        .pricing-section .base-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 80px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid rgba(3, 89, 37, 0.5);
+            border-radius: 30px;
+            background: rgba(3, 89, 37, 0.1);
+            color: #035925;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .pricing-tag-icon {
+            font-size: 16px;
+        }
+
+        .pricing-main-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .pricing-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing-cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            position: relative;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(3, 89, 37, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            border-color: rgba(3, 89, 37, 0.6);
+            box-shadow: 0 10px 40px rgba(3, 89, 37, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .pricing-card-featured {
+            border: 2px solid rgba(3, 89, 37, 0.6);
+            background: rgba(3, 89, 37, 0.1);
+            box-shadow: 0 0 30px rgba(3, 89, 37, 0.3);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #035925 0%, #00a854 100%);
+            color: #ffffff;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(3, 89, 37, 0.4);
+        }
+
+        .pricing-card-header {
+            margin-bottom: 30px;
+        }
+
+        .pricing-card-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .pricing-card-audience {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+
+        .pricing-options {
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .pricing-option-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(3, 89, 37, 0.2);
+        }
+
+        .pricing-option-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .pricing-option-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .pricing-option-details {
+            margin-top: 12px;
+        }
+
+        .pricing-tier {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .pricing-tier:last-child {
+            margin-bottom: 0;
+        }
+
+        .tier-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+        }
+
+        .tier-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #035925;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .price-unit {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .pricing-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .breakdown-item {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .breakdown-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #035925;
+        }
+
+        .pricing-note {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .pricing-features {
+            margin-bottom: 30px;
+        }
+
+        .pricing-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pricing-feature-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .check-icon {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .pricing-button {
+            display: block;
+            width: 100%;
+            padding: 14px 24px;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(3, 89, 37, 0.5);
+            border-radius: 50px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .pricing-button:hover {
+            background: linear-gradient(135deg, rgba(3, 89, 37, 0.3) 0%, rgba(0, 168, 84, 0.2) 100%);
+            border-color: rgba(3, 89, 37, 0.8);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(3, 89, 37, 0.3);
+        }
+
+        .pricing-button-featured {
+            background: linear-gradient(135deg, #035925 0%, #00a854 100%);
+            border: none;
+            box-shadow: 0 4px 15px rgba(3, 89, 37, 0.4);
+        }
+
+        .pricing-button-featured:hover {
+            background: linear-gradient(135deg, #00a854 0%, #035925 100%);
+            box-shadow: 0 6px 25px rgba(3, 89, 37, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .pricing-cards-container {
+                gap: 25px;
+            }
+
+            .pricing-card {
+                padding: 35px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .pricing-section {
+                padding: 80px 0;
+            }
+
+            .pricing-main-title {
+                font-size: 36px;
+            }
+
+            .pricing-subtitle {
+                font-size: 16px;
+            }
+
+            .pricing-cards-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .pricing-card {
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .pricing-section {
+                padding: 60px 0;
+            }
+
+            .pricing-header {
+                margin-bottom: 50px;
+            }
+
+            .pricing-main-title {
+                font-size: 32px;
+            }
+
+            .pricing-subtitle {
+                font-size: 15px;
+            }
+
+            .pricing-card {
+                padding: 30px;
+            }
+
+            .pricing-card-title {
+                font-size: 22px;
+            }
+
+            .tier-price {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 479px) {
+            .pricing-section {
+                padding: 50px 0;
+            }
+
+            .pricing-main-title {
+                font-size: 28px;
+            }
+
+            .pricing-subtitle {
+                font-size: 14px;
+            }
+
+            .pricing-card {
+                padding: 25px;
+            }
+
+            .pricing-tag {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
@@ -1262,9 +1633,9 @@
                         <div class="nav-dropdown-column">
                             <div class="nav-dropdown-link-wrapper"><a href="/home" aria-current="page" class="nav-dropdown-link w-dropdown-link w--current"><span class="nav-dropdown-link-line"> </span>Home 1</a><a href="/home-2" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Home 2</a>
                                 <a
-                                    href="/home-3" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Home 3</a><a href="/about-us" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>About Us</a><a href="/our-team" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Our Team</a>
+                                    href="/home-3" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Home 3</a><a href="/about-us" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>About Us</a><a href="#Gloria-Mbatha-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Our Team</a>
                                     <a
-                                        href="/pricing" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Pricing</a><a href="/services-1" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Services 1</a></div>
+                                        href="#Pricing-Section" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Pricing</a><a href="/services-1" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Services 1</a></div>
                         </div>
                         <div class="nav-dropdown-column">
                             <div class="nav-dropdown-link-wrapper"><a href="/services-2" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Services 2</a><a href="/services-3" class="nav-dropdown-link w-dropdown-link"><span class="nav-dropdown-link-line"> </span>Services 3</a>
@@ -1908,6 +2279,235 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
             </div>
         </div>
     </section>
+    
+    <!-- PRICING Section -->
+    <section id="Pricing-Section" class="pricing-section">
+        <div class="pricing-background-overlay"></div>
+        <div class="w-layout-blockcontainer base-container w-container">
+            <div class="pricing-header">
+                <div class="pricing-tag">
+                    <span class="pricing-tag-icon">🌾</span>
+                    <span>AgriGuard AI — Flexible pricing to match your needs</span>
+                </div>
+                <div class="pricing-title-wrapper">
+                    <h2 class="pricing-main-title">Flexible pricing to match your needs</h2>
+                    <p class="pricing-subtitle">Empower your operations with affordable, scalable solutions — from individual farmers to large-scale programs and financial institutions.</p>
+                </div>
+            </div>
+            
+            <div class="pricing-cards-container">
+                <!-- FOR FARMERS Card -->
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3 class="pricing-card-title">For Farmers</h3>
+                        <p class="pricing-card-audience">Best for Individual Farmers</p>
+                    </div>
+                    
+                    <div class="pricing-options">
+                        <div class="pricing-option-item">
+                            <div class="pricing-option-title">Crop Disease & Pest Detection Device</div>
+                            <div class="pricing-option-details">
+                                <div class="pricing-tier">
+                                    <span class="tier-label">1–5 hectares</span>
+                                    <span class="tier-price">$12.00 <span class="price-unit">per device</span></span>
+                                </div>
+                                <div class="pricing-tier">
+                                    <span class="tier-label">6–10 hectares</span>
+                                    <span class="tier-price">$17.00 <span class="price-unit">per device</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-option-item">
+                            <div class="pricing-option-title">Lease — Detection Device</div>
+                            <div class="pricing-option-details">
+                                <div class="pricing-tier">
+                                    <span class="tier-label">No limit hectares</span>
+                                    <span class="tier-price">$0.50 <span class="price-unit">per month per device</span></span>
+                                </div>
+                            </div>
+                            <p class="pricing-note">Farmers choose: buy once or pay monthly</p>
+                        </div>
+                        
+                        <div class="pricing-option-item">
+                            <div class="pricing-option-title">Crop Monitoring Platform</div>
+                            <div class="pricing-option-details">
+                                <div class="pricing-tier">
+                                    <span class="tier-label">No limit hectares</span>
+                                    <span class="tier-price">$0.50 <span class="price-unit">per month</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-features">
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Alerts & recommendations</span>
+                        </div>
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Crop records</span>
+                        </div>
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Disease history tracking</span>
+                        </div>
+                    </div>
+                    
+                    <a href="signup.html" class="pricing-button">Get Started Now</a>
+                </div>
+                
+                <!-- FOR NGOs / COOPERATIVES / DEVELOPMENT PROGRAMS Card -->
+                <div class="pricing-card pricing-card-featured">
+                    <!-- <div class="pricing-badge">POPULAR</div> -->
+                    <div class="pricing-card-header">
+                        <h3 class="pricing-card-title">For NGOs / Cooperatives</h3>
+                        <p class="pricing-card-audience">Best for Development Programs</p>
+                    </div>
+                    
+                    <div class="pricing-options">
+                        <div class="pricing-option-item">
+                            <div class="pricing-option-title">Program Deployment Package</div>
+                            <div class="pricing-option-details">
+                                <div class="pricing-tier">
+                                    <span class="tier-label">For 100+ farmers</span>
+                                    <div class="pricing-breakdown">
+                                        <span class="breakdown-item">Device: $9.00 per device</span>
+                                        <span class="breakdown-item">Platform: $0.30 per farmer/month</span>
+                                        <span class="breakdown-item">Field support: $150 per site (one-time)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="pricing-note">Ideal for pilots, climate programs, and extension projects</p>
+                        </div>
+                        
+                        <div class="pricing-option-item">
+                            <div class="pricing-option-title">Impact & Monitoring Dashboard</div>
+                            <div class="pricing-option-details">
+                                <div class="pricing-tier">
+                                    <span class="tier-label">Program View</span>
+                                    <span class="tier-price">$25 <span class="price-unit">per month per project region</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-features">
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Disease trends</span>
+                        </div>
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Farmer performance/activity</span>
+                        </div>
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Intervention outcomes</span>
+                        </div>
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Reporting tools</span>
+                        </div>
+                    </div>
+                    
+                    <a href="signup.html" class="pricing-button pricing-button-featured">Get Started Now</a>
+                </div>
+                
+                <!-- FOR BANKS, MFIs & INSURANCE PROVIDERS Card -->
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3 class="pricing-card-title">For Banks, MFIs & Insurance</h3>
+                        <p class="pricing-card-audience">Best for Financial Institutions</p>
+                    </div>
+                    
+                    <div class="pricing-options">
+                        <div class="pricing-option-item">
+                            <div class="pricing-option-title">Risk Scoring & Lending Dashboard</div>
+                            <div class="pricing-option-details">
+                                <div class="pricing-tier">
+                                    <span class="tier-label">Minimum 500 farmers</span>
+                                    <span class="tier-price">$1.50 <span class="price-unit">per farmer per year</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-option-item">
+                            <div class="pricing-option-title">Claims Verification (Insurance)</div>
+                            <div class="pricing-option-details">
+                                <div class="pricing-tier">
+                                    <span class="tier-label">Per season</span>
+                                    <span class="tier-price">$0.75 <span class="price-unit">per farmer per season</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-option-item">
+                            <div class="pricing-option-title">Portfolio Monitoring API</div>
+                            <div class="pricing-option-details">
+                                <div class="pricing-tier">
+                                    <span class="tier-label">Optional integration</span>
+                                    <span class="tier-price">$120 <span class="price-unit">per month</span></span>
+                                </div>
+                            </div>
+                            <p class="pricing-note">Connect our data to your systems</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-features">
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Diligence scoring</span>
+                        </div>
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Crop performance trends</span>
+                        </div>
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Repayment risk indicators</span>
+                        </div>
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Alerts on crop failure risk</span>
+                        </div>
+                        <div class="pricing-feature-item">
+                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#035925" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Automated claim verification</span>
+                        </div>
+                    </div>
+                    
+                    <a href="signup.html" class="pricing-button">Get Started Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- TECHNOLOGY Section -->
     <section class="home-1-banner-section">
         <!-- Video replaced with image while maintaining original classes -->
@@ -2278,7 +2878,7 @@ AgriGuard AI turns farm data into trusted proof, enabling insurance, credit, inp
                     <a href="signup.html" class="footer-link">Contact Us</a>
                 </div>
                 <div class="footer-links-wrapper">
-                    <h6>Company</h6><a href="#About-Section" class="footer-link">About us</a><a href="/our-team" class="footer-link">Our Team</a><a href="/pricing" class="footer-link">Pricing</a><a href="/testimonials" class="footer-link">Testimonials</a></div>
+                    <h6>Company</h6><a href="#About-Section" class="footer-link">About us</a><a href="#Gloria-Mbatha-Section" class="footer-link">Our Team</a><a href="#Pricing-Section" class="footer-link">Pricing</a><a href="/testimonials" class="footer-link">Testimonials</a></div>
                 <div
                     class="footer-links-wrapper">
                     <h6>Services</h6>
